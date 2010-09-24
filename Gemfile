@@ -10,6 +10,12 @@ gem 'unicorn'
 # Use devise for users and authentication
 gem 'devise'
 
+# Use haml templates
+gem 'haml', '>=3.0.18'
+
+# Use formtastic for nice semantic forms
+gem 'formtastic', '>=1.1.0'
+
 group :development, :test, :console do
   gem 'mongrel'
   gem 'capybara'
