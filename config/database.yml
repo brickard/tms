@@ -6,9 +6,8 @@
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 development:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   database: sresetter_development
   pool: 5
   username: sresetter_dev
@@ -19,9 +18,8 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: &test
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   database: sresetter_test
   pool: 5
   username: sresetter_dev
@@ -29,9 +27,8 @@ test: &test
   host: localhost
 
 production:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   database: sresetter_production
   pool: 5
   username: sresetter
