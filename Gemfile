@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.0'
 
-gem 'mysql2'
+gem 'pg'
 
 # Use unicorn as the web server
 gem 'unicorn'
