@@ -4,7 +4,7 @@ Feature: Manage Clients
   I Want to Manage Clients
   So I can manage other data about them
 
-  Scenario:
+  Scenario: Manager manages the entire lifecycle of a Client
     Given I am a user with email "manager@srst.com" with password "manager_password"
       And I am a person with first name "Joe" and last name "Manager"
       And I have the role of "manager"
@@ -48,4 +48,10 @@ Feature: Manage Clients
     Then I should see "#1000 Wetumpka, AL"
       And I should see "Remodel"
       
-      
+    Given I am on the new shift page
+    When I select "Remodel" from "Project"
+      And I fill in "Name" with "1st Shift"
+      And I press "Create Shift"
+    Then I should see "Remodel"
+      And I should see "1st Shift"
+
