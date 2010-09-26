@@ -3,6 +3,7 @@ class CreateRegions < ActiveRecord::Migration
     create_table :regions do |t|
       t.integer :client_id
       t.string :name
+      t.boolean :active
 
       t.timestamps
     end

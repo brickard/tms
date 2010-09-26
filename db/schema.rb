@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20100926144544) do
   create_table "regions", :force => true do |t|
     t.integer  "client_id"
     t.string   "name"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

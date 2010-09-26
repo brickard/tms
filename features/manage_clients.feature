@@ -38,6 +38,6 @@ Feature: Manage Clients
       And I should see "#1000 Wetumpka, AL"
       And I should see "4538 U.S. 231"
       And I should see "AL"
-      And I shold see "36092"
+      And I should see "36092"
       
       
