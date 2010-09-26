@@ -46,4 +46,7 @@ Storeresetter::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # setup mailer
+  config.action_mailer.default_url_options = { :host => 'storeresetter.heroku.com' }
 end
