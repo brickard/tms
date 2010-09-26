@@ -7,7 +7,6 @@ Feature: Manage Clients
   Scenario: Manager manages the entire lifecycle of a Client
     Given I am a user with email "manager@srst.com" with password "manager_password"
       And I am a person with first name "Joe" and last name "Manager"
-      And I have the role of "manager"
       And I am logged in
       And I am on the new client page
     When I fill in "Name" with "Wally World"

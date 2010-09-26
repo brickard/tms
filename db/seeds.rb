@@ -11,7 +11,3 @@
                            :password_confirmation => @admin_password )
 @admin_user.confirmed_at = Time.now
 @admin_user.save!
-%w{ admin manager }.each do |role_name|
-  @admin_user.roles << Role.create( :name => role_name )
-  @admin_user.save!
-end
