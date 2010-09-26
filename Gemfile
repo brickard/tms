@@ -16,6 +16,9 @@ gem 'haml', '>=3.0.18'
 # Use formtastic for nice semantic forms
 gem 'formtastic', '>=1.1.0'
 
+# Use carmen for state_select
+gem 'carmen'
+
 group :development, :test, :console do
   gem 'mongrel'
   gem 'capybara'
