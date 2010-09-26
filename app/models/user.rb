@@ -7,4 +7,13 @@ class User < ActiveRecord::Base
   belongs_to :person
   has_many :user_roles
   has_many :roles, :through => :user_roles
+
+  scope :managers, lambda{
+    joins(:roles).
+    where("roles.name = 'manager'")
+  }
+  scope :admins, lambda{
+    joins(:roles).
+    where("roles.name = 'admin'")
+  }
 end

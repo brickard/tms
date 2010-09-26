@@ -1,4 +1,6 @@
 Storeresetter::Application.routes.draw do
+  resources :stores
+
   resources :regions
 
   resources :clients

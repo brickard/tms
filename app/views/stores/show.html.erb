@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Client:</b>
+  <%= @store.client_id %>
+</p>
+
+<p>
+  <b>Region:</b>
+  <%= @store.region_id %>
+</p>
+
+<p>
+  <b>Manager:</b>
+  <%= @store.manager_id %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @store.active %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @store.name %>
+</p>
+
+<p>
+  <b>Address1:</b>
+  <%= @store.address1 %>
+</p>
+
+<p>
+  <b>Address2:</b>
+  <%= @store.address2 %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @store.city %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%= @store.state %>
+</p>
+
+<p>
+  <b>Zipcode:</b>
+  <%= @store.zipcode %>
+</p>
+
+
+<%= link_to 'Edit', edit_store_path(@store) %> |
+<%= link_to 'Back', stores_path %>

@@ -26,6 +26,7 @@ Feature: Manage Clients
     Given I am on the new store page
     When I select "Wally World" from "Client"
       And I select "Southeast" from "Region"
+      And I select "Joe Manager" from "Manager"
       And I check "Active"
       And I fill in "Name" with "#1000 Wetumpka, AL"
       And I fill in "Address 1" with "4538 U.S. 231"
