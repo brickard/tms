@@ -19,6 +19,9 @@ gem 'formtastic', '>=1.1.0'
 # Use carmen for state_select
 gem 'carmen'
 
+# Use simple-navigation for Navigation Menus
+gem 'simple-navigation'
+
 group :development, :test, :console do
   gem 'mongrel'
   gem 'capybara'
