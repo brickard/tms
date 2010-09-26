@@ -1,4 +1,5 @@
 class ShiftsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /shifts
   # GET /shifts.xml
   def index
