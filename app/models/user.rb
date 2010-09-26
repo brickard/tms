@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   belongs_to :person
   has_many :user_roles
   has_many :roles, :through => :user_roles
+  has_many :stores
 
   scope :managers, lambda{
     joins(:roles).
@@ -16,4 +17,8 @@ class User < ActiveRecord::Base
     joins(:roles).
     where("roles.name = 'admin'")
   }
+
+  def full_name
+    person.full_name rescue email
+  end
 end

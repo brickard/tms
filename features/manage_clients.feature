@@ -29,11 +29,12 @@ Feature: Manage Clients
       And I select "Joe Manager" from "Manager"
       And I check "Active"
       And I fill in "Name" with "#1000 Wetumpka, AL"
-      And I fill in "Address 1" with "4538 U.S. 231"
+      And I fill in "Address1" with "4538 U.S. 231"
       And I fill in "City" with "Wetumpka"
       And I select "AL" from "State"
       And I fill in "Zipcode" with "36092"
       And I press "Create Store"
+      Then show me the page
     Then I should see "Wally World"
       And I should see "Southeast"
       And I should see "#1000 Wetumpka, AL"

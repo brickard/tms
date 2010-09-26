@@ -13,15 +13,18 @@
 
   <div class="field">
     <%= f.label :client_id %><br />
-    <%= f.text_field :client_id %>
+    <%= f.collection_select( :client_id, Client.all, :id, :name,
+                             { :prompt => true } ) %>
   </div>
   <div class="field">
     <%= f.label :region_id %><br />
-    <%= f.text_field :region_id %>
+    <%= f.collection_select( :region_id, Region.all, :id, :name,
+                             { :prompt => true } ) %>
   </div>
   <div class="field">
     <%= f.label :manager_id %><br />
-    <%= f.text_field :manager_id %>
+    <%= f.collection_select( :manager_id, User.managers, :id, :full_name,
+                             { :prompt => true } ) %>
   </div>
   <div class="field">
     <%= f.label :active %><br />
@@ -45,7 +48,7 @@
   </div>
   <div class="field">
     <%= f.label :state %><br />
-    <%= f.text_field :state %>
+    <%= f.select :state, Carmen::state_codes("US") %>
   </div>
   <div class="field">
     <%= f.label :zipcode %><br />
