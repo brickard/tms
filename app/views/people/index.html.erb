@@ -20,7 +20,7 @@
 
 <% @people.each do |person| %>
   <tr>
-    <td><%= person.user.email %></td>
+    <td><%= person.user.email rescue '' %></td>
     <td><%= person.last_name %></td>
     <td><%= person.first_name %></td>
     <td><%= person.middle_name %></td>
