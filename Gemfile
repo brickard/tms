@@ -22,6 +22,7 @@ group :development, :test, :console do
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
+  gem 'rspec', '>=2.0.0.beta.22'
   gem 'rspec-rails', '>=2.0.0.beta.22'
   gem 'spork'
   gem 'launchy'

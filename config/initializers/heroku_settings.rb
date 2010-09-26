@@ -1,3 +1,3 @@
-Rails::Application.configure do
+Storeresetter::Application.configure do
     config.serve_static_assets = true
 end

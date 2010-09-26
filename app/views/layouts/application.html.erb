@@ -7,8 +7,9 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-<%= yield %>
+  <p class="otice"><%= notice %></p>
+  <p class="lert"><%= alert %></p>
+  <%= yield %>
 
 </body>
 </html>
