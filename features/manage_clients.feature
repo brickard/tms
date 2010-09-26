@@ -41,5 +41,12 @@ Feature: Manage Clients
       And I should see "4538 U.S. 231"
       And I should see "AL"
       And I should see "36092"
+
+    Given I am on the new project page
+    When I select "#1000 Wetumpka, AL" from "Store"
+      And I fill in "Name" with "Remodel"
+      And I press "Create Project"
+    Then I should see "#1000 Wetumpka, AL"
+      And I should see "Remodel"
       
       
