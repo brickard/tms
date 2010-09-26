@@ -1,4 +1,6 @@
 Storeresetter::Application.routes.draw do
+  resources :shifts
+
   resources :projects
 
   resources :stores
