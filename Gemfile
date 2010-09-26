@@ -20,7 +20,7 @@ gem 'formtastic', '>=1.1.0'
 gem 'carmen'
 
 # Use simple-navigation for Navigation Menus
-gem 'simple-navigation'
+gem 'simple-navigation', '3.0.0.beta2'
 
 group :development, :test, :console do
   gem 'mongrel'
