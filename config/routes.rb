@@ -12,6 +12,10 @@ Storeresetter::Application.routes.draw do
   resources :roles
 
   resources :people
+
+  resources :users
+
   devise_for :users
+
   root :to => 'clients#index'
 end
