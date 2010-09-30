@@ -7,8 +7,14 @@ Feature: Manage Clients
   Scenario: Manager manages the entire lifecycle of a Client
     Given I am a user with email "manager@srst.com" with password "manager_password"
       And I am a person with first name "Joe" and last name "Manager"
-      And I am logged in
-      And I am on the new client page
+      #And I am logged in
+      And I am on the new user session page
+    When I fill in "Email" with "manager@srst.com"
+      And I fill in "Password" with "manager_password"
+      And I check "Remember me"
+      And I press "Sign in"
+
+    Given I am on the new client page
     When I fill in "Name" with "Wally World"
       And I check "Active"
       And I press "Create Client"
@@ -27,7 +33,8 @@ Feature: Manage Clients
       And I select "Southeast" from "Region"
       And I select "Joe Manager" from "Manager"
       And I check "Active"
-      And I fill in "Name" with "#1000 Wetumpka, AL"
+      And I fill in "Number" with "1000"
+      And I fill in "Name" with "Wetumpka West 1"
       And I fill in "Address1" with "4538 U.S. 231"
       And I fill in "City" with "Wetumpka"
       And I select "AL" from "State"
@@ -35,16 +42,17 @@ Feature: Manage Clients
       And I press "Create Store"
     Then I should see "Wally World"
       And I should see "Southeast"
-      And I should see "#1000 Wetumpka, AL"
+      And I should see "1000"
+      And I should see "Wetumpka West 1"
       And I should see "4538 U.S. 231"
       And I should see "AL"
       And I should see "36092"
 
     Given I am on the new project page
-    When I select "#1000 Wetumpka, AL" from "Store"
+    When I select "Wetumpka West 1" from "Store"
       And I fill in "Name" with "Remodel"
       And I press "Create Project"
-    Then I should see "#1000 Wetumpka, AL"
+    Then I should see "Wetumpka West 1"
       And I should see "Remodel"
       
     Given I am on the new shift page
