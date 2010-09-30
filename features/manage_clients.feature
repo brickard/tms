@@ -56,7 +56,7 @@ Feature: Manage Clients
       And I should see "Remodel"
       
     Given I am on the new shift page
-    When I select "Remodel" from "Project"
+    When I select "Wally World | Wetumpka West 1 | Remodel" from "Project"
       And I fill in "Name" with "1st Shift"
       And I press "Create Shift"
     Then I should see "Remodel"
