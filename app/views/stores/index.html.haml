@@ -1,0 +1,35 @@
+%h1 Listing stores
+%table
+  %tr
+    %th Client
+    %th Region
+    %th Manager
+    %th Active
+    %th Name
+    %th Number
+    %th Address1
+    %th Address2
+    %th City
+    %th State
+    %th Zipcode
+    %th
+    %th
+    %th
+  - @stores.each do |store|
+    %tr
+      %td= store.client.name
+      %td= store.region.name
+      %td= store.manager.full_name
+      %td= store.active
+      %td= store.name
+      %td= store.number
+      %td= store.address1
+      %td= store.address2
+      %td= store.city
+      %td= store.state
+      %td= store.zipcode
+      %td= link_to 'Show', store
+      %td= link_to 'Edit', edit_store_path(store)
+      %td= link_to 'Destroy', store, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Store', new_store_path

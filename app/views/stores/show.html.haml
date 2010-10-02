@@ -1,0 +1,37 @@
+%p#notice= notice
+%p
+  %b Client:
+  = @store.client.name
+%p
+  %b Region:
+  = @store.region.name
+%p
+  %b Manager:
+  = @store.manager.full_name
+%p
+  %b Active:
+  = @store.active
+%p
+  %b Name:
+  = @store.name
+%p
+  %b Number:
+  = @store.number
+%p
+  %b Address1:
+  = @store.address1
+%p
+  %b Address2:
+  = @store.address2
+%p
+  %b City:
+  = @store.city
+%p
+  %b State:
+  = @store.state
+%p
+  %b Zipcode:
+  = @store.zipcode
+= link_to 'Edit', edit_store_path(@store)
+|
+\#{link_to 'Back', stores_path}

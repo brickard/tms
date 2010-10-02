@@ -1,0 +1,58 @@
+= form_for(@store) do |f|
+  - if @store.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@store.errors.count, "error")
+        prohibited this store from being saved:
+      %ul
+        - @store.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :client_id
+    %br/
+    = f.collection_select( :client_id, Client.all, :id, :name, |
+      { :prompt => true } )                                    |
+  .field
+    = f.label :region_id
+    %br/
+    = f.collection_select( :region_id, Region.all, :id, :name, |
+      { :prompt => true } )                                    |
+  .field
+    = f.label :manager_id
+    %br/
+    = f.collection_select( :manager_id, User.managers, :id, :full_name, |
+      { :prompt => true } )                                             |
+  .field
+    = f.label :active
+    %br/
+    = f.check_box :active
+  .field
+    = f.label :name
+    %br/
+    = f.text_field :name
+  .field
+    = f.label :number
+    %br/
+    = f.text_field :number
+  .field
+    = f.label :address1
+    %br/
+    = f.text_field :address1
+  .field
+    = f.label :address2
+    %br/
+    = f.text_field :address2
+  .field
+    = f.label :city
+    %br/
+    = f.text_field :city
+  .field
+    = f.label :state
+    %br/
+    = f.select :state, Carmen::state_codes("US")
+  .field
+    = f.label :zipcode
+    %br/
+    = f.text_field :zipcode
+  .actions
+    = f.submit

@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %title Storeresetter
+    = stylesheet_link_tag :all
+    = formtastic_stylesheet_link_tag
+    = javascript_include_tag :defaults
+    = csrf_meta_tag
+  %body
+    %p.notice= notice
+    %p.alert= alert
+    %p.navigation= render_navigation unless current_user.blank?
+    = yield

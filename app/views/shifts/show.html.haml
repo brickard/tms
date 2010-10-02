@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %b Project:
+  = @shift.project.display_name
+%p
+  %b Name:
+  = @shift.name
+= link_to 'Edit', edit_shift_path(@shift)
+|
+\#{link_to 'Back', shifts_path}

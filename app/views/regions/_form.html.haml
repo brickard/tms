@@ -1,0 +1,24 @@
+= form_for(@region) do |f|
+  - if @region.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@region.errors.count, "error")
+        prohibited this region from being saved:
+      %ul
+        - @region.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :client_id
+    %br/
+    = f.collection_select( :client_id, Client.all, :id, :name, |
+      { :prompt => true } )                                    |
+  .field
+    = f.label :name
+    %br/
+    = f.text_field :name
+  .field
+    = f.label :active
+    %br/
+    = f.check_box :active
+  .actions
+    = f.submit

@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %b Person:
+  = @user.person.full_name rescue 'No Person Found'
+%p
+  %b Email:
+  = @user.email
+= link_to 'Edit', edit_user_path(@user)
+|
+\#{link_to 'Back', users_path}

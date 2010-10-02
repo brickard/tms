@@ -1,0 +1,46 @@
+%p#notice= notice
+%p
+  %b User:
+  = @person.user.email rescue 'No User Found'
+%p
+  %b Last name:
+  = @person.last_name
+%p
+  %b First name:
+  = @person.first_name
+%p
+  %b Middle name:
+  = @person.middle_name
+%p
+  %b Address1:
+  = @person.address1
+%p
+  %b Address2:
+  = @person.address2
+%p
+  %b City:
+  = @person.city
+%p
+  %b State:
+  = @person.state
+%p
+  %b Zipcode:
+  = @person.zipcode
+%p
+  %b Social Security Number:
+  = @person.ssn
+%p
+  %b Date of Birth:
+  = @person.dob
+%p
+  %b Home Phone:
+  = @person.home_phone
+%p
+  %b Mobile Phone:
+  = @person.mobile_phone
+%p
+  %b Other Phone:
+  = @person.other_phone
+= link_to 'Edit', edit_person_path(@person)
+|
+\#{link_to 'Back', people_path}
