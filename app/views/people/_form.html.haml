@@ -1,63 +1,17 @@
-= form_for(@person) do |f|
-  - if @person.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@person.errors.count, "error")
-        prohibited this person from being saved:
-      %ul
-        - @person.errors.full_messages.each do |msg|
-          %li= msg
-  .field
-    = f.label :last_name
-    %br/
-    = f.text_field :last_name
-  .field
-    = f.label :first_name
-    %br/
-    = f.text_field :first_name
-  .field
-    = f.label :middle_name
-    %br/
-    = f.text_field :middle_name
-  .field
-    = f.label :address1
-    %br/
-    = f.text_field :address1
-  .field
-    = f.label :address2
-    %br/
-    = f.text_field :address2
-  .field
-    = f.label :city
-    %br/
-    = f.text_field :city
-  .field
-    = f.label :state
-    %br/
-    = f.text_field :state
-  .field
-    = f.label :zipcode
-    %br/
-    = f.text_field :zipcode
-  .field
-    = f.label :ssn
-    %br/
-    = f.text_field :ssn
-  .field
-    = f.label :dob
-    %br/
-    = f.text_field :dob
-  .field
-    = f.label :home_phone
-    %br/
-    = f.text_field :home_phone
-  .field
-    = f.label :mobile_phone
-    %br/
-    = f.text_field :mobile_phone
-  .field
-    = f.label :other_phone
-    %br/
-    = f.text_field :other_phone
-  .actions
-    = f.submit
+= semantic_form_for @person do |f|
+  - f.inputs do
+    = f.input :last_name, :label => 'Last name'
+    = f.input :first_name, :label => 'First name'
+    = f.input :middle_name, :label => 'Middle name'
+    = f.input :address1, :label => 'Address1'
+    = f.input :address2, :label => 'Address2'
+    = f.input :city, :label => 'City'
+    = f.input :state, :label => 'State'
+    = f.input :zipcode, :label => 'Zipcode'
+    = f.input :ssn, :label => 'Ssn'
+    = f.input :dob, :label => 'Dob'
+    = f.input :home_phone, :label => 'Home phone'
+    = f.input :mobile_phone, :label => 'Mobile phone'
+    = f.input :other_phone, :label => 'Other phone'
+    = f.input :hired_at, :label => 'Hire Date'
+    = f.buttons
