@@ -6,6 +6,7 @@ Feature: Sign up new potential employees from kiosk form
 
   Scenario: Successfull Employee Signup
     Given I am on the new applicant page
+    Then I should see "Employment Application"
     When I fill in "Last name" with "Employee"
       And I fill in "First name" with "Joe"
       And I fill in "Middle name" with "The"
@@ -20,7 +21,7 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "Email address" with "joe@employees.com"
       And I fill in "Verify email address" with "joe@employees.com"
       And I press "Next"
-    Then I should see "Employment Application"
+    Then I should see "Employment Criteria"
     When I choose "Yes" within "Are there any days, shifts, or hours you will not work?"
       And I fill in "special_hours_conditions" with "No Weekends"
       And I fill in "When are you available to start work?" with "01012010"

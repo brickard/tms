@@ -23,13 +23,14 @@ SimpleNavigation::Configuration.run do |navigation|
 
   # Define the primary navigation
   navigation.items do |primary|
-    primary.item :users,    'Users',    users_path
-    primary.item :people,   'People',   people_path
-    primary.item :clients,  'Clients',  clients_path
-    primary.item :regions,  'Regions',  regions_path
-    primary.item :stores,   'Stores',   stores_path
-    primary.item :projects, 'Projects', projects_path
-    primary.item :shifts,   'Shifts',   shifts_path
+    primary.item :users,      'Users',      users_path
+    primary.item :people,     'People',     people_path
+    primary.item :clients,    'Clients',    clients_path
+    primary.item :regions,    'Regions',    regions_path
+    primary.item :stores,     'Stores',     stores_path
+    primary.item :projects,   'Projects',   projects_path
+    primary.item :shifts,     'Shifts',     shifts_path
+    primary.item :applicants, 'Applicants', applicants_path
   end
 
     # Add an item to the primary navigation. The following params apply:
