@@ -19,7 +19,7 @@
     %tr
       %td= store.client.name
       %td= store.region.name
-      %td= store.manager.full_name
+      %td= store.manager.full_name rescue 'No Manager Found'
       %td= store.active
       %td= store.name
       %td= store.number
