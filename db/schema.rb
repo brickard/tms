@@ -10,11 +10,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101002004437) do
+ActiveRecord::Schema.define(:version => 20101003161520) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
     t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "employees", :force => true do |t|
+    t.integer  "person_id"
+    t.boolean  "needs_special_hours"
+    t.text     "needs_special_hours_detail"
+    t.datetime "available_at"
+    t.boolean  "has_reliable_vehicle"
+    t.boolean  "can_travel_long_term"
+    t.boolean  "been_convicted"
+    t.text     "been_convicted_detail"
+    t.boolean  "ever_failed_drug_test"
+    t.boolean  "legal_us_worker"
+    t.boolean  "applied_before"
+    t.text     "applied_before_detail"
+    t.boolean  "drivers_license_valid"
+    t.string   "drivers_license_state"
+    t.string   "drivers_license_number"
+    t.datetime "drivers_license_expiration"
+    t.boolean  "drivers_license_ever_suspended"
+    t.text     "drivers_license_ever_suspended_detail"
+    t.boolean  "agree_to_terms"
+    t.datetime "agree_to_terms_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20101002004437) do
     t.string   "home_phone"
     t.string   "mobile_phone"
     t.string   "other_phone"
+    t.datetime "hired_at"
   end
 
   create_table "projects", :force => true do |t|

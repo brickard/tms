@@ -1,0 +1,70 @@
+= form_for @employee do |f|
+  -if @employee.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@employee.errors.count, "error")} prohibited this employee from being saved:"
+      %ul
+        - @employee.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :person_id
+    = f.text_field :person_id
+  .field
+    = f.label :needs_special_hours
+    = f.check_box :needs_special_hours
+  .field
+    = f.label :needs_special_hours_detail
+    = f.text_area :needs_special_hours_detail
+  .field
+    = f.label :available_at
+    = f.datetime_select :available_at
+  .field
+    = f.label :has_reliable_vehicle
+    = f.check_box :has_reliable_vehicle
+  .field
+    = f.label :can_travel_long_term
+    = f.check_box :can_travel_long_term
+  .field
+    = f.label :been_convicted
+    = f.check_box :been_convicted
+  .field
+    = f.label :been_convicted_detail
+    = f.text_area :been_convicted_detail
+  .field
+    = f.label :ever_failed_drug_test
+    = f.check_box :ever_failed_drug_test
+  .field
+    = f.label :legal_us_worker
+    = f.check_box :legal_us_worker
+  .field
+    = f.label :applied_before
+    = f.text_field :applied_before
+  .field
+    = f.label :applied_before_detail
+    = f.text_area :applied_before_detail
+  .field
+    = f.label :drivers_license_valid
+    = f.check_box :drivers_license_valid
+  .field
+    = f.label :drivers_license_state
+    = f.text_field :drivers_license_state
+  .field
+    = f.label :drivers_license_number
+    = f.text_field :drivers_license_number
+  .field
+    = f.label :drivers_license_expiration
+    = f.datetime_select :drivers_license_expiration
+  .field
+    = f.label :drivers_license_ever_suspended
+    = f.check_box :drivers_license_ever_suspended
+  .field
+    = f.label :drivers_license_ever_suspended_detail
+    = f.text_area :drivers_license_ever_suspended_detail
+  .field
+    = f.label :agree_to_terms
+    = f.check_box :agree_to_terms
+  .field
+    = f.label :agree_to_terms_date
+    = f.datetime_select :agree_to_terms_date
+  .actions
+    = f.submit 'Save'

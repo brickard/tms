@@ -30,6 +30,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :stores,     'Stores',     stores_path
     primary.item :projects,   'Projects',   projects_path
     primary.item :shifts,     'Shifts',     shifts_path
+    primary.item :employees,  'Employees',  employees_path
     primary.item :applicants, 'Applicants', applicants_path
   end
 

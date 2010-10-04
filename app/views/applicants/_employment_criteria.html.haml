@@ -1,0 +1,40 @@
+= semantic_form_for @employee, :url => new_applicants_references_path  do |f|
+  - if @employee.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@employee.errors.count, "error")
+        prohibited this application from being saved:
+      %ul
+        - @employee.errors.full_messages.each do |msg|
+          %li= msg
+  = f.inputs :name => 'Employment Availability' do
+    = f.input :person_id, :as => :hidden, :value => @person.id
+    = f.input :needs_special_hours, :as => :select, :collection => [ "Yes", "No" ], |
+      :label => 'Are there any days, shifts, hours you will not work?'
+    = f.input :needs_special_hours_detail, :label => 'If yes, please explain.'
+    = f.input :available_at, :label => 'When are you available to start work?'
+    = f.input :has_reliable_vehicle, :label => 'Do you have reliable tranportation?'
+    = f.input :can_travel_long_term, :label => 'Can you travel long term?'
+    = f.input :been_convicted, :as => :select, :collection => [ 'Yes', 'No' ], |
+      :label => 'Have you been convicted of a crime?'
+    = f.input :been_convicted_detail, :label => 'If yes, please explain.'
+    = f.input :ever_failed_drug_test, :as => :select, |
+      :collection => [ 'Yes', 'No' ], |
+      :label => 'Have you ever failed a drug test?'
+    = f.input :legal_us_worker, :as => :select, :collection => [ 'Yes', 'No' ], |
+      :label => 'Are you legally authorized to work in the United States'
+    = f.input :applied_before, :as => :select, :collection => [ 'Yes', 'No' ], |
+      :label => 'Have you ever applied for work or worked here before?'
+    = f.input :applied_before_detail, |
+      :label => 'If yes, when and reason not employed currently?'
+    = f.input :drivers_license_valid, :as => :select, |
+      :collection => [ 'Yes', 'No' ], |
+      :label => "Do you have a valid Driver's License?"
+    = f.input :drivers_license_state, :as => :select, |
+      :collection => Carmen::US_STATES, |
+      :label => "License State"
+    = f.input :drivers_license_number, :label => 'License Number'
+    = f.input :drivers_license_expiration, :label => 'License Expiration Date'
+
+  = f.buttons do
+    = f.commit_button :label => 'Next'
