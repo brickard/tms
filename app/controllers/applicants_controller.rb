@@ -27,6 +27,6 @@ class ApplicantsController < ApplicationController
     @employee = Employee.new(:person_id => @person.id)
   end
 
-  def reference
+  def references
   end
 end

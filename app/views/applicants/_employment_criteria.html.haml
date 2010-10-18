@@ -12,11 +12,11 @@
     = f.input :needs_special_hours, :as => :select, :collection => [ "Yes", "No" ], |
       :label => 'Are there any days, shifts, hours you will not work?'
     = f.input :needs_special_hours_detail, :label => 'If yes, please explain.'
-    = f.input :available_at, :label => 'When are you available to start work?'
+    = f.input :available_at, :as => :date, :label => 'When are you available to start work?'
     = f.input :has_reliable_vehicle, :label => 'Do you have reliable tranportation?'
     = f.input :can_travel_long_term, :label => 'Can you travel long term?'
     = f.input :been_convicted, :as => :select, :collection => [ 'Yes', 'No' ], |
-      :label => 'Have you been convicted of a crime?'
+      :label => 'Have you ever been convicted of a crime?'
     = f.input :been_convicted_detail, :label => 'If yes, please explain.'
     = f.input :ever_failed_drug_test, :as => :select, |
       :collection => [ 'Yes', 'No' ], |
@@ -34,7 +34,11 @@
       :collection => Carmen::US_STATES, |
       :label => "License State"
     = f.input :drivers_license_number, :label => 'License Number'
-    = f.input :drivers_license_expiration, :label => 'License Expiration Date'
+    = f.input :drivers_license_expiration, :as => :date, :label => 'License Expiration Date'
+    = f.input :drivers_license_ever_suspended, :as => :select, |
+      :label => 'Has your Drivers License ever been suspended?', |
+      :collection => [ 'Yes', 'No' ]
+    = f.input :drivers_license_ever_suspended_detail, :label => 'If yes, please explain'
 
   = f.buttons do
     = f.commit_button :label => 'Next'
