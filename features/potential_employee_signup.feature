@@ -5,7 +5,7 @@ Feature: Sign up new potential employees from kiosk form
   So I can get a good job
 
   Scenario: Successfull Employee Signup
-    Given I am on the new applicants page
+    Given I am on the new applicant page
     Then I should see "Employment Application"
     When I fill in "Last name" with "Employee"
       And I fill in "First name" with "Joe"
@@ -46,9 +46,8 @@ Feature: Sign up new potential employees from kiosk form
       And I select "Yes" from "Has your Drivers License ever been suspended"
       And I fill in "employee[drivers_license_ever_suspended_detail]" with "Unpaid tickets"
       And I press "Next"
+    Then show me the page
     Then I should see "Employment History"
-    When I press "New Employer"
-    Then I should see "Company name"
     When I fill in "Company name" with "Some Job 1"
       And I fill in "Start date" with "06062000"
       And I fill in "End date" with "06062001"
@@ -58,10 +57,8 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "Start $" with "$100 an hour"
       And I fill in "End $" with "$100 an hour"
       And I fill in "Reason for leaving" with "Laid off"
-      And I press "Save"
+      And I press "Next"
     Then I should see "Some Job 1 Added"
-    When I press "Next"
-    Then I should see "You must add at least 1 more Employer"
     When I press "New Employer"
     Then I should see "Company Name"
     When I fill in "Company name" with "Some Job 2"
@@ -73,9 +70,7 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "Start $" with "$60 an hour"
       And I fill in "End $" with "$60 an hour"
       And I fill in "Reason for leaving" with "Laid off"
-      And I press "Save"
-    Then I should see "Some Job 2 Added"
-    When I press "Next"
+      And I press "Next"
     Then I should see "References"
     When I press "New Reference"
     Then I should see "Name"

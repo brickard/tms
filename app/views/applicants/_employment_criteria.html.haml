@@ -1,4 +1,4 @@
-= semantic_form_for @employee, :url => new_applicants_references_path  do |f|
+= semantic_form_for @employee, :url => create_applicant_criteria_path(@person)  do |f|
   - if @employee.errors.any?
     #error_explanation
       %h2

@@ -1,4 +1,6 @@
 Storeresetter::Application.routes.draw do
+  resources :employers
+
   resources :employees
 
   resources :shifts
@@ -18,10 +20,20 @@ Storeresetter::Application.routes.draw do
   resources :users
 
   get 'applicants/index', :as => :applicants
-  get 'applicants/new', :as => :new_applicants
-  match 'applicants/criteria', :via => [ :get, :post, :put ], :as => :new_applicants_criteria
-  match 'applicants/references', :via => [ :get, :post, :put ], :as => :new_applicants_references
-  #match 'applicants/', :via => [ :get, :post ], :as => :new_applicants_references
+  get 'applicants/new', :as => :new_applicant
+  post 'applicants/create', :as => :create_applicant
+  match 'applicants/criteria/:person_id', :as => :new_applicant_criteria,
+    :via => [ :get ], :controller => :applicants, :action => :criteria
+  match 'applicants/criteria_create/:person_id', :as => :create_applicant_criteria,
+    :via => [ :post ], :controller => :applicants, :action => :criteria_create
+  match 'applicants/employers/:person_id', :as => :new_applicant_employers,
+    :via => [ :get ], :controller => :applicants, :action => :employers
+  match 'applicants/employers_create/:person_id', :as => :create_applicant_employers,
+    :via => [ :post ], :controller => :applicants, :action => :employers_create
+  match 'applicants/references/:person_id', :as => :new_applicant_references,
+    :via => [ :get ], :controller => :applicants, :action => :references
+  match 'applicants/references_create/:person_id', :as => :create_applicant_references,
+    :via => [ :post ], :controller => :applicants, :action => :references_create
 
   devise_for :users, :path => 'accounts'
 

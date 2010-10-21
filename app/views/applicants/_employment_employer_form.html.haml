@@ -1,0 +1,13 @@
+= semantic_form_for @employer, :url => create_applicant_employer_path(@person)  do |f|
+  - if @employer.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@employer.errors.count, "error")
+        prohibited this employment application from being saved:
+      %ul
+        - @employer.errors.full_messages.each do |msg|
+          %li= msg
+  = f.inputs :company_name
+  = f.buttons do
+    = f.commit_button :label => 'Next'
+

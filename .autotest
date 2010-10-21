@@ -1,0 +1,5 @@
+begin
+  require "autotest/growl"
+rescue LoadError
+  puts 'Not going to growl'
+end

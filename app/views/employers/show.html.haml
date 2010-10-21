@@ -1,0 +1,36 @@
+%p#notice= notice
+
+%p
+  %b Employee:
+  = @employer.employee_id
+%p
+  %b Company name:
+  = @employer.company_name
+%p
+  %b Start date:
+  = @employer.start_date
+%p
+  %b End date:
+  = @employer.end_date
+%p
+  %b Phone number:
+  = @employer.phone_number
+%p
+  %b Job title:
+  = @employer.job_title
+%p
+  %b Supervisor name:
+  = @employer.supervisor_name
+%p
+  %b Start salary:
+  = @employer.start_salary
+%p
+  %b End salary:
+  = @employer.end_salary
+%p
+  %b Reason for leaving:
+  = @employer.reason_for_leaving
+
+= link_to 'Edit', edit_employer_path(@employer)
+\|
+= link_to 'Back', employers_path

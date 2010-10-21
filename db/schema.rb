@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101018010606) do
+ActiveRecord::Schema.define(:version => 20101020111117) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -40,6 +40,21 @@ ActiveRecord::Schema.define(:version => 20101018010606) do
     t.text     "drivers_license_ever_suspended_detail"
     t.boolean  "agree_to_terms"
     t.datetime "agree_to_terms_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "employers", :force => true do |t|
+    t.integer  "employee_id"
+    t.string   "company_name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "phone_number"
+    t.string   "job_title"
+    t.string   "supervisor_name"
+    t.string   "start_salary"
+    t.string   "end_salary"
+    t.string   "reason_for_leaving"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

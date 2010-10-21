@@ -1,0 +1,5 @@
+%h1 Employment History
+/= @person.employee.employer.each do |employer|
+/  = render :partial => 'employment_employer', |
+/    :locals => { :employer => employer }
+= render :partial => 'employment_employer_form'
