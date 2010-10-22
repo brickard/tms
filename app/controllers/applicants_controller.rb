@@ -57,7 +57,8 @@ class ApplicantsController < ApplicationController
       return redirect_to new_applicant_employers_path(@person),
         :notice => "#{@employer.company_name} Added!"
     end
-    return redirect_to new_applicant_references_path(@person)
+    return redirect_to new_applicant_references_path(@person),
+      :notice => "#{@employer.company_name} Added!"
   end
 
   def references
@@ -76,7 +77,8 @@ class ApplicantsController < ApplicationController
       return redirect_to new_applicant_references_path(@person),
         :notice => "#{@reference.name} Added!"
     end
-    return redirect_to new_applicant_references_path(@person)
+    return redirect_to new_applicant_references_path(@person),
+      :notice => "#{@reference.name} Added!"
   end
 
 end

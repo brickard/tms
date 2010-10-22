@@ -1,4 +1,6 @@
 Storeresetter::Application.routes.draw do
+  resources :references
+
   resources :employers
 
   resources :employees
