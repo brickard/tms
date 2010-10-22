@@ -49,6 +49,15 @@ class ApplicantsController < ApplicationController
   def employers_create
     @person = Person.find(params[:person_id])
     @employer = @person.employee.employers.build(params[:employer])
+    unless @employer.save
+      return render :employer
+    end
+    @employers_left = 2 - @person.employee.employers.count
+    unless @employers_left <= 0
+      return redirect_to new_applicant_employers_path(@person),
+        :notice => "#{@employer.company_name} Added!"
+    end
+    return redirect_to new_applicant_references_path(@person)
   end
 
   def references
