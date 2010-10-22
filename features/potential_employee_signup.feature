@@ -4,6 +4,7 @@ Feature: Sign up new potential employees from kiosk form
   I want to fill out an application
   So I can get a good job
 
+  @wip
   Scenario: Successfull Employee Signup
     Given I am on the new applicant page
     Then I should see "Employment Application"
@@ -46,7 +47,6 @@ Feature: Sign up new potential employees from kiosk form
       And I select "Yes" from "Has your Drivers License ever been suspended"
       And I fill in "employee[drivers_license_ever_suspended_detail]" with "Unpaid tickets"
       And I press "Next"
-    Then show me the page
     Then I should see "Employment History"
     When I fill in "Company name" with "Some Job 1"
       And I select "2009" from "employer[start_date(1i)]"
@@ -63,11 +63,13 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "Reason for leaving" with "Laid off"
       And I press "Next"
     Then I should see "Some Job 1 Added"
-    When I press "New Employer"
-    Then I should see "Company Name"
     When I fill in "Company name" with "Some Job 2"
-      And I fill in "Start date" with "06062002"
-      And I fill in "End date" with "06062003"
+      And I select "2008" from "employer[start_date(1i)]"
+      And I select "December" from "employer[start_date(2i)]"
+      And I select "21" from "employer[start_date(3i)]"
+      And I select "2009" from "employer[end_date(1i)]"
+      And I select "December" from "employer[end_date(2i)]"
+      And I select "21" from "employer[end_date(3i)]"
       And I fill in "Phone number" with "2055553333"
       And I fill in "Job Title/Description" with "Developer"
       And I fill in "Supervisor Name" with "The Super Duper"
@@ -75,9 +77,8 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "End $" with "$60 an hour"
       And I fill in "Reason for leaving" with "Laid off"
       And I press "Next"
-    Then I should see "References"
-    When I press "New Reference"
-    Then I should see "Name"
+    Then I should see "Some Job 2 Added"
+      And I should see "References"
     When I fill in "Name" with "Reference 1"
       And I fill in "Phone number/Email" with "2059991199"
       And I fill in "Relationship" with "Friend"
