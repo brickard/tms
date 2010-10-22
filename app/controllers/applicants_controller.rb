@@ -61,9 +61,22 @@ class ApplicantsController < ApplicationController
   end
 
   def references
+    @person = Person.find(params[:person_id])
+    @reference = @person.employee.references.build
   end
 
   def references_create
+    @person = Person.find(params[:person_id])
+    @reference = @person.employee.references.build(params[:reference])
+    unless @reference.save
+      return render :reference
+    end
+    @references_left = 3 - @person.employee.references.count
+    unless @references_left <= 0
+      return redirect_to new_applicant_references_path(@person),
+        :notice => "#{@reference.name} Added!"
+    end
+    return redirect_to new_applicant_references_path(@person)
   end
 
 end
