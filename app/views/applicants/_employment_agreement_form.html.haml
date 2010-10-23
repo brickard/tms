@@ -11,7 +11,7 @@
     = f.input :application_agreement_agreed, :as => :boolean, |
       :label => 'I Agree'
     = f.input :application_agreement_agreed_on, :as => :date, |
-      :label => 'Date', :value => Date.now
+      :label => 'Date', :value => DateTime.now
   = f.buttons do
     = f.commit_button :label => 'Apply'
 

@@ -93,7 +93,7 @@ class ApplicantsController < ApplicationController
     unless @uniform_order.save
       render :uniform_order
     end
-    redirect_to new_applicant_agreement_path(@person)
+    redirect_to new_applicant_agreement_path(@person), :notice => 'Uniform Order Saved!'
   end
 
   def agreement
