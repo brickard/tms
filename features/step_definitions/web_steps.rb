@@ -217,3 +217,13 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+When /^I select todays date from "([^"]*)"(?: within "([^"]*)")?$/ do |field, selector|
+  with_scope(selector) do
+    date = DateTime.now
+    select(date.year.to_s, :from => "#{field[0..-2]}(1i)]")
+    select(Date::MONTHNAMES[date.month], :from => "#{field[0..-2]}(2i)]")
+    select(date.day.to_s, :from => "#{field[0..-2]}(3i)]")
+  end
+end
+

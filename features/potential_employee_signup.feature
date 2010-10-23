@@ -109,8 +109,8 @@ Feature: Sign up new potential employees from kiosk form
       And I should see "Application Agreement"
       And I should see "I certify that the facts contained are true."
     When I check "I Agree"
-      And I select todays date in "Date"
-      And I press "Apply"
-    Then I should see "Your application has been submitted!"
+      And I select todays date from "person[application_agreement_agreed_on]"
+      And I press "Next"
+    Then I should see "Your application has been submitted"
       And I should see "Thank you for taking the time to apply Joe The Employee!"
     
