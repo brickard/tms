@@ -4,7 +4,6 @@ Feature: Sign up new potential employees from kiosk form
   I want to fill out an application
   So I can get a good job
 
-  @wip
   Scenario: Successfull Employee Signup
     Given I am on the new applicant page
     Then I should see "Employment Application"
