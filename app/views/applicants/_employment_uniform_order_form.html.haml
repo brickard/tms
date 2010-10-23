@@ -1,4 +1,4 @@
-= semantic_form_for @uniform_order, :url => create_applicant_uniform_orders_path(@person)  do |f|
+= semantic_form_for @uniform_order, :url => create_applicant_uniform_order_path(@person)  do |f|
   - if @uniform_order.errors.any?
     #error_explanation
       %h2
@@ -8,10 +8,14 @@
         - @uniform_order.errors.full_messages.each do |msg|
           %li= msg
   = f.inputs do
-    = f.input :shirt_count, :label => 'How many Shirts?'
-    = f.input :shirt_size, :label => 'Shirt Size'
-    = f.input :hat_count, :label => 'How many Hats?'
-    = f.input :hat_count, :label => 'Hat Size'
+    = f.input :shirt_count, :as => :select, :collection => (1..10), |
+      :label => 'How many Shirts?'
+    = f.input :shirt_size, :as => :select, :collection => %w{ S M L XL XXL }, |
+      :label => 'Shirt Size'
+    = f.input :hat_count, :as => :select, :collection => (1..5), |
+      :label => 'How many Hats?'
+    = f.input :hat_size, :as => :select, :collection => (5..9), |
+      :label => 'Hat Size'
   = f.buttons do
     = f.commit_button :label => 'Next'
 

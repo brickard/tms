@@ -83,10 +83,13 @@ class ApplicantsController < ApplicationController
 
   def uniform_order
     @person = Person.find(params[:person_id])
-    @uniform_order = @person.employee.uniform_order.build
+    @uniform_order = UniformOrder.new(:employee => @person.employee)
   end
 
   def uniform_order_create
+    @person = Person.find(params[:person_id])
+    @uniform_order = UniformOrder.new(params['uniform_order'].merge(
+                                      :employee => @person.employee))
   end
 
   def agreement
