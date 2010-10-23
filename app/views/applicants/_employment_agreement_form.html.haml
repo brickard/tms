@@ -1,0 +1,17 @@
+= semantic_form_for @person, :url => create_applicant_agreement_path(@person)  do |f|
+  - if @person.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@person.errors.count, "error")
+        prohibited this employment application from being saved:
+      %ul
+        - @person.errors.full_messages.each do |msg|
+          %li= msg
+  = f.inputs do
+    = f.input :application_agreement_agreed, :as => :boolean, |
+      :label => 'I Agree'
+    = f.input :application_agreement_date, :as => :date, |
+      :label => 'Date', :value => Date.now
+  = f.buttons do
+    = f.commit_button :label => 'Apply'
+

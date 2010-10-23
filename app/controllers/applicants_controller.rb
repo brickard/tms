@@ -90,15 +90,26 @@ class ApplicantsController < ApplicationController
     @person = Person.find(params[:person_id])
     @uniform_order = UniformOrder.new(params['uniform_order'].merge(
                                       :employee => @person.employee))
+    unless @uniform_order.save
+      render :uniform_order
+    end
+    redirect_to new_applicant_agreement_path(@person)
   end
 
   def agreement
+    @person = Person.find(params[:person_id])
   end
 
   def agreement_create
+    @person = Person.find(params[:person_id])
+    unless @person.update_attributes(params[:person])
+      render :agreement
+    end
+    redirect_to new_applicant_complete_path(@person), :notice => 'Your application has been submitted!'
   end
 
   def complete
+    @person = Person.find(params[:person_id])
   end
 
 end
