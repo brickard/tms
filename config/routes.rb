@@ -45,9 +45,7 @@ Storeresetter::Application.routes.draw do
   match 'applicants/agreement/:person_id', :as => :new_applicant_agreement,
     :via => [ :get ], :controller => :applicants, :action => :agreement
   match 'applicants/agreement_create/:person_id', :as => :create_applicant_agreement,
-    :via => [ :post ], :controller => :applicants, :action => :agreement_create
-  match 'applicants/complete/:person_id', :as => :new_applicant_complete,
-    :via => [ :get ], :controller => :applicants, :action => :complete
+    :via => [ :post, :put ], :controller => :applicants, :action => :agreement_create
 
   devise_for :users, :path => 'accounts'
 
