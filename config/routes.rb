@@ -1,4 +1,6 @@
 Storeresetter::Application.routes.draw do
+  resources :uniform_orders
+
   resources :references
 
   resources :employers

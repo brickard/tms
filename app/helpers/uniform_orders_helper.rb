@@ -1,0 +1,2 @@
+module UniformOrdersHelper
+end
