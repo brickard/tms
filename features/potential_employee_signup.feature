@@ -105,14 +105,12 @@ Feature: Sign up new potential employees from kiosk form
       And I select "7" from "Hat Size"
       And I select "2" from "How many Hats"
       And I press "Next"
-    Then I should see "Authorization"
-      And I should see "I certify that the facts contained"
+    Then I should see "Uniform Order Saved"
+      And I should see "Application Agreement"
+      And I should see "I certify that the facts contained are true."
     When I check "I Agree"
-      And I fill in "Date" with "10202010"
+      And I select todays date in "Date"
       And I press "Apply"
-    Then I should see "Your application has been submitted"
+    Then I should see "Your application has been submitted!"
+      And I should see "Thank you for taking the time to apply Joe The Employee!"
     
-
-
-
-
