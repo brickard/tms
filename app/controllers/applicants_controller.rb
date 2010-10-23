@@ -77,8 +77,25 @@ class ApplicantsController < ApplicationController
       return redirect_to new_applicant_references_path(@person),
         :notice => "#{@reference.name} Added!"
     end
-    return redirect_to new_applicant_references_path(@person),
+    return redirect_to new_applicant_uniform_order_path(@person),
       :notice => "#{@reference.name} Added!"
+  end
+
+  def uniform_order
+    @person = Person.find(params[:person_id])
+    @uniform_order = @person.employee.uniform_order.build
+  end
+
+  def uniform_order_create
+  end
+
+  def agreement
+  end
+
+  def agreement_create
+  end
+
+  def complete
   end
 
 end
