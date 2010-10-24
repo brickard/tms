@@ -23,9 +23,7 @@ Storeresetter::Application.routes.draw do
 
   resources :users
 
-  get 'applicants/index', :as => :applicants
-  get 'applicants/new', :as => :new_applicant
-  post 'applicants/create', :as => :create_applicant
+  resources :applicants
   match 'applicants/criteria/:person_id', :as => :new_applicant_criteria,
     :via => [ :get ], :controller => :applicants, :action => :criteria
   match 'applicants/criteria_create/:person_id', :as => :create_applicant_criteria,

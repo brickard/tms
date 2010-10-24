@@ -1,4 +1,4 @@
-= semantic_form_for @person, :url => create_applicant_path  do |f|
+= semantic_form_for @person, :url => applicants_path  do |f|
   - if @person.errors.any? || @user.errors.any?
     #error_explanation
       %h2
