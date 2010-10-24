@@ -8,15 +8,15 @@
     = csrf_meta_tag
   %body
     #main.main_content
-      #top_navigation= render_navigation(:level => 1)
+      #top_navigation
+        = render_navigation(:level => 1) if current_user
       .clear_float
       .content_wrapper
-        #sub_navigation= render_navigation(:level => 2)
         .content
           #breadcrumbs
-            = render_navigation(:renderer => :breadcrumbs, :join_with => ' &raquo; ')
+            = render_navigation(:renderer => :breadcrumbs, :join_with => ' &raquo; ') if current_user
           #authentication
-            = render :partial => 'shared/authentication'
+            = render :partial => 'shared/authentication' if current_user
           %p.notice= notice
           %p.alert= alert
           = yield
