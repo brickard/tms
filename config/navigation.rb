@@ -31,7 +31,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :projects,   'Projects',   projects_path
     primary.item :shifts,     'Shifts',     shifts_path
     primary.item :employees,  'Employees',  employees_path
-    primary.item :applicant, 'New Applicant', new_applicant_path
+    primary.item :applicants, 'Applicants', applicants_path
   end
 
     # Add an item to the primary navigation. The following params apply:
