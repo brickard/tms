@@ -3,29 +3,26 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :person_id
-  belongs_to :person
+  attr_accessible :email, :password, :password_confirmation, :remember_me, 
+    :person_id, :person_attributes, :role_ids
+  belongs_to :person, :dependent => :destroy
   has_many :user_roles
   has_many :roles, :through => :user_roles
   has_many :stores
 
-  after_create :add_manager_role
+  accepts_nested_attributes_for :person
 
-  scope :managers, lambda{
+  scope :store_managers, lambda{
     joins(:roles).
-    where("roles.name = 'manager'")
+    where("roles.name = 'Store Manager'")
   }
   scope :admins, lambda{
     joins(:roles).
-    where("roles.name = 'admin'")
+    where("roles.name = 'Admin'")
   }
 
   def full_name
     person.full_name rescue email
   end
 
-  def add_manager_role
-    self.roles << Role.find_or_create_by_name( 'manager' )
-    self.save!
-  end
 end
