@@ -38,7 +38,7 @@ form.formtastic fieldset.buttons li { float:left; padding-right:0.5em; }
 
 /* INPUT LIs
 --------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li { margin-bottom:1.5em; }
+form.formtastic fieldset > ol > li { padding:0.5em 0; margin-top:-0.5em; margin-bottom:1em; } /* padding and negative margin juggling is for Firefox */
 form.formtastic fieldset > ol > li { overflow:auto; } /* clearing contained floats */
 
 form.formtastic fieldset > ol > li.required { }
@@ -75,16 +75,29 @@ form.formtastic fieldset > ol > li ul.errors { color:#cc0000; margin:0.5em 0 0 2
 form.formtastic fieldset > ol > li ul.errors li { padding:0; border:none; display:list-item; }
 
 
-/* STRING & NUMERIC OVERRIDES
+/* STRING, NUMERIC, PASSWORD, EMAIL, URL, PHONE & SEARCH OVERRIDES
 --------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li.string input { max-width:74%; }
-form.formtastic fieldset > ol > li.password input { max-width: 13em; }
-form.formtastic fieldset > ol > li.numeric input { max-width:74%; }
+form.formtastic fieldset > ol > li.string input, 
+form.formtastic fieldset > ol > li.password input, 
+form.formtastic fieldset > ol > li.numeric input,
+form.formtastic fieldset > ol > li.email input,
+form.formtastic fieldset > ol > li.url input,
+form.formtastic fieldset > ol > li.phone input,
+form.formtastic fieldset > ol > li.search input { width:72%; }
+
+form.formtastic fieldset > ol > li.string input[size], 
+form.formtastic fieldset > ol > li.password input[size], 
+form.formtastic fieldset > ol > li.numeric input[size],
+form.formtastic fieldset > ol > li.email input[size],
+form.formtastic fieldset > ol > li.url input[size],
+form.formtastic fieldset > ol > li.phone input[size],
+form.formtastic fieldset > ol > li.search input[size] { width:auto; max-width:72%; }
 
 
 /* TEXTAREA OVERRIDES
 --------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset > ol > li.text textarea { width:74%; }
+form.formtastic fieldset > ol > li.text textarea { width:72%; }
+form.formtastic fieldset > ol > li.text textarea[cols] { width:auto; max-width:72%; }
 
 
 /* HIDDEN OVERRIDES
