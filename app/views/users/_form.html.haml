@@ -1,20 +1,11 @@
-= form_for(@user) do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@user.errors.count, "error")
-        prohibited this user from being saved:
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
-  .field
-    = f.label :person_id
-    %br/
-    = f.collection_select( :person_id, Person.all, :id, :full_name, |
-      { :prompt => true } )                                         |
-  .field
-    = f.label :email
-    %br/
-    = f.text_field :email
-  .actions
-    = f.submit
+= semantic_form_for(@user) do |f|
+  = f.inputs :email, :password, :required => true
+  = f.input :roles, :as => :check_boxes, :collection => Role.all, :required => true
+  = f.inputs :for => :person do |person_form|
+    = person_form.inputs :first_name, :last_name, :required => true
+    = person_form.input :address1, :label => 'Address 1'
+    = person_form.input :address2, :label => 'Address 2'
+    = person_form.input :city
+    = person_form.input :state, :as => :select, :collection => Carmen::US_STATES
+    = person_form.inputs :zipcode, :home_phone, :mobile_phone
+  = f.buttons
