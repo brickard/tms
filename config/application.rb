@@ -37,8 +37,9 @@ module Storeresetter
 
     # JavaScript files you want as :defaults (application.js is always included).
     config.action_view.javascript_expansions[:defaults] = [
-      'http://code.jquery.com/jquery-1.4.2.min.js', 
-      'jquery-ujs/src/rails'
+      'https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js', 
+      'jquery-ujs/src/rails',
+      'jquery-ui-1.8.5.custom.min.js',
     ]
 
     # Configure the default encoding used in templates for Ruby 1.9.
