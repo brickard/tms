@@ -1,3 +1,5 @@
+= content_for :head do
+  = javascript_include_tag 'datepicker'
 = semantic_form_for @person, :url => applicants_path  do |f|
   - if @person.errors.any? || @user.errors.any?
     #error_explanation
@@ -7,15 +9,21 @@
       %ul
         - ( @person.errors.full_messages + @user.errors.full_messages ).each do |msg|
           %li= msg
-  = f.inputs :name => 'Address Information' do
-    = f.inputs :last_name, :first_name, :middle_name, :address1, :address2, :city
-    = f.input :state, :as => :select, :collection => Carmen::US_STATES
-    = f.input :zipcode
-    = f.input :date_of_birth, :as => :date, :start_year => 1930, |
-      :label => 'Date of birth'
-    = f.inputs :email, :email_confirmation, :for => :user
-  = f.inputs :home_phone, :mobile_phone, :other_phone, |
-    :name => 'Phone Information'
+  = f.inputs do
+    = f.input :first_name, :required => true
+    = f.input :middle_name
+    = f.input :last_name, :required => true
+    = f.input :address1, :required => true
+    = f.input :address2
+    = f.input :city, :required => true
+    = f.input :state, :as => :select, :collection => Carmen::US_STATES, |
+      :required => true
+    = f.input :zipcode, :required => true
+    = f.input :date_of_birth, :as => :string, :label => 'Date of birth', |
+      :input_html => { :class => 'date_of_birth' }, :required => true
+    = f.inputs :email, :email_confirmation, :for => :user, :required => true
+    = f.input :home_phone, :required => true
+    = f.inputs :mobile_phone, :other_phone
   = f.buttons do
     = f.commit_button :label => 'Next'
 

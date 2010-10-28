@@ -1,3 +1,5 @@
+= content_for :head do
+  = javascript_include_tag 'datepicker'
 = semantic_form_for @employee, :url => create_applicant_criteria_path(@person)  do |f|
   - if @employee.errors.any?
     #error_explanation
@@ -12,7 +14,9 @@
     = f.input :needs_special_hours, :as => :select, :collection => [ "Yes", "No" ], |
       :label => 'Are there any days, shifts, hours you will not work?'
     = f.input :needs_special_hours_detail, :label => 'If yes, please explain.'
-    = f.input :available_at, :as => :date, :label => 'When are you available to start work?'
+    = f.input :available_at, :as => :string, |
+      :label => 'When are you available to start work?', |
+      :input_html => { :class => 'soon' }
     = f.input :has_reliable_vehicle, :label => 'Do you have reliable tranportation?'
     = f.input :can_travel_long_term, :label => 'Can you travel long term?'
     = f.input :been_convicted, :as => :select, :collection => [ 'Yes', 'No' ], |
@@ -34,7 +38,9 @@
       :collection => Carmen::US_STATES, |
       :label => "License State"
     = f.input :drivers_license_number, :label => 'License Number'
-    = f.input :drivers_license_expiration, :as => :date, :label => 'License Expiration Date'
+    = f.input :drivers_license_expiration, :as => :string,  |
+      :label => 'License Expiration Date', |
+      :input_html => { :class => 'soon' }
     = f.input :drivers_license_ever_suspended, :as => :select, |
       :label => 'Has your Drivers License ever been suspended?', |
       :collection => [ 'Yes', 'No' ]

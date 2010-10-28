@@ -1,3 +1,5 @@
+= content_for :head do
+  = javascript_include_tag 'datepicker'
 = semantic_form_for @employer, :url => create_applicant_employers_path(@person)  do |f|
   - if @employer.errors.any?
     #error_explanation
@@ -9,8 +11,10 @@
           %li= msg
   = f.inputs do
     = f.input :company_name, :label => 'Company name'
-    = f.input :start_date, :as => :date, :label => 'Start date'
-    = f.input :end_date, :as => :date, :label => 'End date'
+    = f.input :start_date, :as => :string, :label => 'Start date', |
+      :input_html => { :class => 'recent' }
+    = f.input :end_date, :as => :string, :label => 'End date', |
+      :input_html => { :class => 'recent' }
     = f.input :phone_number, :label => 'Phone number'
     = f.input :job_title, :label => 'Job Title/Description'
     = f.input :supervisor_name, :label => 'Supervisor Name'
