@@ -5,9 +5,16 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
-@admin_email = 'admin@storeresetter.com'
-@admin_password = 'admin_password'
-@admin_user = User.create( :email => @admin_email, :password => @admin_password,
-                           :password_confirmation => @admin_password )
-@admin_user.confirmed_at = Time.now
-@admin_user.save!
+%w{ Admin StoreManager }.each do |role_name|
+  Role.create!(:name => role_name)
+end
+%w{ bram@craniumisajar.com bryonr@att.net admin@storeresetter.com }.each do |email|
+  user = User.new(:email => email, :password => '!password!',
+                  :password_confirmation => '!password!')
+  person = Person.create(:hired_at => DateTime.now)
+  user.person = person
+  user.skip_confirmation!
+  user.roles << Role.find_by_name('Admin')
+  user.save!
+end
+
