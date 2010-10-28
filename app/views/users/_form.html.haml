@@ -8,4 +8,5 @@
     = person_form.input :city
     = person_form.input :state, :as => :select, :collection => Carmen::US_STATES
     = person_form.inputs :zipcode, :home_phone, :mobile_phone
+    = person_form.input :hired_at, :as => :hidden, :value => @user.person.hired_at || DateTime.now
   = f.buttons

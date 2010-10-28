@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     joins(:roles).
     where("roles.name = 'Admin'")
   }
+  scope :not_applicants, lambda{
+    joins(:person).
+    where('people.hired_at IS NOT NULL')
+  }
 
   def full_name
     person.full_name rescue email
