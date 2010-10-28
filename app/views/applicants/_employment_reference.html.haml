@@ -8,9 +8,12 @@
         - @reference.errors.full_messages.each do |msg|
           %li= msg
   = f.inputs do
-    = f.input :name, :label => 'Name'
+    = f.input :name, :label => 'Full Name'
     = f.input :contact_info, :label => 'Phone number/Email'
     = f.input :relationship, :label => 'Relationship'
+    = f.input :type_of_reference, :as => :select, |
+      :collection => [ 'Professional', 'Personal' ], |
+      :label => 'Type of Reference' 
   = f.buttons do
     = f.commit_button :label => 'Next'
 
