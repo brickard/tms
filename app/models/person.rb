@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
   has_one :employee
 
   scope :applicants, lambda {  
-    where( "people.hired_at = NULL" )
+    where( "people.hired_at IS NULL" )
   }
 
   def full_name
