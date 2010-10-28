@@ -18,9 +18,9 @@
     = f.input :phone_number, :label => 'Phone number'
     = f.input :job_title, :label => 'Job Title/Description'
     = f.input :supervisor_name, :label => 'Supervisor Name'
-    = f.input :start_salary, :label => 'Start $'
-    = f.input :end_salary, :label => 'End $'
-    = f.input :reason_for_leaving, :label => 'Reason for leaving'
+    = f.input :start_salary, :label => 'Start $', :input_html => { :size => '16' }
+    = f.input :end_salary, :label => 'End $', :input_html => {  :size => '16' }
+    = f.input :reason_for_leaving, :label => 'Reason for leaving', :as => :text
   = f.buttons do
     = f.commit_button :label => 'Next'
 
