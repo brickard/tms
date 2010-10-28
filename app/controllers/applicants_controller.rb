@@ -1,4 +1,5 @@
 class ApplicantsController < ApplicationController
+  before_filter :authenticate_user!, :only => [ :index  ]
   def index
     @applicants = Person.applicants
   end

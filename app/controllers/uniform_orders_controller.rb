@@ -1,4 +1,5 @@
 class UniformOrdersController < ApplicationController
+  before_filter :authenticate_user!
   # GET /uniform_orders
   # GET /uniform_orders.xml
   def index

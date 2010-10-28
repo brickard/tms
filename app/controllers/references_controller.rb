@@ -1,4 +1,5 @@
 class ReferencesController < ApplicationController
+  before_filter :authenticate_user!
   # GET /references
   # GET /references.xml
   def index

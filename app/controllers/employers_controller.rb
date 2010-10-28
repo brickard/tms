@@ -1,4 +1,5 @@
 class EmployersController < ApplicationController
+  before_filter :authenticate_user!
   # GET /employers
   # GET /employers.xml
   def index
