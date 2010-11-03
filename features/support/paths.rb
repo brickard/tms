@@ -11,6 +11,15 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
+    when /^the (.*) page for the last applicant$/i
+      begin
+        path_components = $1.split(/\s+/)
+        send(path_components.push('path').join('_').to_sym, Person.applicants.last)
+      rescue Object => e
+        Rails.logger.warn("#{e}:\n#{e.message}")
+        raise e
+      end
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

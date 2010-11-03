@@ -7,6 +7,9 @@
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 
+require 'factory_girl'
+Dir.glob(File.join(File.dirname(__FILE__), '../../spec/factories/*.rb')).each {|f| require f }
+
 require 'cucumber/formatter/unicode' # Remove this line if you don't want Cucumber Unicode support
 require 'cucumber/rails/rspec'
 require 'cucumber/rails/world'
@@ -24,8 +27,8 @@ require 'capybara/envjs'
 # steps to use the XPath syntax.
 Capybara.default_selector = :css
 
-Capybara.default_driver = :envjs
-Capybara.javascript_driver = :envjs
+#Capybara.default_driver = :envjs
+Capybara.javascript_driver = :selenium
 Capybara.save_and_open_page_path = '/tmp'
 # If you set this to false, any error raised from within your app will bubble 
 # up to your step definition and out to cucumber unless you catch it somewhere
