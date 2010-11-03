@@ -1,6 +1,6 @@
 = content_for :head do
   = javascript_include_tag 'datepicker'
-= semantic_form_for @employer, :url => create_applicant_employers_path(@person)  do |f|
+= semantic_form_for @employer, :url => applicant_employers_create_path(@person)  do |f|
   - if @employer.errors.any?
     #error_explanation
       %h2
@@ -22,5 +22,8 @@
     = f.input :end_salary, :label => 'End $', :input_html => {  :size => '16' }
     = f.input :reason_for_leaving, :label => 'Reason for leaving', :as => :text
   = f.buttons do
-    = f.commit_button :label => 'Next'
+    = f.commit_button :label => 'Add'
 
+= semantic_form_for :next, :url => applicant_references_path(@person), :html => { :method => :get } do |f|
+  = f.buttons do
+    = f.commit_button :label => 'Next'

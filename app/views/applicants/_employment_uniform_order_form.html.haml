@@ -1,4 +1,4 @@
-= semantic_form_for @uniform_order, :url => create_applicant_uniform_order_path(@person)  do |f|
+= semantic_form_for @uniform_order, :url => applicant_uniform_order_create_path(@person)  do |f|
   - if @uniform_order.errors.any?
     #error_explanation
       %h2

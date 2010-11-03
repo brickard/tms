@@ -1,6 +1,6 @@
 = content_for :head do
   = javascript_include_tag 'datepicker'
-= semantic_form_for @employee, :url => create_applicant_criteria_path(@person)  do |f|
+= semantic_form_for @employee, :url => applicant_criteria_create_path(@person)  do |f|
   - if @employee.errors.any?
     #error_explanation
       %h2

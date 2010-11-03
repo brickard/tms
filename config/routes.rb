@@ -23,27 +23,18 @@ Storeresetter::Application.routes.draw do
 
   resources :users
 
-  resources :applicants
-  match 'applicants/criteria/:person_id', :as => :new_applicant_criteria,
-    :via => [ :get ], :controller => :applicants, :action => :criteria
-  match 'applicants/criteria_create/:person_id', :as => :create_applicant_criteria,
-    :via => [ :post ], :controller => :applicants, :action => :criteria_create
-  match 'applicants/employers/:person_id', :as => :new_applicant_employers,
-    :via => [ :get ], :controller => :applicants, :action => :employers
-  match 'applicants/employers_create/:person_id', :as => :create_applicant_employers,
-    :via => [ :post ], :controller => :applicants, :action => :employers_create
-  match 'applicants/references/:person_id', :as => :new_applicant_references,
-    :via => [ :get ], :controller => :applicants, :action => :references
-  match 'applicants/references_create/:person_id', :as => :create_applicant_references,
-    :via => [ :post ], :controller => :applicants, :action => :references_create
-  match 'applicants/uniform_order/:person_id', :as => :new_applicant_uniform_order,
-    :via => [ :get ], :controller => :applicants, :action => :uniform_order
-  match 'applicants/uniform_order_create/:person_id', :as => :create_applicant_uniform_order,
-    :via => [ :post ], :controller => :applicants, :action => :uniform_order_create
-  match 'applicants/agreement/:person_id', :as => :new_applicant_agreement,
-    :via => [ :get ], :controller => :applicants, :action => :agreement
-  match 'applicants/agreement_create/:person_id', :as => :create_applicant_agreement,
-    :via => [ :post, :put ], :controller => :applicants, :action => :agreement_create
+  resources :applicants do
+    get 'criteria', :action => :criteria
+    post 'criteria_create', :action => :criteria_create
+    match 'employers', :action => :employers
+    match 'employers_create', :action => :employers_create
+    match 'references', :action => :references
+    match 'references_create', :action => :references_create
+    match 'uniform_order', :action => :uniform_order
+    match 'uniform_order_create', :action => :uniform_order_create
+    match 'agreement', :action => :agreement
+    match 'agreement_create', :action => :agreement_create
+  end
 
   devise_for :users, :path => 'accounts'
 
