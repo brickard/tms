@@ -1,5 +1,18 @@
 require 'spec_helper'
 
 describe Region do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before(:each) do
+    @region = Factory(:region)
+  end
+
+  it "should not be valid without a name" do
+    @region.name = nil
+    @region.valid?.should be_false
+  end
+
+  it "should not be valid without a client" do
+    @region.client = nil
+    @region.valid?.should be_false
+  end
+
 end

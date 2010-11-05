@@ -7,6 +7,11 @@ require 'rspec/rails'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+# load factory_girl
+require 'factory_girl'
+Dir[Rails.root.join("spec/factories/**/*.rb"), 
+    Rails.root.join("spec/factories.rb")].each {|f| require f}
+
 RSpec.configure do |config|
   # == Mock Framework
   #
