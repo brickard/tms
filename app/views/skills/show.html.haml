@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @skill.name
+
+= link_to 'Edit', edit_skill_path(@skill)
+\|
+= link_to 'Back', skills_path

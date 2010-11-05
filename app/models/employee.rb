@@ -33,6 +33,8 @@ class Employee < ActiveRecord::Base
   has_many :employers
   has_many :references
   has_one  :uniform_order
+  has_many :employee_skills
+  has_many :skills, :through => :employee_skills
 
   validates :person_id, :presence => true, :uniqueness => true
   validates_presence_of :available_at

@@ -18,4 +18,6 @@ end
   user.roles << Role.find_by_name('Admin')
   user.save!
 end
-
+%w{ Management Merchandiser Carpenter FixtureInstaller }.each do |skill_name|
+  Skill.create!(:name => skill_name)
+end
