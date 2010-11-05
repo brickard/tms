@@ -2,52 +2,16 @@
 
 %table
   %tr
-    %th Person
-    %th Needs special hours
-    %th Needs special hours detail
-    %th Available at
-    %th Has reliable vehicle
-    %th Can travel long term
-    %th Been convicted
-    %th Been convicted detail
-    %th Ever failed drug test
-    %th Legal us worker
-    %th Applied before
-    %th Applied before detail
-    %th Drivers license valid
-    %th Drivers license state
-    %th Drivers license number
-    %th Drivers license expiration
-    %th Drivers license ever suspended
-    %th Drivers license ever suspended detail
-    %th Agree to terms
-    %th Agree to terms date
+    %th Name
+    %th Location
     %th
     %th
     %th
 
   - @employees.each do |employee|
     %tr
-      %td= employee.person_id
-      %td= employee.needs_special_hours
-      %td= employee.needs_special_hours_detail
-      %td= employee.available_at
-      %td= employee.has_reliable_vehicle
-      %td= employee.can_travel_long_term
-      %td= employee.been_convicted
-      %td= employee.been_convicted_detail
-      %td= employee.ever_failed_drug_test
-      %td= employee.legal_us_worker
-      %td= employee.applied_before
-      %td= employee.applied_before_detail
-      %td= employee.drivers_license_valid
-      %td= employee.drivers_license_state
-      %td= employee.drivers_license_number
-      %td= employee.drivers_license_expiration
-      %td= employee.drivers_license_ever_suspended
-      %td= employee.drivers_license_ever_suspended_detail
-      %td= employee.agree_to_terms
-      %td= employee.agree_to_terms_date
+      %td= employee.person.full_name
+      %td= employee.person.location
       %td= link_to 'Show', employee
       %td= link_to 'Edit', edit_employee_path(employee)
       %td= link_to 'Destroy', employee, :confirm => 'Are you sure?', :method => :delete

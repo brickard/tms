@@ -43,4 +43,5 @@ class Employee < ActiveRecord::Base
     :legal_us_worker, :applied_before, :drivers_license_valid, 
     :drivers_license_ever_suspended, :agree_to_terms,
     :in => [ true, false ]
+  accepts_nested_attributes_for :skills
 end

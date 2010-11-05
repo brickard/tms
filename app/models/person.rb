@@ -48,4 +48,9 @@ class Person < ActiveRecord::Base
   def full_name
     "#{first_name} #{middle_name+' ' rescue ''}#{last_name}"
   end
+
+  def location
+    "#{city.capitalize}, #{state.capitalize}" rescue "Unknown"
+  end
+
 end
