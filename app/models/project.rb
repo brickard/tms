@@ -14,6 +14,7 @@ class Project < ActiveRecord::Base
   belongs_to :store
   has_many :shifts
 
+  validates_presence_of :store_id, :name
   def display_name
     [ store.client.name, store.name, name ].join( ' | ' )
   end

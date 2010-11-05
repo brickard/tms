@@ -20,4 +20,8 @@
 
 class Employer < ActiveRecord::Base
   belongs_to :employee
+  validates :employee_id, :presence => true, :uniqueness => true
+  validates_presence_of :company_name, :start_date, :end_date,
+    :job_title, :supervisor_name, :start_salary, :end_salary, 
+    :reason_for_leaving
 end

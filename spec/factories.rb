@@ -21,31 +21,8 @@ Factory.define :client do |f|
   f.active true
 end
 
-Factory.define :employee do |f|
-  f.person_id 1
-  f.needs_special_hours false
-  f.needs_special_hours_detail "MyText"
-  f.available_at "2010-10-03 11:15:20"
-  f.has_reliable_vehicle false
-  f.can_travel_long_term false
-  f.been_convicted false
-  f.been_convicted_detail "MyText"
-  f.ever_failed_drug_test false
-  f.legal_us_worker false
-  f.applied_before ""
-  f.applied_before_detail "MyText"
-  f.drivers_license_valid false
-  f.drivers_license_state "MyString"
-  f.drivers_license_number "MyString"
-  f.drivers_license_expiration "2010-10-03 11:15:20"
-  f.drivers_license_ever_suspended false
-  f.drivers_license_ever_suspended_detail "MyText"
-  f.agree_to_terms false
-  f.agree_to_terms_date "2010-10-03 11:15:20"
-end
-
 Factory.define :employer do |f|
-  f.employee_id 1
+  f.employee Employee.last || Factory.create(:employee)
   f.company_name "MyString"
   f.start_date "2010-10-20"
   f.end_date "2010-10-20"
@@ -81,6 +58,29 @@ Factory.define(:applicant, :class => :person) do |f|
   f.hired_at nil
 end
 
+Factory.define :employee do |f|
+  f.person Factory.create(:person)
+  f.needs_special_hours true
+  f.needs_special_hours_detail "No Weekends"
+  f.available_at "2010-10-03 11:15:20"
+  f.has_reliable_vehicle true
+  f.can_travel_long_term true
+  f.been_convicted true
+  f.been_convicted_detail "Grand Theft Auto"
+  f.ever_failed_drug_test true
+  f.legal_us_worker true
+  f.applied_before true
+  f.applied_before_detail "Worked there"
+  f.drivers_license_valid true
+  f.drivers_license_state "Alabama"
+  f.drivers_license_number "1111-211222-11211"
+  f.drivers_license_expiration "2010-10-03 11:15:20"
+  f.drivers_license_ever_suspended true
+  f.drivers_license_ever_suspended_detail "Unpaid parking tickets"
+  f.agree_to_terms true
+  f.agree_to_terms_date "2010-10-03 11:15:20"
+end
+
 Factory.define :region do |f|
   f.name Factory.next(:name)
   f.client Factory.create(:client)
@@ -89,9 +89,18 @@ end
 
 Factory.define :reference do |f|
   f.employee_id 1
-  f.name "MyString"
-  f.contact_info "MyString"
-  f.relationship "MyString"
+  f.name Factory.next(:name)
+  f.contact_info Factory.next(:name)
+  f.relationship Factory.next(:name)
+  f.type_of_reference Factory.next(:name)
+end
+
+Factory.define :personal_reference, :class => :reference do |f|
+  f.type_of_reference 'Personal'
+end
+
+Factory.define :professional_reference, :class => :reference do |f|
+  f.type_of_reference 'Professional'
 end
 
 Factory.define :role do |f|
@@ -111,16 +120,18 @@ Factory.define :user do |f|
   f.email Factory.next(:email)
   f.password 'password'
   f.password_confirmation 'password'
-  f.roles [ Factory.create(:role, :name => 'StoreManager') ]
+  #f.roles [ Role.find_by_name('StoreManager') || 
+  #          Factory.create(:role, :name => 'StoreManager') ]
 end
 
 Factory.define :admin, :parent => :user do |f|
-  f.roles [ Factory.create(:role, :name => 'Admin') ]
+  #f.roles [ Role.find_by_name('Admin') || 
+  #          Factory.create(:role, :name => 'Admin') ]
 end
 
 Factory.define :store do |f|
-  @client = Factory.create(:client)
-  @manager = Factory.create(:user, :roles => [ 
+  @client = Client.last || Factory.create(:client)
+  @manager = User.store_managers.last || Factory.create(:user, :roles => [ 
     Factory.create(:manager_role),
   ])
   f.client @client
@@ -135,9 +146,25 @@ Factory.define :store do |f|
 end
 
 Factory.define :uniform_order do |f|
+  f.employee Factory.create(:employee)
   f.shirt_size "XL"
   f.shirt_count 1
   f.hat_size "7"
   f.hat_count 1
+end
+
+Factory.define :project do |f|
+  f.store Factory.create(:store)
+  f.name Factory.next(:name)
+end
+
+Factory.define :shift do |f|
+  f.project Factory.create(:project)
+  f.name Factory.next(:name)
+end
+
+Factory.define :user_role do |f|
+  f.user Factory.create(:user)
+  f.role Factory.create(:role)
 end
 

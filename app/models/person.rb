@@ -28,6 +28,8 @@ class Person < ActiveRecord::Base
   has_one :user
   has_one :employee
 
+  validates_presence_of :last_name, :first_name
+
   scope :applicants, lambda {  
     where( "people.hired_at IS NULL" )
   }

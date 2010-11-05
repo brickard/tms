@@ -12,4 +12,5 @@
 
 class Client < ActiveRecord::Base
   has_many :regions
+  validates :name, :presence => true, :uniqueness => true
 end

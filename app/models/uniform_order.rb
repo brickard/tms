@@ -15,4 +15,6 @@
 
 class UniformOrder < ActiveRecord::Base
   belongs_to :employee
+  validates :employee_id, :presence => true, :uniqueness => true
+  validates_presence_of :shirt_size, :shirt_count, :hat_size, :hat_count
 end

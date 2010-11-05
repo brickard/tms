@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   scope :store_managers, lambda{
     joins(:roles).
-    where("roles.name = 'Store Manager'")
+    where("roles.name = 'StoreManager'")
   }
   scope :admins, lambda{
     joins(:roles).
