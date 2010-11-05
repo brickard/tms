@@ -9,7 +9,9 @@
       %ul
         - @employee.errors.full_messages.each do |msg|
           %li= msg
-  = f.inputs :name => 'Employment Availability' do
+  = f.inputs :for => :skills do |sf|
+    = sf.input :skills, :as => :check_boxes, :collection => Skill.all
+  = f.inputs do
     = f.input :person_id, :as => :hidden, :value => @person.id
     = f.input :needs_special_hours, :as => :select, :collection => [ "Yes", "No" ], |
       :label => 'Are there any days, shifts, hours you will not work?'
