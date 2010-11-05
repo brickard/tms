@@ -7,7 +7,6 @@ class ApplicantsController < ApplicationController
   def new
     @step = 1
     @progress_value = get_progress_value(@step)
-    Rails.logger.warn("progress_value: #{@progress_value}")
     @person = Person.new
     @user = User.new
   end
@@ -37,7 +36,6 @@ class ApplicantsController < ApplicationController
   def criteria
     @step = 2
     @progress_value = get_progress_value(@step)
-    Rails.logger.warn("progress_value: #{@progress_value}")
     @person = Person.find(params[:applicant_id])
     @employee = Employee.new(:person_id => @person.id)
   end
@@ -57,20 +55,19 @@ class ApplicantsController < ApplicationController
     @step = 3
     @progress_value = get_progress_value(@step)
     @person = Person.find(params[:applicant_id])
-    @employer = @person.employee.employers.build
     @employers_left = 2 - @person.employee.employers.count
+    @employer = @person.employee.employers.build
   end
 
   def employers_create
     @step = 3
     @progress_value = get_progress_value(@step)
     @person = Person.find(params[:applicant_id])
+    @employers_left = 2 - @person.employee.employers.count
     @employer = @person.employee.employers.build(params[:employer])
     unless @employer.save
-      return render :employer
+      return render :employers
     end
-    @person.reload
-    @employers_left = 2 - @person.employee.employers.count
     return redirect_to applicant_employers_path(@person)
   end
 
@@ -92,7 +89,7 @@ class ApplicantsController < ApplicationController
     @reference = @person.employee.references.build(params[:reference])
     unless @reference.save
       @references_left = 3 - @person.employee.references.count
-      return render :reference
+      return render :references
     end
     @person.reload
     @references_left = 3 - @person.employee.references.count

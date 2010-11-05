@@ -45,6 +45,7 @@
       :label => 'Has your Drivers License ever been suspended?', |
       :collection => [ 'Yes', 'No' ]
     = f.input :drivers_license_ever_suspended_detail, :label => 'If yes, please explain'
+    = f.input :agree_to_terms, :as => :hidden, :value => false
 
   = f.buttons do
     = f.commit_button :label => 'Next'

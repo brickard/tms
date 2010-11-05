@@ -2,12 +2,16 @@
   = javascript_include_tag 'datepicker'
 = semantic_form_for @person, :url => applicants_path  do |f|
   - if @person.errors.any? || @user.errors.any?
+    - error_count = @person.errors.count rescue 0
+    - error_count = @user.errors.count rescue 0
     #error_explanation
       %h2
-        = pluralize(@person.errors.count + @user.errors.count, "error")
+        = pluralize(error_count, "error")
         prohibited this employment application from being saved:
       %ul
-        - ( @person.errors.full_messages + @user.errors.full_messages ).each do |msg|
+        - full_messages = (@person.errors.full_messages || []) rescue []
+        - full_messages += (@user.errors.full_messages || []) rescue []
+        - ( full_messages ).each do |msg|
           %li= msg
   = f.inputs do
     = f.input :first_name, :required => true

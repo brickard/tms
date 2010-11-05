@@ -20,7 +20,7 @@
   .field
     = f.label :manager_id
     %br/
-    = f.collection_select( :manager_id, User.managers, :id, :full_name, |
+    = f.collection_select( :manager_id, User.store_managers, :id, :full_name, |
       { :prompt => true } )                                             |
   .field
     = f.label :active

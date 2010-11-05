@@ -35,8 +35,10 @@ class Employee < ActiveRecord::Base
   has_one  :uniform_order
 
   validates :person_id, :presence => true, :uniqueness => true
-  validates_presence_of :needs_special_hours, :available_at, :has_reliable_vehicle,
-    :can_travel_long_term, :been_convicted, :ever_failed_drug_test, :legal_us_worker,
-    :applied_before, :drivers_license_valid, :drivers_license_ever_suspended,
-    :agree_to_terms
+  validates_presence_of :available_at
+  validates_inclusion_of :needs_special_hours, :has_reliable_vehicle, 
+    :can_travel_long_term, :been_convicted, :ever_failed_drug_test, 
+    :legal_us_worker, :applied_before, :drivers_license_valid, 
+    :drivers_license_ever_suspended, :agree_to_terms,
+    :in => [ true, false ]
 end

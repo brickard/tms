@@ -1,6 +1,6 @@
 #employers 
-  - @person.employee.employers.each do |employer|
-    %p #{employer.company_name} added!
+  - @person.employee.employers.reject! { |e| e == @employer }.each do |added_employer|
+    %p #{added_employer.company_name} added!
   - unless @employers_left <= 0
     %p.notice You need to add at least #{pluralize(@employers_left, 'more Employer')}
 %br/

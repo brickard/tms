@@ -17,12 +17,12 @@ Factory.sequence(:phone) {
   "205555#{Time.now.to_i.to_s[-4..-1]}" 
 }
 Factory.define :client do |f|
-  f.name Factory.next(:name)
+  f.name { Factory.next(:name) }
   f.active true
 end
 
 Factory.define :employer do |f|
-  f.employee Employee.last || Factory.create(:employee)
+  f.employee { Factory.create(:employee) }
   f.company_name "MyString"
   f.start_date "2010-10-20"
   f.end_date "2010-10-20"
@@ -36,18 +36,18 @@ end
 
 
 Factory.define :person do |f|
-  f.last_name Factory.next(:last_name)
-  f.first_name Factory.next(:first_name)
-  f.middle_name Factory.next(:middle_name)
-  f.address1 Factory.next(:address1)
-  f.address2 Factory.next(:address2)
+  f.last_name { Factory.next(:last_name) }
+  f.first_name { Factory.next(:first_name) }
+  f.middle_name { Factory.next(:middle_name) }
+  f.address1 { Factory.next(:address1) }
+  f.address2 { Factory.next(:address2) }
   f.city 'Loi'
   f.state 'Alabama'
   f.zipcode '35216'
   f.ssn '111-11-1111'
-  f.home_phone Factory.next(:phone)
-  f.mobile_phone Factory.next(:phone)
-  f.other_phone Factory.next(:phone)
+  f.home_phone { Factory.next(:phone) }
+  f.mobile_phone { Factory.next(:phone) }
+  f.other_phone { Factory.next(:phone) }
   f.hired_at DateTime.now
   f.date_of_birth DateTime.now - 33.years
   f.application_agreement_agreed true
@@ -59,7 +59,7 @@ Factory.define(:applicant, :class => :person) do |f|
 end
 
 Factory.define :employee do |f|
-  f.person Factory.create(:person)
+  f.person { Factory.create(:person) }
   f.needs_special_hours true
   f.needs_special_hours_detail "No Weekends"
   f.available_at "2010-10-03 11:15:20"
@@ -82,17 +82,17 @@ Factory.define :employee do |f|
 end
 
 Factory.define :region do |f|
-  f.name Factory.next(:name)
-  f.client Factory.create(:client)
+  f.name { Factory.next(:name) }
+  f.client { Factory.create(:client) }
   f.active true
 end
 
 Factory.define :reference do |f|
-  f.employee_id 1
-  f.name Factory.next(:name)
-  f.contact_info Factory.next(:name)
-  f.relationship Factory.next(:name)
-  f.type_of_reference Factory.next(:name)
+  f.employee { Factory.create(:employee) }
+  f.name { Factory.next(:name) }
+  f.contact_info { Factory.next(:name) }
+  f.relationship { Factory.next(:name) }
+  f.type_of_reference { Factory.next(:name) }
 end
 
 Factory.define :personal_reference, :class => :reference do |f|
@@ -104,7 +104,7 @@ Factory.define :professional_reference, :class => :reference do |f|
 end
 
 Factory.define :role do |f|
-  f.name 'Role1'
+  f.name { Factory.next(:name) }
 end
 
 Factory.define :admin_role, :parent => :role do |f|
@@ -117,7 +117,7 @@ end
 
 # User
 Factory.define :user do |f|
-  f.email Factory.next(:email)
+  f.email { Factory.next(:email) }
   f.password 'password'
   f.password_confirmation 'password'
   #f.roles [ Role.find_by_name('StoreManager') || 
@@ -130,23 +130,23 @@ Factory.define :admin, :parent => :user do |f|
 end
 
 Factory.define :store do |f|
-  @client = Client.last || Factory.create(:client)
+  @client = Factory.create(:client) 
   @manager = User.store_managers.last || Factory.create(:user, :roles => [ 
     Factory.create(:manager_role),
   ])
   f.client @client
-  f.region Factory.create(:region, :client => @client)
+  f.region { Factory.create(:region, :client => @client) }
   f.manager @manager
   f.active true
-  f.name Factory.next(:name)
-  f.address1 Factory.next(:address1)
-  f.address2 Factory.next(:address2)
+  f.name { Factory.next(:name) }
+  f.address1 { Factory.next(:address1) }
+  f.address2 { Factory.next(:address2) }
   f.city 'Zion'
   f.zipcode '35216'
 end
 
 Factory.define :uniform_order do |f|
-  f.employee Factory.create(:employee)
+  f.employee { Factory.create(:employee) }
   f.shirt_size "XL"
   f.shirt_count 1
   f.hat_size "7"
@@ -154,17 +154,17 @@ Factory.define :uniform_order do |f|
 end
 
 Factory.define :project do |f|
-  f.store Factory.create(:store)
-  f.name Factory.next(:name)
+  f.store { Factory.create(:store) }
+  f.name { Factory.next(:name) }
 end
 
 Factory.define :shift do |f|
-  f.project Factory.create(:project)
-  f.name Factory.next(:name)
+  f.project { Factory.create(:project) }
+  f.name { Factory.next(:name) }
 end
 
 Factory.define :user_role do |f|
-  f.user Factory.create(:user)
-  f.role Factory.create(:role)
+  f.user { Factory.create(:user) }
+  f.role { Factory.create(:role) }
 end
 

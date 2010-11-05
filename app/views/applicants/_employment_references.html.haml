@@ -1,5 +1,5 @@
 #employers 
-  - @person.employee.references.each do |reference|
+  - @person.employee.references.reject! { |r| r == @reference }.each do |reference|
     %p #{reference.name} added!
   - unless @references_left <= 0
     %p.notice You need to add at least #{pluralize(@references_left, 'more Reference')}
