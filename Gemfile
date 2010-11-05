@@ -26,7 +26,7 @@ gem 'carmen'
 # Use simple-navigation for Navigation Menus
 gem 'simple-navigation', '3.0.0.beta2'
 
-group :development, :test, :console do
+group :development, :test do
   gem 'mongrel'
   gem 'capybara'
   gem 'database_cleaner'
@@ -39,6 +39,10 @@ group :development, :test, :console do
   gem 'launchy'
   gem 'capybara-envjs'
   gem 'factory_girl'
-  gem 'wirble'
   gem 'autotest'
+  gem 'annotate-models'
+end
+
+group :console do
+  gem 'wirble'
 end
