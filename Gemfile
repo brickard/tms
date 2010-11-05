@@ -32,6 +32,7 @@ group :development, :test, :console do
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
+  gem 'pickle'
   gem 'rspec', '>=2.0.0'
   gem 'rspec-rails', '>=2.0.0'
   gem 'spork'
