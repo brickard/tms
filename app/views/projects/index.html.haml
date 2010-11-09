@@ -8,7 +8,7 @@
     %th
   - @projects.each do |project|
     %tr
-      %td= project.store.name
+      %td= project.store.name rescue 'No store found'
       %td= project.name
       %td= link_to 'Show', project
       %td= link_to 'Edit', edit_project_path(project)

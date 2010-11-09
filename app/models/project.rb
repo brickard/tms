@@ -16,6 +16,6 @@ class Project < ActiveRecord::Base
 
   validates_presence_of :store_id, :name
   def display_name
-    [ store.client.name, store.name, name ].join( ' | ' )
+    [ store.client.name, store.name, name ].join( ' | ' ) rescue ''
   end
 end
