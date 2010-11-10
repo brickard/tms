@@ -44,9 +44,12 @@ class ApplicantsController < ApplicationController
     @step = 2
     @progress_value = get_progress_value(@step)
     @person = Person.find(params[:applicant_id])
-    skill_ids = params[:employee].delete(:skills).delete(:skills)
-    Rails.logger.warn("\n\n#{skill_ids.inspect}\n\n")
     @employee = Employee.new(params[:employee].merge!(:person_id => @person.id))
+    skill_ids = params[:employee].delete(:skill_ids)
+    unless skill_ids.count >= 3
+      @employee.errors[:base] << "You need to select at least 3 skills!"
+      return render :criteria
+    end
     skill_ids.each do |skill_id|
       @employee.skills << Skill.find(skill_id) unless skill_id.blank?
     end
