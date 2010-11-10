@@ -9,9 +9,9 @@
       %ul
         - @employee.errors.full_messages.each do |msg|
           %li= msg
-  = f.inputs :for => :skills do |sf|
-    = sf.input :skills, :as => :check_boxes, :collection => Skill.all
   = f.inputs do
+    /= f.inputs :for => :skills do |sf|
+    = f.input :skills, :for => :skills, :as => :check_boxes, :collection => Skill.all
     = f.input :person_id, :as => :hidden, :value => @person.id
     = f.input :needs_special_hours, :as => :select, :collection => [ "Yes", "No" ], |
       :label => 'Are there any days, shifts, hours you will not work?'
@@ -35,7 +35,7 @@
       :label => 'If yes, when and reason not employed currently?'
     = f.input :drivers_license_valid, :as => :select, |
       :collection => [ 'Yes', 'No' ], |
-      :label => "Do you have a valid Driver's License?"
+      :label => "Do you have a valid Drivers License?"
     = f.input :drivers_license_state, :as => :select, |
       :collection => Carmen::US_STATES, |
       :label => "License State"
