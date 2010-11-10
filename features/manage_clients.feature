@@ -5,9 +5,11 @@ Feature: Manage Clients
   So I can manage other data about them
 
   Scenario: Manager manages the entire lifecycle of a Client
-    Given I am a user with email "manager@srst.com" with password "manager_password"
-      And I am a person with first name "Joe" and last name "Manager"
-      #And I am logged in
+    Given a person "joe" exists with first_name: "Joe", last_name: "Manager", middle_name: ""
+      And a role "manager" exists with name: "StoreManager"
+      And a user "joe" exists with email: "manager@srst.com", password: "manager_password", person: person "joe"
+      And a user_role exists with user: user "joe", role: role "manager" 
+      And the role: "manager" should be one of user: "joe"'s roles
       And I am on the new user session page
     When I fill in "Email" with "manager@srst.com"
       And I fill in "Password" with "manager_password"

@@ -1,4 +1,4 @@
-Given /^I am a user with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
+Given /^I am a user with email "([^"]*)" and with password "([^"]*)"$/ do |email, password|
   @password, @email = password, email
   @user = User.new( :email => @email, :password => @password,
                     :password_confirmation => @password )

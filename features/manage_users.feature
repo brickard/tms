@@ -5,9 +5,16 @@ Feature: Manage Users and thier Roles
   So that the users can have varying levels of access
 
   Scenario: As an Admin user I add an admin user to the system
-    Given I am a user with email "bram@craniumisajar.com" and password "thepass"
-      And I have the role of "Admin"
-      And I am logged in
+    Given a person "joe" exists with first_name: "Joe", last_name: "Admin", middle_name: ""
+      And a role "admin" exists with name: "Admin"
+      And a user "joe" exists with email: "admin@matrix.com", password: "admin_password", person: person "joe"
+      And a user_role exists with user: user "joe", role: role "admin" 
+      And the role: "admin" should be one of user: "joe"'s roles
+      And I am on the new user session page
+      And I fill in "Email" with "admin@matrix.com"
+      And I fill in "Password" with "admin_password"
+      And I check "Remember me"
+      And I press "Sign in"
       And I am on the new user page
     When I fill in "Email" with "joe@blow.com"
       And I fill in "Password" with "password"
