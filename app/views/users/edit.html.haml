@@ -1,5 +1,9 @@
-%h1 Editing user
-= render 'form'
-= link_to 'Show', @user
-|
-\#{link_to 'Back', users_path}
+= content_for(:content_nav_heading) do
+  Edit User
+.section_heading
+  Editing #{@user.person.full_name rescue 'User'}
+  .section_heading_menu
+    = link_to 'Show', @user
+    = link_to 'Back', users_path
+.sub_content
+  = render 'form'

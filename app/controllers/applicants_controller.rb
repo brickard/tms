@@ -5,10 +5,9 @@ class ApplicantsController < ApplicationController
   end
 
   def new
-    @step = 1
-    @progress_value = get_progress_value(@step)
-    @person = Person.new
+    @person = Person.new(:form_step => 1)
     @user = User.new
+    @progress_value = get_progress_value(@person.form_step)
   end
 
   def create

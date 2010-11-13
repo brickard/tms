@@ -2,24 +2,37 @@
 %html
   %head
     %title Storeresetter
+    = stylesheet_link_tag 'jquery-ui-1.8.5.custom.css'
     = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/print.css', :media => 'print'
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
     = csrf_meta_tag
     = yield(:head)
-  %body{ :id => "#{action_name}", :class => 'home' }
-    #content_wrap{ :class => 'container' }
-    #header{ :id => 'banner', :class => 'body' }
-      #title
-        %h1 TAB Retail Remodeling
-        %h2 create it and we will install it
-      #nav
-        = render_navigation(:expand_all => true) if current_user
-      = render :partial => 'shared/authentication' if current_user
-    #content
-      = yield  
-    #foot
-      = javascript_include_tag :defaults
-      = yield(:foot)
+  %body{ :class => 'bp' }
+    #container
+      #header_container
+        #header
+          TAB Retail Remodeling Administration
+          = render :partial => 'shared/user_menu' if current_user
+      - if current_user
+        #nav_container
+          #nav
+            = render_navigation(:level => 1)
+      #content_container
+        #content
+          #content_nav_container{ :class => 'section' }
+            #content_nav
+              #content_nav_heading{ :class => 'section_heading' }
+                = yield(:content_nav_heading)
+                = render_navigation(:renderer => :breadcrumbs, :level => 1)
+              #content_nav_items
+                = render_navigation(:level => 2)
+              = yield(:content_nav)
+          #main_content{ :class => 'section' }
+            = yield  
+      #footer_container
+        #footer
+          = javascript_include_tag :defaults
+          = yield(:footer)
 

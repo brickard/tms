@@ -19,19 +19,25 @@ SimpleNavigation::Configuration.run do |navigation|
 
   # The auto highlight feature is turned on by default.
   # This turns it off globally (for the whole plugin)
-  # navigation.auto_highlight = false
+  #navigation.auto_highlight = false
 
   # Define the primary navigation
   navigation.items do |primary|
-    primary.item :users,      'Users',      users_path
-    primary.item :clients,    'Clients',    clients_path
-    primary.item :regions,    'Regions',    regions_path
-    primary.item :stores,     'Stores',     stores_path
-    primary.item :projects,   'Projects',   projects_path
-    primary.item :shifts,     'Shifts',     shifts_path
-    primary.item :skills,     'Skills',     skills_path
-    primary.item :employees,  'Employees',  employees_path
-    primary.item :applicants, 'Applicants', applicants_path
+    primary.item :employment, 'Employment', employees_path, :highlights_on => false do |employment_nav|
+      employment_nav.item :employees,  'Employees',  employees_path
+      employment_nav.item :applicants, 'Applicants', applicants_path
+    end
+    primary.item :clients, 'Clients', clients_path, :highlights_on => false do |clients_nav|
+      clients_nav.item :regions,    'Regions',    regions_path
+      clients_nav.item :stores,     'Stores',     stores_path
+      clients_nav.item :projects,   'Projects',   projects_path
+      clients_nav.item :shifts,     'Shifts',     shifts_path
+    end
+    primary.item :admin, 'Administration', users_path, :highlights_on => false do |admin_nav|
+      admin_nav.item :users, 'Users', users_path
+      admin_nav.item :skills, 'Skills', skills_path
+    end
+    primary.item :wwwtab, 'Tab Website', 'http://tabretailremodeling.com'
   end
 
     # Add an item to the primary navigation. The following params apply:

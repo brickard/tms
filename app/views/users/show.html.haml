@@ -1,10 +1,15 @@
-%p#notice= notice
-%p
-  %b Person:
+= content_for(:content_nav_heading) do
+  Show User
+.section_heading
   = @user.person.full_name rescue 'No Person Found'
-%p
-  %b Email:
-  = @user.email
-= link_to 'Edit', edit_user_path(@user)
-|
-\#{link_to 'Back', users_path}
+  .section_heading_menu
+    = link_to 'Edit', edit_user_path(@user)
+    = link_to 'Back', users_path
+.sub_content
+  %p#notice= notice
+  %p
+    %b Person:
+    = @user.person.full_name rescue 'No Person Found'
+  %p
+    %b Email:
+    = @user.email

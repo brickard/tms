@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101105184758) do
+ActiveRecord::Schema.define(:version => 20101111034350) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20101105184758) do
     t.datetime "date_of_birth"
     t.boolean  "application_agreement_agreed"
     t.date     "application_agreement_agreed_on"
+    t.integer  "form_step"
   end
 
   create_table "projects", :force => true do |t|

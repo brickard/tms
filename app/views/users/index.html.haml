@@ -1,5 +1,8 @@
-%h1 Users
-%table
+.section_heading
+  Users
+  .section_heading_menu
+    = link_to 'New User', new_user_path
+%table{ :class => 'section_content data_table' }
   %tr
     %th Email
     %th Person
@@ -14,4 +17,3 @@
       %td= link_to 'Edit', edit_user_path(user)
       %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
 %br/
-= link_to 'New User', new_user_path

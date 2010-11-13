@@ -1,3 +1,11 @@
-%h1 Employment Application
-= render :partial => 'employment_application_progress_bar'
-= render :partial => 'employment_application'
+= content_for(:content_nav_heading) do
+  Application Status
+= content_for(:content_nav) do
+  = render :partial => 'progress_bar'
+  %p.sub_content Please complete all required form fields to continue to the next step.
+.section_heading
+  Employment Application
+  .section_heading_menu
+    /= link_to 'Back', users_path
+.sub_content
+  = render :partial => "form_step_#{@person.form_step}"

@@ -1,12 +1,16 @@
-= semantic_form_for(@user) do |f|
-  = f.inputs :email, :password, :required => true
-  = f.input :roles, :as => :check_boxes, :collection => Role.all, :required => true
-  = f.inputs :for => :person do |person_form|
-    = person_form.inputs :first_name, :last_name, :required => true
-    = person_form.input :address1, :label => 'Address 1'
-    = person_form.input :address2, :label => 'Address 2'
-    = person_form.input :city
-    = person_form.input :state, :as => :select, :collection => Carmen::US_STATES
-    = person_form.inputs :zipcode, :home_phone, :mobile_phone
-    = person_form.input :hired_at, :as => :hidden, :value => @user.person.hired_at || DateTime.now
-  = f.buttons
+= form_for(@user, :html => { :class => 'bp'}) do |f|
+  = f.text_field :email
+  = f.password_field :password
+  = f.collection_select :roles, Role.all, :id, :name, {}, { :multiple => true }
+  = f.fields_for :person do |person_form|
+    = person_form.text_field :first_name
+    = person_form.text_field :last_name
+    = person_form.text_field :address1
+    = person_form.text_field :address2
+    = person_form.text_field :city
+    = person_form.select :state, Carmen::US_STATES
+    = person_form.text_field :zipcode
+    = person_form.text_field :home_phone
+    = person_form.text_field :mobile_phone
+    = person_form.hidden_field :hired_at, :value => @user.person.hired_at || DateTime.now
+  = content_tag :button, 'Save', :type => :commit
