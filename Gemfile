@@ -13,9 +13,10 @@ gem 'rails3-generators'
 # Use devise for users and authentication
 gem 'devise'
 
-# Use haml templates
+# Use haml, sass and compass for markup and css
 gem 'haml', '>=3.0.18'
 gem 'haml-rails', '>=0.3'
+gem 'compass'
 
 # Use formtastic for nice semantic forms
 gem 'formtastic', '>=1.1.0'
@@ -41,6 +42,7 @@ group :development, :test do
   gem 'factory_girl'
   gem 'autotest'
   gem 'annotate-models'
+  gem 'rb-inotify'
 end
 
 group :console do
