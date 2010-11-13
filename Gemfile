@@ -16,7 +16,7 @@ gem 'devise'
 # Use haml, sass and compass for markup and css
 gem 'haml', '>=3.0.18'
 gem 'haml-rails', '>=0.3'
-gem 'compass'
+#gem 'compass'
 
 # Use formtastic for nice semantic forms
 gem 'formtastic', '>=1.1.0'
