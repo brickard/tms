@@ -51,8 +51,6 @@ GEM
     cgi_multipart_eof_fix (2.5.0)
     childprocess (0.1.4)
       ffi (~> 0.6.3)
-    compass (0.10.6)
-      haml (>= 3.0.4)
     configuration (1.1.0)
     cucumber (0.9.4)
       builder (~> 2.1.2)
@@ -185,7 +183,6 @@ DEPENDENCIES
   capybara
   capybara-envjs
   carmen
-  compass
   cucumber
   cucumber-rails
   database_cleaner

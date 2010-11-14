@@ -14,6 +14,7 @@
 #
 
 class Reference < ActiveRecord::Base
+  REFERENCE_TYPES = [ 'Professional', 'Personal' ]
   belongs_to :employee
   validates_presence_of :employee_id, :name, :contact_info, :relationship, 
     :type_of_reference

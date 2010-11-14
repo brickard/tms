@@ -1,4 +1,61 @@
-= form_for :person, :url => applicants_path(@person) do |f|
-  = f.label :first_name
-  = f.text_field :first_name
-  = content_tag :button, 'Next', :type => :submit
+= content_for :footer do
+  = javascript_include_tag 'datepicker'
+= form_for :applicant, :url => applicants_path, :html => { :class => 'bp' } do |f|
+  = f.fields_for @applicant.person do |person_form|
+    %p{ :class => 'field short required' }
+      = person_form.text_field :first_name
+      = person_form.label :first_name
+      *
+    %p{ :class => 'field short' }
+      = person_form.text_field :middle_name
+      = person_form.label :middle_name
+    %p{ :class => 'field short required' }
+      = person_form.text_field :last_name
+      = person_form.label :last_name
+      *
+    %p{ :class => 'field short required' }
+      = person_form.text_field :address1
+      = person_form.label :address1
+      *
+    %p{ :class => 'field short' }
+      = person_form.text_field :address2
+      = person_form.label :address2
+    %p{ :class => 'field short required' }
+      = person_form.text_field :city
+      = person_form.label :city
+      *
+    %p{ :class => 'field short required' }
+      = person_form.select :state, Carmen::US_STATES
+      = person_form.label :state
+      *
+    %p{ :class => 'field short required' }
+      = person_form.text_field :zipcode
+      = person_form.label :zipcode
+      *
+    %p{ :class => 'field short required' }
+      = person_form.text_field :date_of_birth, :class => 'date_of_birth'
+      = person_form.label :date_of_birth, 'Date of birth'
+      *
+  = f.fields_for User.new do |user_form|
+    %p{ :class => 'field short required' }
+      = user_form.text_field :email
+      = user_form.label :email
+      *
+    %p{ :class => 'field short required' }
+      = user_form.text_field :email_confirmation
+      = user_form.label :email_confirmation
+      *
+  = f.fields_for @applicant.person do |person_form|
+    %p{ :class => 'field short required' }
+      = person_form.text_field :home_phone
+      = person_form.label :home_phone
+      *
+    %p{ :class => 'field short' }
+      = person_form.text_field :mobile_phone
+      = person_form.label :mobile_phone
+    %p{ :class => 'field short' }
+      = person_form.text_field :other_phone
+      = person_form.label :other_phone
+    = person_form.hidden_field :form_step, :value => @applicant.person.form_step
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Next', :type => :submit

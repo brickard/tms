@@ -1,43 +1,59 @@
 class ApplicantsController < ApplicationController
   before_filter :authenticate_user!, :only => [ :index  ]
+
   def index
     @applicants = Person.applicants
   end
 
   def new
-    @person = Person.new(:form_step => 1)
-    @user = User.new
-    @progress_value = get_progress_value(@person.form_step)
+    @applicant = ApplicantPresenter.new(:person => { :form_step => 1})
+    set_progress_value
+    set_step_status
   end
 
   def create
-    @step = 1
-    @progress_value = get_progress_value(@step)
-    user_params = params[:person].delete(:user)
-    random_password = ActiveSupport::SecureRandom.hex(5)
-    [ :password, :password_confirmation ].each do |meth|
-      user_params[meth] = random_password
-    end
-    @person = Person.new(params[:person])
-    unless @person.save
+    @applicant = ApplicantPresenter.new(params[:applicant])
+    set_progress_value
+    set_step_status
+    unless @applicant.save
       return render :new
     end
-    user_params[:person_id] = @person.id
-    @user = User.new(user_params)
-    @user.skip_confirmation!
-    unless @user.save
-      @person.destroy
-      return render :new
+    unless (3..4).include?(@applicant.person.form_step)
+      @applicant.person.increment!(:form_step)
     end
-    return redirect_to applicant_criteria_path(@person)
+    set_progress_value
+    set_step_status
   end
 
-  def criteria
-    @step = 2
-    @progress_value = get_progress_value(@step)
-    @person = Person.find(params[:applicant_id])
-    @employee = Employee.new(:person_id => @person.id)
+  def increment_step
+    @person = Person.find(params[:id])
+    return redirect_to edit_applicant_path(@person) unless @person.form_step > 2
+    return redirect_to edit_applicant_path(@person) unless @person.form_step < 5
+    case @person.form_step
+    when 3
+      return redirect_to edit_applicant_path(@person) unless 
+        @person.employee.employers.count >= 2
+    when 4
+      return redirect_to edit_applicant_path(@person) unless 
+        @person.employee.references.count >= 3
+    end
+    @person.increment!(:form_step) 
+    redirect_to edit_applicant_path(@person)
   end
+
+  def edit
+    @applicant = ApplicantPresenter.new(:person => { :id => params[:id]} )
+    set_progress_value
+    set_step_status
+  end
+
+  alias_method :update, :create
+
+  def destroy
+    super
+  end
+
+  private
 
   def criteria_create
     @step = 2
@@ -145,17 +161,30 @@ class ApplicantsController < ApplicationController
     return render :complete
   end
 
-  def destroy
-    super
+  def set_step_status
+    default_status = {
+      :heading => 'Employment Application',
+      :message => 'Please complete all required form fields to continue to the next step.'
+    }
+    step_statuses = [
+      { :heading => 'Employment Application', 
+        :message => 'Please complete the form to tell us about yourself.' },
+      { :heading => 'Employment Criteria', 
+        :message => 'Please complete the form to tell us about your qualifications.' },
+      { :heading => 'Employment History', 
+        :message => 'Please complete the form to tell us about your past jobs.' },
+      { :heading => 'Employment References', 
+        :message => 'Please complete the form to tell us about your references.' },
+    ]
+    @step_status = step_statuses[@applicant.person.form_step.to_i - 1] || default_status
   end
 
-  private
   def total_steps
     @total_steps = 7
   end
 
-  def get_progress_value(current_step)
-    ( ( current_step.to_f / total_steps ) * 100 ).round
+  def set_progress_value
+    @progress_value = ( ( @applicant.person.form_step.to_f / total_steps ) * 100 ).round
   end
 
 end

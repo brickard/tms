@@ -1,0 +1,9 @@
+= content_for :content_nav do
+  - if @applicant.errors.any?
+    #error_explanation.error
+      %p
+        = pluralize(@applicant.errors.count, "error")
+        prohibited this application from being saved:
+      %ul
+        - @applicant.errors.each do |msg|
+          %li= msg

@@ -1,0 +1,59 @@
+= content_for(:footer) do
+  = javascript_include_tag 'datepicker'
+
+= content_for(:content_nav) do
+  - @employers_left_to_add = 2 - @applicant.person.employee.employers.count
+  - unless @employers_left_to_add <= 0
+    %p.notice You need to add at least #{pluralize(@employers_left_to_add, 'more Employer')}
+
+= render :partial => 'employers_table'
+
+= form_for :applicant, :url => applicants_path, :html => { :class => 'bp' } do |f|
+  = f.fields_for @applicant.person do |person_form|
+    = person_form.hidden_field :id, :value => @applicant.person.id
+  = f.fields_for @applicant.person.user do |user_form|
+    = user_form.hidden_field :id, :value => @applicant.person.user.id
+  = f.fields_for @applicant.person.employee do |employee_form|
+    = employee_form.hidden_field :id, :value => @applicant.person.employee.id
+  = f.fields_for Employer.new do |employer_form|
+    = employer_form.hidden_field :employee_id, :value => @applicant.person.employee.id
+    %p{ :class => 'field short required' }
+      = employer_form.text_field :company_name
+      = employer_form.label :company_name
+      *
+    %p{ :class => 'field short required' }
+      = employer_form.text_field :start_date, :class => 'recent'
+      = employer_form.label :start_date
+      *
+    %p{ :class => 'field short required' }
+      = employer_form.text_field :end_date, :class => 'recent'
+      = employer_form.label :end_date
+      *
+    %p{ :class => 'field short required' }
+      = employer_form.text_field :phone_number
+      = employer_form.label :phone_number
+      *
+    %p{ :class => 'field short required' }
+      = employer_form.text_field :job_title
+      = employer_form.label :job_title, 'Job Title/Description'
+      *
+    %p{ :class => 'field short required' }
+      = employer_form.text_field :supervisor_name
+      = employer_form.label :supervisor_name, 'Supervisor Name'
+      *
+    %p{ :class => 'field short required' }
+      = employer_form.text_field :start_salary
+      = employer_form.label :start_salary, 'Start $'
+      *
+    %p{ :class => 'field short required' }
+      = employer_form.text_field :end_salary
+      = employer_form.label :end_salary, 'End $'
+      *
+    %p{ :class => 'field short required' }
+      = employer_form.text_field :reason_for_leaving
+      = employer_form.label :reason_for_leaving
+      *
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Add', :type => :submit
+  %p{ :class => 'field button' }
+    = button_to 'Next', increment_step_applicant_path(@applicant.person)

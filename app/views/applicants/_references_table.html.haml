@@ -1,0 +1,12 @@
+%table{ :class => 'data_table' }
+  %tr
+    %th Name
+    %th Contact Info
+    %th Type of Reference
+    %th
+  - @applicant.person.employee.references.each do |reference|
+    %tr
+      %td= reference.name
+      %td= reference.contact_info
+      %td= reference.type_of_reference
+%br/

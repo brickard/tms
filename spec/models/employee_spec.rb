@@ -23,6 +23,16 @@ describe Employee do
       end
     end
 
+    %w{ needs_special_hours been_convicted applied_before 
+        drivers_license_ever_suspended
+        }.each do |attr|
+      it "#{attr}_detail when #{attr} is true" do
+        @employee.send("#{attr}=", true)
+        @employee.send("#{attr}_detail=", nil)
+        @employee.valid?.should be_false
+      end
+    end
+
   end
 
 end

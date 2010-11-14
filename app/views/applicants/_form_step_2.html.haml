@@ -1,0 +1,71 @@
+= content_for :footer do
+  = javascript_include_tag 'datepicker'
+= form_for :applicant, :url => applicants_path, :html => { :class => 'bp' } do |f|
+  = f.fields_for @applicant.person do |person_form|
+    = person_form.hidden_field :id, :value => @applicant.person.id
+  = f.fields_for @applicant.user do |user_form|
+    = user_form.hidden_field :id, :value => @applicant.user.id
+  = f.fields_for Employee.new do |employee_form|
+    = employee_form.hidden_field :person_id, :value => @applicant.person.id
+    %p{ :class => 'field short required' }
+      = employee_form.collection_select :skills, Skill.all, :id, :name, {}, { :multiple => true }
+      = employee_form.label :skills, 'Skills'
+      *
+    %p{ :class => 'field short' }
+      = employee_form.select :needs_special_hours, [ [ 'Yes', true ], [ 'No', false ] ]
+      = employee_form.label :needs_special_hours, 'Are there any days, shifts, hours you will not work?'
+    %p{ :class => 'field short' }
+      = employee_form.label :needs_special_hours_detail, 'If yes, please explain.'
+      %br/
+      = employee_form.text_area :needs_special_hours_detail
+    %p{ :class => 'field short' }
+      = employee_form.text_field :available_at, :class => 'soon'
+      = employee_form.label :available_at, 'When are you available to start work?'
+    %p{ :class => 'field short' }
+      = employee_form.select :has_reliable_vehicle, [ [ 'Yes', true ], [ 'No', false ] ]
+      = employee_form.label :has_reliable_vehicle, 'Do you have reliable tranportation?'
+    %p{ :class => 'field short' }
+      = employee_form.select :can_travel_long_term, [ [ 'Yes', true ], [ 'No', false ] ]
+      = employee_form.label :can_travel_long_term, 'Can you travel long term?'
+    %p{ :class => 'field short' }
+      = employee_form.select :been_convicted, [ [ 'Yes', true ], [ 'No', false ] ]
+      = employee_form.label :been_convicted, 'Have you ever been convicted of a crime?'
+    %p{ :class => 'field short' }
+      = employee_form.label :been_convicted_detail, 'If yes, please explain.'
+      %br/
+      = employee_form.text_area :been_convicted_detail
+    %p{ :class => 'field short' }
+      = employee_form.select :ever_failed_drug_test, [ [ 'Yes', true ], [ 'No', false ] ]
+      = employee_form.label :ever_failed_drug_test, 'Have you ever failed a drug test?'
+    %p{ :class => 'field short' }
+      = employee_form.select :legal_us_worker, [ [ 'Yes', true ], [ 'No', false ] ]
+      = employee_form.label :legal_us_worker, 'Are you legally authorized to work in the United States'
+    %p{ :class => 'field short' }
+      = employee_form.select :applied_before, [ [ 'Yes', true ], [ 'No', false ] ]
+      = employee_form.label :applied_before, 'Have you ever applied for work or worked here before?'
+    %p{ :class => 'field short' }
+      = employee_form.label :applied_before_detail, 'If yes, when and reason not employed currently?'
+      %br/
+      = employee_form.text_area :applied_before_detail
+    %p{ :class => 'field short' }
+      = employee_form.select :drivers_license_valid, [ [ 'Yes', true ], [ 'No', false ] ]
+      = employee_form.label :drivers_license_valid, 'Do you have a valid Drivers License?'
+    %p{ :class => 'field short' }
+      = employee_form.select :drivers_license_state, Carmen::US_STATES
+      = employee_form.label :drivers_license_state, 'License State'
+    %p{ :class => 'field short' }
+      = employee_form.text_field :drivers_license_number
+      = employee_form.label :drivers_license_number, 'License Number'
+    %p{ :class => 'field short' }
+      = employee_form.text_field :drivers_license_expiration, :class => 'soon'
+      = employee_form.label :drivers_license_expiration, 'License Expiration Date'
+    %p{ :class => 'field short' }
+      = employee_form.select :drivers_license_ever_suspended, [ [ 'Yes', true ], [ 'No', false ] ]
+      = employee_form.label :drivers_license_ever_suspended, 'Has your Drivers License ever been suspended?'
+    %p{ :class => 'field short' }
+      = employee_form.label :drivers_license_ever_suspended_detail, 'If yes, please explain'
+      %br/
+      = employee_form.text_area :drivers_license_ever_suspended_detail
+    = employee_form.hidden_field :agree_to_terms, :value => false
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Next', :type => :submit

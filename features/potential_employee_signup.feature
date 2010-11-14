@@ -4,10 +4,11 @@ Feature: Sign up new potential employees from kiosk form
   I want to fill out an application
   So I can get a good job
 
-  Scenario: Potential Employee completes the Employment Application
+  Scenario: Potential Employee completes the Employment Application Step 1
     Given I am on the new applicant page
     Then I should see "Employment Application"
       And I should see "You are currently on step 1 of 7"
+      And I should see "Please complete the form to tell us about yourself."
     When I fill in "Last name" with "Employee"
       And I fill in "First name" with "Joe"
       And I fill in "Middle name" with "The"
@@ -23,26 +24,26 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "Email confirmation" with "joe@employees.com"
       And I press "Next"
     Then I should see "Employment Criteria"
-      And there should be a "Person" whose "full_name" is "Joe The Employee"
-      And there should be a "User" whose "email" is "joe@employees.com"
+      And a person: "joe_person" should exist with first_name: "Joe", last_name: "Employee"
+      And a user: "joe_user" should exist with email: "joe@employees.com"
+      And user: "joe_user" should be person: "joe_person"'s user
 
-  Scenario: Potential employee completes Employment Criteria
-    Given an "Applicant"
-      And the default skills exist
-      And I am on the applicant criteria page for the last applicant
+  Scenario: Potential employee completes Employment Application Step 2
+    Given the default skills exist
+      And I complete step 1 of the employment application
       And I should see "Employment Criteria"
       And I should see "You are currently on step 2 of 7"
-    When I check " Management"
-      And I check " Merchandiser"
-      And I check " Carpenter"
-      And I check " Fixture Installer"
-      And I select "Yes" from "employee[needs_special_hours]"
-      And I fill in "employee[needs_special_hours_detail]" with "No Weekends"
-      And I fill in "employee[available_at]" with "10/21/2010"
-      And I check "employee[has_reliable_vehicle]"
-      And I check "employee[can_travel_long_term]"
+    When I select "Management" from "Skills"
+      And I select "Merchandiser" from "Skills"
+      And I select "Carpenter" from "Skills"
+      And I select "Fixture Installer" from "Skills"
+      And I select "Yes" from "applicant[employee][needs_special_hours]"
+      And I fill in "applicant[employee][needs_special_hours_detail]" with "No Weekends"
+      And I fill in "applicant[employee][available_at]" with "10/21/2010"
+      And I select "Yes" from "applicant[employee][has_reliable_vehicle]"
+      And I select "Yes" from "applicant[employee][can_travel_long_term]"
       And I select "Yes" from "Have you ever been convicted of a crime"
-      And I fill in "employee[been_convicted_detail]" with "Grand Theft Auto"
+      And I fill in "applicant[employee][been_convicted_detail]" with "Grand Theft Auto"
       And I select "No" from "Have you ever failed a drug test"
       And I select "Yes" from "Are you legally authorized to work in the United States"
       And I select "Yes" from "Have you ever applied for work or worked here before"
@@ -50,23 +51,24 @@ Feature: Sign up new potential employees from kiosk form
       And I select "Yes" from "Do you have a valid Drivers License"
       And I select "Alabama" from "License State"
       And I fill in "License Number" with "55-5555-55555"
-      And I fill in "employee[drivers_license_expiration]" with "10/21/2013"
+      And I fill in "applicant[employee][drivers_license_expiration]" with "10/21/2013"
       And I select "Yes" from "Has your Drivers License ever been suspended"
-      And I fill in "employee[drivers_license_ever_suspended_detail]" with "Unpaid tickets"
+      And I fill in "applicant[employee][drivers_license_ever_suspended_detail]" with "Unpaid tickets"
       And I press "Next"
     Then I should see "Employment History"
+      And a person: "joe_person" should exist with first_name: "Joe", last_name: "Employee"
+      And a user: "joe_user" should exist with email: "joe@employees.com"
+      And user: "joe_user" should be person: "joe_person"'s user
+      And a employee: "joe_employee" should exist with person: person "joe_person"
 
-  Scenario: Potential Employee completes Employment History
-    Given a "Applicant"
-      And a "Employee"
-      And the last Employee belongs to the last Applicant
-      And I am on the applicant employers page for the last applicant
+  Scenario: Potential employee completes Employment Application Step 3
+    Given I complete step 2 of the employment application
       And I should see "Employment History"
       And I should see "You are currently on step 3 of 7"
       And I should see "You need to add at least 2 more Employers"
     When I fill in "Company name" with "Some Job 1"
-      And I fill in "employer[start_date]" with "10/10/2000"
-      And I fill in "employer[end_date]" with "10/10/2001"
+      And I fill in "Start date" with "10/10/2000"
+      And I fill in "End date" with "10/10/2001"
       And I fill in "Phone number" with "2055551111"
       And I fill in "Job Title/Description" with "Developer"
       And I fill in "Supervisor Name" with "The Super"
@@ -77,11 +79,14 @@ Feature: Sign up new potential employees from kiosk form
     Then I should see "You are currently on step 3 of 7"
       And I should see "You need to add at least 1 more Employer"
       And I should see "Some Job 1"
+      And a person: "joe_person" should exist with first_name: "Joe", last_name: "Employee"
+      And a employee: "joe_employee" should exist with person: person "joe_person"
+      And a employer should exist with employee: employee "joe_employee"
     When I press "Next"
     Then I should see "You need to add at least 1 more Employer"
     When I fill in "Company name" with "Some Job 2"
-      And I fill in "employer[start_date]" with "10/10/2002"
-      And I fill in "employer[end_date]" with "10/10/2004"
+      And I fill in "Start date" with "10/10/2002"
+      And I fill in "End date" with "10/10/2004"
       And I fill in "Phone number" with "2055551111"
       And I fill in "Job Title/Description" with "Developer"
       And I fill in "Supervisor Name" with "The Super"
@@ -93,17 +98,13 @@ Feature: Sign up new potential employees from kiosk form
       And I should see "Some Job 1"
       And I should see "Some Job 2"
       And I should not see "You need to add at least"
+      And 2 employers should exist with employee: employee "joe_employee"
     When I press "Next"
-      Then I should see "References"
+      Then I should see "Employment References"
 
-  Scenario: Potential Employee completes References
-    Given an "Applicant"
-      And an "Employee"
-      And 3 "Employer"
-      And the last Employee belongs to the last Applicant
-      And the last 3 Employers belongs to the last Applicant
-      And I am on the applicant references page for the last applicant
-      And I should see "References"
+  Scenario: Potential employee completes Employment Application Step 4
+    Given I complete step 3 of the employment application
+      And I should see "Employment References"
       And I should see "You need to add at least 3 more References"
       And I should see "You are currently on step 4 of 7"
     When I fill in "Name" with "Reference 1"
@@ -111,11 +112,11 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "Relationship" with "Friend"
       And I select "Professional" from "Type of Reference"
       And I press "Add"
-    Then I should see "References"
+    Then I should see "Employment References"
       And I should see "You need to add at least 2 more References"
       And I should see "Reference 1"
     When I press "Next"
-    Then I should see "References"
+    Then I should see "Employment References"
       And I should see "You need to add at least 2 more References"
       And I should see "Reference 1"
     When I fill in "Name" with "Reference 2"
@@ -123,7 +124,7 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "Relationship" with "Friend"
       And I select "Professional" from "Type of Reference"
       And I press "Add"
-    Then I should see "References"
+    Then I should see "Employment References"
       And I should see "You need to add at least 1 more Reference"
       And I should see "Reference 1"
       And I should see "Reference 2"
@@ -132,7 +133,7 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "Relationship" with "Friend"
       And I select "Personal" from "Type of Reference"
       And I press "Add"
-    Then I should see "References"
+    Then I should see "Employment References"
       And I should not see "You need to add at least"
       And I should see "Reference 1"
       And I should see "Reference 2"
@@ -140,15 +141,9 @@ Feature: Sign up new potential employees from kiosk form
     When I press "Next"
     Then I should see "ALL new employees must purchase shirts!"
   
-  Scenario: Potential Employee completes Uniform Order
-    Given an "Applicant"
-      And an "Employee"
-      And 2 "Employer"
-      And 3 "Reference"
-      And the last Employee belongs to the last Applicant
-      And the last 2 Employers belongs to the last Applicant
-      And the last 3 References belongs to the last Applicant
-      And I am on the applicant uniform order page for the last applicant
+  @wip
+  Scenario: Potential employee completes Employment Application Step 5
+    Given I complete step 4 of the employment application
       And I should see "You are currently on step 5 of 7"
       And I should see "ALL new employees must purchase shirts!"
       And I should see "Buy 4 get 1 free for new employees ONLY!"
@@ -161,6 +156,7 @@ Feature: Sign up new potential employees from kiosk form
       And I select "7" from "Hat Size"
       And I select "2" from "How many Hats"
       And I press "Next"
+      And show me the page
     Then I should see "Uniform Order Saved"
       And I should see "Application Agreement"
 

@@ -28,6 +28,14 @@
 #  updated_at                            :datetime
 #
 
+class DetailsValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    return nil unless value == true
+    details = record.send("#{attribute}_detail".to_sym)
+    record.errors["#{attribute}_detail".to_sym] << "cannot be blank when #{attribute} is Yes" if details.blank?
+  end
+end
+
 class Employee < ActiveRecord::Base
   belongs_to :person
   has_many :employers
@@ -35,6 +43,7 @@ class Employee < ActiveRecord::Base
   has_one  :uniform_order
   has_many :employee_skills
   has_many :skills, :through => :employee_skills
+  accepts_nested_attributes_for :employers, :references, :uniform_order, :skills
 
   validates :person_id, :presence => true, :uniqueness => true
   validates_presence_of :available_at
@@ -43,5 +52,6 @@ class Employee < ActiveRecord::Base
     :legal_us_worker, :applied_before, :drivers_license_valid, 
     :drivers_license_ever_suspended, :agree_to_terms,
     :in => [ true, false ]
-  accepts_nested_attributes_for :skills
+  validates :needs_special_hours, :been_convicted, :applied_before, 
+    :drivers_license_ever_suspended, :details => true
 end

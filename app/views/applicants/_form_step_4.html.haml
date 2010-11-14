@@ -1,0 +1,39 @@
+= content_for(:footer) do
+  = javascript_include_tag 'datepicker'
+
+= content_for(:content_nav) do
+  - @references_left_to_add = 3 - @applicant.person.employee.references.count
+  - unless @references_left_to_add <= 0
+    %p.notice You need to add at least #{pluralize(@references_left_to_add, 'more Reference')}
+
+= render :partial => 'references_table'
+
+= form_for :applicant, :url => applicants_path, :html => { :class => 'bp' } do |f|
+  = f.fields_for @applicant.person do |person_form|
+    = person_form.hidden_field :id, :value => @applicant.person.id
+  = f.fields_for @applicant.person.user do |user_form|
+    = user_form.hidden_field :id, :value => @applicant.person.user.id
+  = f.fields_for @applicant.person.employee do |employee_form|
+    = employee_form.hidden_field :id, :value => @applicant.person.employee.id
+  = f.fields_for Reference.new do |reference_form|
+    = reference_form.hidden_field :employee_id, :value => @applicant.person.employee.id
+    %p{ :class => 'field short required' }
+      = reference_form.text_field :name
+      = reference_form.label :name
+      *
+    %p{ :class => 'field short required' }
+      = reference_form.text_field :contact_info
+      = reference_form.label :contact_info, 'Phone number/Email'
+      *
+    %p{ :class => 'field short required' }
+      = reference_form.text_field :relationship
+      = reference_form.label :relationship
+      *
+    %p{ :class => 'field short required' }
+      = reference_form.select :type_of_reference, Reference::REFERENCE_TYPES
+      = reference_form.label :type_of_reference, 'Type of Reference'
+      *
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Add', :type => :submit
+  %p{ :class => 'field button' }
+    = button_to 'Next', increment_step_applicant_path(@applicant.person)

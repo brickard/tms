@@ -540,26 +540,24 @@ dd {
   margin-bottom: 10px;
 }
 
-/* line 68, ../../../app/views/sass/screen.scss */
+/* line 71, ../../../app/views/sass/screen.scss */
 input[type='text'] {
   font-size: 1.2em;
-  width: 80%;
 }
 
-/* line 72, ../../../app/views/sass/screen.scss */
+/* line 74, ../../../app/views/sass/screen.scss */
 select {
   font-size: 1.1em;
-  width: 80%;
 }
 
-/* line 76, ../../../app/views/sass/screen.scss */
+/* line 77, ../../../app/views/sass/screen.scss */
 a {
   color: #385b7b;
   text-decoration: none;
   border-bottom: solid 1px #385b7b;
 }
 
-/* line 82, ../../../app/views/sass/screen.scss */
+/* line 83, ../../../app/views/sass/screen.scss */
 input, textarea {
   padding: 9px;
   border: solid 1px #E5E5E5;
@@ -569,27 +567,35 @@ input, textarea {
   background: #FFFFFF;
 }
 
-/* line 91, ../../../app/views/sass/screen.scss */
-textarea {
-  width: 400px;
-  max-width: 400px;
-  height: 150px;
-  line-height: 150%;
+/* line 92, ../../../app/views/sass/screen.scss */
+form.bp textarea {
+  width: 300px;
+  height: 50px;
 }
 
-/* line 99, ../../../app/views/sass/screen.scss */
+/* line 97, ../../../app/views/sass/screen.scss */
+form.bp label {
+  padding: 10px;
+}
+
+/* line 101, ../../../app/views/sass/screen.scss */
+form.bp textarea + label {
+  position: relative;
+}
+
+/* line 106, ../../../app/views/sass/screen.scss */
 input:hover, textarea:hover,
 input:focus, textarea:focus {
   border-color: #C9C9C9;
 }
 
-/* line 103, ../../../app/views/sass/screen.scss */
+/* line 110, ../../../app/views/sass/screen.scss */
 .form label {
   margin-left: 10px;
   color: #999999;
 }
 
-/* line 108, ../../../app/views/sass/screen.scss */
+/* line 115, ../../../app/views/sass/screen.scss */
 .submit input {
   width: auto;
   padding: 9px 15px;
@@ -599,7 +605,7 @@ input:focus, textarea:focus {
   color: #FFFFFF;
 }
 
-/* line 117, ../../../app/views/sass/screen.scss */
+/* line 124, ../../../app/views/sass/screen.scss */
 #container {
   width: 950px;
   margin: 0 auto;
@@ -607,7 +613,7 @@ input:focus, textarea:focus {
   *zoom: 1;
 }
 
-/* line 121, ../../../app/views/sass/screen.scss */
+/* line 128, ../../../app/views/sass/screen.scss */
 #header {
   background-color: #333333;
   color: white;
@@ -623,18 +629,18 @@ input:focus, textarea:focus {
   padding: 10px;
   margin-top: 10px;
 }
-/* line 136, ../../../app/views/sass/screen.scss */
+/* line 143, ../../../app/views/sass/screen.scss */
 #header #user_menu {
   font-size: 10px;
   float: right;
 }
-/* line 141, ../../../app/views/sass/screen.scss */
+/* line 148, ../../../app/views/sass/screen.scss */
 #header #user_menu a {
   text-decoration: none;
   color: white;
 }
 
-/* line 150, ../../../app/views/sass/screen.scss */
+/* line 157, ../../../app/views/sass/screen.scss */
 #nav {
   background-color: #666666;
   color: white;
@@ -651,13 +657,13 @@ input:focus, textarea:focus {
   margin-top: 10px;
 }
 
-/* line 165, ../../../app/views/sass/screen.scss */
+/* line 172, ../../../app/views/sass/screen.scss */
 #nav ul {
   padding: 0;
   margin: 0;
 }
 
-/* line 169, ../../../app/views/sass/screen.scss */
+/* line 176, ../../../app/views/sass/screen.scss */
 #nav li {
   display: inline;
   list-style: none;
@@ -665,7 +671,7 @@ input:focus, textarea:focus {
   margin: 0;
 }
 
-/* line 175, ../../../app/views/sass/screen.scss */
+/* line 182, ../../../app/views/sass/screen.scss */
 #nav a {
   color: white;
   text-decoration: none;
@@ -673,7 +679,7 @@ input:focus, textarea:focus {
   border-bottom: none;
 }
 
-/* line 181, ../../../app/views/sass/screen.scss */
+/* line 188, ../../../app/views/sass/screen.scss */
 #nav a:hover {
   color: white;
   background-image: -moz-linear-gradient(100% 100% 90deg, #385b7b, #48739c);
@@ -686,7 +692,7 @@ input:focus, textarea:focus {
   -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* line 193, ../../../app/views/sass/screen.scss */
+/* line 200, ../../../app/views/sass/screen.scss */
 .section {
   background-color: #ffffff;
   -moz-border-radius: 5px;
@@ -699,7 +705,7 @@ input:focus, textarea:focus {
   margin-bottom: 10px;
 }
 
-/* line 204, ../../../app/views/sass/screen.scss */
+/* line 211, ../../../app/views/sass/screen.scss */
 .section_heading {
   background-color: #eeeeee;
   font-size: 16px;
@@ -714,13 +720,13 @@ input:focus, textarea:focus {
   padding: 10px;
 }
 
-/* line 217, ../../../app/views/sass/screen.scss */
+/* line 224, ../../../app/views/sass/screen.scss */
 .section_heading_menu {
   font-size: 12px;
   float: right;
 }
 
-/* line 221, ../../../app/views/sass/screen.scss */
+/* line 228, ../../../app/views/sass/screen.scss */
 .section_heading a {
   text-decoration: none;
   border: none;
@@ -728,7 +734,7 @@ input:focus, textarea:focus {
   color: #333333;
 }
 
-/* line 227, ../../../app/views/sass/screen.scss */
+/* line 234, ../../../app/views/sass/screen.scss */
 .section_heading a:hover {
   color: white;
   background-color: #385b7b;
@@ -740,26 +746,26 @@ input:focus, textarea:focus {
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* line 238, ../../../app/views/sass/screen.scss */
+/* line 245, ../../../app/views/sass/screen.scss */
 .section_content {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-/* line 242, ../../../app/views/sass/screen.scss */
+/* line 249, ../../../app/views/sass/screen.scss */
 .section_content p {
   padding-left: 5px;
   padding-right: 5px;
 }
 
-/* line 247, ../../../app/views/sass/screen.scss */
+/* line 254, ../../../app/views/sass/screen.scss */
 .data_table {
   padding-top: 10px;
   padding-bottom: 15px;
   border-collapse: collapse;
 }
 
-/* line 253, ../../../app/views/sass/screen.scss */
+/* line 260, ../../../app/views/sass/screen.scss */
 .data_table th {
   background-color: #dddddd;
   color: #333333 !important;
@@ -767,12 +773,12 @@ input:focus, textarea:focus {
   border-bottom: solid 1px #cccccc;
 }
 
-/* line 260, ../../../app/views/sass/screen.scss */
+/* line 267, ../../../app/views/sass/screen.scss */
 .data_table td {
   border-bottom: solid 1px #eeeeee;
 }
 
-/* line 264, ../../../app/views/sass/screen.scss */
+/* line 271, ../../../app/views/sass/screen.scss */
 .data_table tr:hover {
   color: #ffffff;
   background-color: #385b7b;
@@ -782,13 +788,13 @@ input:focus, textarea:focus {
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* line 273, ../../../app/views/sass/screen.scss */
+/* line 280, ../../../app/views/sass/screen.scss */
 .data_table tr:hover a {
   color: #ffffff;
   border-bottom: solid 1px #ffffff;
 }
 
-/* line 278, ../../../app/views/sass/screen.scss */
+/* line 285, ../../../app/views/sass/screen.scss */
 #content_nav_container {
   display: inline;
   float: left;
@@ -801,25 +807,25 @@ input:focus, textarea:focus {
   overflow-x: hidden;
 }
 
-/* line 283, ../../../app/views/sass/screen.scss */
+/* line 290, ../../../app/views/sass/screen.scss */
 #content_nav_items ul {
   padding: 10px;
   margin: 0;
 }
 
-/* line 287, ../../../app/views/sass/screen.scss */
+/* line 294, ../../../app/views/sass/screen.scss */
 #content_nav_items li {
   list-style: none;
   line-height: 2.4em;
 }
 
-/* line 292, ../../../app/views/sass/screen.scss */
+/* line 299, ../../../app/views/sass/screen.scss */
 #content_nav_items a {
   text-decoration: none;
   color: #333333;
 }
 
-/* line 297, ../../../app/views/sass/screen.scss */
+/* line 304, ../../../app/views/sass/screen.scss */
 #content_nav_items a:hover {
   color: white;
   background-color: #385b7b;
@@ -831,7 +837,7 @@ input:focus, textarea:focus {
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* line 308, ../../../app/views/sass/screen.scss */
+/* line 315, ../../../app/views/sass/screen.scss */
 #main_content {
   display: inline;
   float: left;
@@ -845,18 +851,35 @@ input:focus, textarea:focus {
   overflow-x: hidden;
 }
 
-/* line 314, ../../../app/views/sass/screen.scss */
+/* line 321, ../../../app/views/sass/screen.scss */
 .sub_content {
   padding: 10px;
 }
 
-/* line 318, ../../../app/views/sass/screen.scss */
+/* line 325, ../../../app/views/sass/screen.scss */
 #progress {
   padding-top: 10px;
 }
 
-/* line 322, ../../../app/views/sass/screen.scss */
+/* line 329, ../../../app/views/sass/screen.scss */
 .step_text {
   padding-left: 10px;
   padding-top: 10px;
+}
+
+/* line 334, ../../../app/views/sass/screen.scss */
+.inline {
+  display: inline;
+}
+
+/* line 338, ../../../app/views/sass/screen.scss */
+#error_explanation {
+  color: red;
+  padding: 10px;
+}
+/* line 341, ../../../app/views/sass/screen.scss */
+#error_explanation li {
+  list-style: none;
+  margin-left: -10px;
+  padding-bottom: 4px;
 }

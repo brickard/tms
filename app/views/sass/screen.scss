@@ -65,13 +65,14 @@ dt label {
 dd {
   margin-bottom: 10px;
 }
+label {
+  
+}
 input[type='text'] {
   font-size: 1.2em;
-  width: 80%;
 }
 select {
   font-size: 1.1em;
-  width: 80%;
 }
 a {
   color: $link_color;
@@ -88,11 +89,17 @@ input, textarea {
   background: #FFFFFF;
 }
 
-textarea {
-  width: 400px;
-  max-width: 400px;
-  height: 150px;
-  line-height: 150%;
+form.bp textarea {
+  width: 300px;
+  height: 50px;
+}
+
+form.bp label {
+  padding: 10px;
+}
+
+form.bp textarea + label {
+  position: relative;
 }
 
 input:hover, textarea:hover,
@@ -322,4 +329,18 @@ $nav_shadow_color: #555555;
 .step_text {
   padding-left: 10px;
   padding-top: 10px;
+}
+
+.inline {
+  display: inline;
+}
+
+#error_explanation {
+  color: red;
+  padding: 10px;
+  li {  
+    list-style: none;
+    margin-left: -10px;
+    padding-bottom: 4px;
+  }
 }

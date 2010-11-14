@@ -31,14 +31,18 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, 
-    :person_id, :person_attributes, :role_ids
+  attr_accessible :email, :email_confirmation, :password, 
+    :password_confirmation, :remember_me, :person_id, :person_attributes, 
+    :role_ids
   belongs_to :person, :dependent => :destroy
   has_many :user_roles
   has_many :roles, :through => :user_roles
   has_many :stores
+  accepts_nested_attributes_for :person, :roles, :stores
 
-  accepts_nested_attributes_for :person
+  validates :email, :presence => true, :confirmation => true, :uniqueness => true
+
+  before_validation :ensure_password_is_set
 
   scope :store_managers, lambda{
     joins(:roles).
@@ -55,6 +59,11 @@ class User < ActiveRecord::Base
 
   def full_name
     person.full_name rescue email
+  end
+
+  private
+  def ensure_password_is_set
+    self.password = ActiveSupport::SecureRandom.hex(10) if self.password.blank?
   end
 
 end

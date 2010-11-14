@@ -27,8 +27,11 @@
 class Person < ActiveRecord::Base
   has_one :user
   has_one :employee
+  accepts_nested_attributes_for :user, :employee
 
   validates_presence_of :last_name, :first_name
+  validates_presence_of :address1, :city, :state, :zipcode, :home_phone, 
+    :date_of_birth, :if => lambda{ form_step_is?(1) }
 
   scope :applicants, lambda {  
     where( "people.hired_at IS NULL" )
@@ -51,6 +54,17 @@ class Person < ActiveRecord::Base
 
   def location
     "#{city.capitalize}, #{state.capitalize}" rescue "Unknown"
+  end
+
+  def form_step_is?(step)
+    self.form_step == step.to_i
+  end
+
+  def build_user(options)
+    user = User.new(options)
+    user.person = self
+    user.skip_confirmation!
+    user
   end
 
 end

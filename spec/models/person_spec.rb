@@ -10,15 +10,31 @@ describe Person do
 #    lambda { Factory(:person, :employee => @person.employee) }.should raise_error(ActiveRecord::RecordInvalid)
 #  end
 
-  context "should not be valid without " do
+  context "should not be valid " do
     
     %w{ last_name first_name 
         }.each do |attr|
-      it "#{attr}" do
+      it "without #{attr}" do
         @person.send("#{attr}=", nil)
         @person.valid?.should be_false
       end
     end
+
+    context "on step 1" do
+      before(:each) do
+        @person.form_step = 1
+      end
+
+      %w{ address1 city state zipcode home_phone date_of_birth
+          }.each do |attr|
+        it "without #{attr}" do
+          @person.send("#{attr}=", nil)
+          @person.valid?.should be_false
+        end
+      end
+
+    end
+
 
   end
 

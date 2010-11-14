@@ -2,12 +2,12 @@
 %html
   %head
     %title Storeresetter
-    = stylesheet_link_tag 'jquery-ui-1.8.5.custom.css'
+    = csrf_meta_tag
     = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/print.css', :media => 'print'
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
-    = csrf_meta_tag
+    = stylesheet_link_tag 'jquery-ui-1.8.5.custom.css'
     = yield(:head)
   %body{ :class => 'bp' }
     #container
@@ -25,9 +25,9 @@
             #content_nav
               #content_nav_heading{ :class => 'section_heading' }
                 = yield(:content_nav_heading)
-                = render_navigation(:renderer => :breadcrumbs, :level => 1)
+                = render_navigation(:renderer => :breadcrumbs, :level => 1) if current_user
               #content_nav_items
-                = render_navigation(:level => 2)
+                = render_navigation(:level => 2) if current_user
               = yield(:content_nav)
           #main_content{ :class => 'section' }
             = yield  
