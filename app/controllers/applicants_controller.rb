@@ -177,6 +177,12 @@ class ApplicantsController < ApplicationController
         :message => 'Please complete the form to tell us about your past jobs.' },
       { :heading => 'Employment References', 
         :message => 'Please complete the form to tell us about your references.' },
+      { :heading => 'Employment Uniform Order', 
+        :message => 'Please complete the form to tell us about your uniform preferences.' },
+      { :heading => 'Employment Application Agreement', 
+        :message => 'Please complete agree to the terms and enter todays date.' },
+      { :heading => 'Employment Application Complete', 
+        :message => 'All steps complete! Your application has been submitted.' },
     ]
     @step_status = step_statuses[@applicant.person.form_step.to_i - 1] || default_status
   end

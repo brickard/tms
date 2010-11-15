@@ -170,6 +170,24 @@ Given /^I complete step (\d+) of the employment application$/ do |step_number|
       When I press "Next"
       Then I should see "ALL new employees must purchase shirts!"
     }
+  when 5
+    steps %Q{
+      Given I complete step 4 of the employment application
+        And I should see "You are currently on step 5 of 7"
+        And I should see "ALL new employees must purchase shirts!"
+        And I should see "Buy 4 get 1 free for new employees ONLY!"
+        And I should see "Each shirt is $12.95"
+        And I should see "If you wear a ball cap, it MUST be issued by the company!"
+        And I should see "1 FREE each year"
+        And I should see "Additional fitted hats can be purchased for $12.95 each"
+      When I select "XL" from "Shirt Size"
+        And I select "5" from "How many Shirts"
+        And I select "7" from "Hat Size"
+        And I select "2" from "How many Hats"
+        And I press "Next"
+        And a uniform order should exist with employee: employee "joe_employee"
+      Then I should see "Employment Application Agreement"
+    }
   end
 end
 

@@ -3,8 +3,6 @@
 = form_for :applicant, :url => applicants_path, :html => { :class => 'bp' } do |f|
   = f.fields_for @applicant.person do |person_form|
     = person_form.hidden_field :id, :value => @applicant.person.id
-  = f.fields_for @applicant.person.user do |user_form|
-    = user_form.hidden_field :id, :value => @applicant.person.user.id
   = f.fields_for Employee.new do |employee_form|
     = employee_form.hidden_field :person_id, :value => @applicant.person.id
     %p{ :class => 'field short required' }

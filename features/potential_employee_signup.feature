@@ -115,6 +115,7 @@ Feature: Sign up new potential employees from kiosk form
     Then I should see "Employment References"
       And I should see "You need to add at least 2 more References"
       And I should see "Reference 1"
+      And a reference should exist with employee: employee "joe_employee"
     When I press "Next"
     Then I should see "Employment References"
       And I should see "You need to add at least 2 more References"
@@ -128,6 +129,7 @@ Feature: Sign up new potential employees from kiosk form
       And I should see "You need to add at least 1 more Reference"
       And I should see "Reference 1"
       And I should see "Reference 2"
+      And 2 references should exist with employee: employee "joe_employee"
     When I fill in "Name" with "Reference 3"
       And I fill in "Phone number/Email" with "2059993399"
       And I fill in "Relationship" with "Friend"
@@ -138,12 +140,13 @@ Feature: Sign up new potential employees from kiosk form
       And I should see "Reference 1"
       And I should see "Reference 2"
       And I should see "Reference 3"
+      And 3 references should exist with employee: employee "joe_employee"
     When I press "Next"
     Then I should see "ALL new employees must purchase shirts!"
   
-  @wip
   Scenario: Potential employee completes Employment Application Step 5
     Given I complete step 4 of the employment application
+      And I should see "Employment Uniform Order"
       And I should see "You are currently on step 5 of 7"
       And I should see "ALL new employees must purchase shirts!"
       And I should see "Buy 4 get 1 free for new employees ONLY!"
@@ -156,29 +159,20 @@ Feature: Sign up new potential employees from kiosk form
       And I select "7" from "Hat Size"
       And I select "2" from "How many Hats"
       And I press "Next"
-      And show me the page
-    Then I should see "Uniform Order Saved"
-      And I should see "Application Agreement"
+    Then I should see "Employment Application Agreement"
+      And a uniform order should exist with employee: employee "joe_employee"
 
-  Scenario: Potential Employee completes the Application Agreement
-    Given an "Applicant"
-      And an "Employee"
-      And 2 "Employer"
-      And 3 "Reference"
-      And a "UniformOrder"
-      And the last Employee belongs to the last Applicant
-      And the last 2 Employers belongs to the last Applicant
-      And the last 3 References belongs to the last Applicant
-      And the last UniformOrder belongs to the last Applicant
-      And I am on the applicant agreement page for the last applicant
-      And I should see "Application Agreement"
+  Scenario: Potential employee completes Employment Application Step 6
+    Given I complete step 5 of the employment application
+      And I should see "Employment Application Agreement"
       And I should see "You are currently on step 6 of 7"
       And I should see "I certify that the facts contained are true."
     When I check "I Agree"
-      And I fill in "person[application_agreement_agreed_on]" with "10/10/2010"
+      And I fill in "Todays Date" with "10/10/2010"
       And I press "Next"
     Then I should see "Your application has been submitted"
       And I should see "Thank you for taking the time to apply"
       And I should not see "You are currently on step"
       And I should see "All steps complete!"
+      And a person: "joe_person" should exist with first_name: "Joe", last_name: "Employee", application_agreement_agreed: true
     

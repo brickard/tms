@@ -1,0 +1,18 @@
+= content_for(:footer) do
+  = javascript_include_tag 'datepicker'
+
+= render :partial => 'agreement_copy'
+
+= form_for :applicant, :url => applicants_path, :html => { :class => 'bp' } do |f|
+  = f.fields_for @applicant.person do |person_form|
+    = person_form.hidden_field :id, :value => @applicant.person.id
+    %p{ :class => 'field short required' }
+      = person_form.text_field :application_agreement_agreed_on, :class => 'today'
+      = person_form.label :application_agreement_agreed_on, 'Todays Date'
+      *
+    %p{ :class => 'field short required' }
+      = person_form.check_box :application_agreement_agreed, :value => false
+      = person_form.label :application_agreement_agreed, 'I Agree'
+      *
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Next', :type => :submit
