@@ -872,12 +872,7 @@ input:focus, textarea:focus {
   display: inline;
 }
 
-/* line 338, ../../../app/views/sass/screen.scss */
-#error_explanation {
-  color: red;
-  padding: 10px;
-}
-/* line 341, ../../../app/views/sass/screen.scss */
+/* line 340, ../../../app/views/sass/screen.scss */
 #error_explanation li {
   list-style: none;
   margin-left: -10px;

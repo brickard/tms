@@ -1,16 +1,54 @@
+= render :partial => 'shared/form_errors', :locals => { :@model => @user }
 = form_for(@user, :html => { :class => 'bp'}) do |f|
-  = f.text_field :email
-  = f.password_field :password
-  = f.collection_select :roles, Role.all, :id, :name, {}, { :multiple => true }
+  %p{ :class => 'field short required email' }
+    = f.text_field :email
+    = f.label :email
+    *
+  %p{ :class => 'field short required' }
+    = f.password_field :password
+    = f.label :password
+    *
+  %p{ :class => 'field short required' }
+    = f.collection_select :role_ids, Role.all, :id, :name, {}, { :multiple => true }
+    = f.label :role_ids, 'Roles'
+    * ( Hold Ctrl to select multiple )
   = f.fields_for :person do |person_form|
-    = person_form.text_field :first_name
-    = person_form.text_field :last_name
-    = person_form.text_field :address1
-    = person_form.text_field :address2
-    = person_form.text_field :city
-    = person_form.select :state, Carmen::US_STATES
-    = person_form.text_field :zipcode
-    = person_form.text_field :home_phone
-    = person_form.text_field :mobile_phone
+    %p{ :class => 'field short required' }
+      = person_form.text_field :first_name
+      = person_form.label :first_name
+      *
+    %p{ :class => 'field short required' }
+      = person_form.text_field :last_name
+      = person_form.label :last_name
+      *
+    %p{ :class => 'field short required' }
+      = person_form.text_field :address1
+      = person_form.label :address1, 'Address'
+      *
+    %p{ :class => 'field short required' }
+      = person_form.text_field :address2
+      = person_form.label :address2, 'Address Line 2'
+      *
+    %p{ :class => 'field short required' }
+      = person_form.text_field :city
+      = person_form.label :city
+      *
+    %p{ :class => 'field short required' }
+      = person_form.select :state, Carmen::US_STATES
+      = person_form.label :state
+      *
+    %p{ :class => 'field short required' }
+      = person_form.text_field :zipcode
+      = person_form.label :zipcode
+      *
+    %p{ :class => 'field short required' }
+      = person_form.text_field :home_phone
+      = person_form.label :home_phone
+      *
+    %p{ :class => 'field short required' }
+      = person_form.text_field :mobile_phone
+      = person_form.label :mobile_phone
+      *
     = person_form.hidden_field :hired_at, :value => @user.person.hired_at || DateTime.now
-  = content_tag :button, 'Save', :type => :commit
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Save', :type => :commit

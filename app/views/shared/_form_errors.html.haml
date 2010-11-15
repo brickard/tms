@@ -1,0 +1,9 @@
+= content_for( :content_nav ) do
+  - if @model.errors.any?
+    #error_explanation.error
+      %p
+        = pluralize(@model.errors.count, "error")
+        prohibited this #{@model.class.to_s.underscore.humanize} from being saved:
+      %ul
+        - @model.errors.full_messages.each do |msg|
+          %li= msg
