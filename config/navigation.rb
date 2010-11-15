@@ -37,7 +37,7 @@ SimpleNavigation::Configuration.run do |navigation|
       admin_nav.item :users, 'Users', users_path
       admin_nav.item :skills, 'Skills', skills_path
     end
-    primary.item :wwwtab, 'Tab Website', 'http://tabretailremodeling.com'
+    #primary.item :wwwtab, 'Tab Website', 'http://tabretailremodeling.com'
   end
 
     # Add an item to the primary navigation. The following params apply:
