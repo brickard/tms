@@ -82,9 +82,11 @@ module Presentable
     def save(meth=:save)
       results = {}
       self.class.presentables.each_pair do |name, model|
+        Rails.logger.warn("SAVING: #{name}")
         instance = self.send(name.to_sym)
         res = instance.send(meth.to_sym)
         results[instance] = res
+        Rails.logger.warn("SAVE RESULTS FOR: #{name} is #{res}")
       end
       if results.values.include?(false)
         results.map { |k,v| k.destroy if k.new_record? }
