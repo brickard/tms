@@ -3,6 +3,7 @@ class ApplicantPresenter < Presentable::Presenter
   presentable :user, User 
 
   def initialize(options={})
+    @skills = options[:employee].delete(:skills) rescue nil
     super
     setup_options_for_step(options)
   end
@@ -14,9 +15,10 @@ class ApplicantPresenter < Presentable::Presenter
       self.class.class_eval do
         presentable :employee, Employee
       end
-      skills = options[:employee].delete(:skills)
       initialize_presentable(:employee, Employee, options)
-      self.employee.skills << skills.map{ |skill_id| Skill.find(skill_id) }
+      self.employee.skills << @skills.map{ |skill_id| 
+        Skill.find(skill_id) 
+      } unless @skills.blank?
     when 3
       self.class.class_eval do
         presentable :employer, Employer

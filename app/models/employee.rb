@@ -51,7 +51,7 @@ class Employee < ActiveRecord::Base
     :can_travel_long_term, :been_convicted, :ever_failed_drug_test, 
     :legal_us_worker, :applied_before, :drivers_license_valid, 
     :drivers_license_ever_suspended, :agree_to_terms,
-    :in => [ true, false ]
+    :in => [ true, false ], :message => 'must be Yes or No'
   validates :needs_special_hours, :been_convicted, :applied_before, 
     :drivers_license_ever_suspended, :details => true
 end

@@ -43,8 +43,7 @@ class ApplicantsController < ApplicationController
 
   def edit
     @person = Person.find(params[:id])
-    @applicant = ApplicantPresenter.new(:person => { :id => params[:id]},
-                                        :user => { :id => @person.user.id })
+    @applicant = ApplicantPresenter.new(:person => { :id => params[:id]})
     set_progress_value
     set_step_status
   end
