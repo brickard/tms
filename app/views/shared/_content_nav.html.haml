@@ -1,0 +1,9 @@
+#content_nav_container{ :class => 'section' }
+  #content_nav
+    #content_nav_heading{ :class => 'section_heading' }
+      = yield(:content_nav_heading)
+      - if current_user && controller_name != :applicants
+        = render_navigation(:renderer => :breadcrumbs, :level => 1) if current_user
+    #content_nav_items
+      = render_navigation(:level => 2) if current_user
+    = yield(:content_nav)
