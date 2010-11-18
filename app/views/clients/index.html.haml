@@ -1,5 +1,8 @@
-%h1 Clients
-%table
+.section_heading
+  Users
+  .section_heading_menu
+    = link_to 'New Client', new_client_path
+%table{ :class => 'section_content data_table' }
   %tr
     %th Name
     %th Active
@@ -14,4 +17,3 @@
       %td= link_to 'Edit', edit_client_path(client)
       %td= link_to 'Destroy', client, :confirm => 'Are you sure?', :method => :delete
 %br/
-= link_to 'New Client', new_client_path

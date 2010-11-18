@@ -1,5 +1,8 @@
-%h1 Stores
-%table
+.section_heading
+  Stores
+  .section_heading_menu
+    = link_to 'New Store', new_store_path
+%table{ :class => 'section_content data_table' }
   %tr
     %th Client
     %th Region
@@ -32,4 +35,3 @@
       %td= link_to 'Edit', edit_store_path(store)
       %td= link_to 'Destroy', store, :confirm => 'Are you sure?', :method => :delete
 %br/
-= link_to 'New Store', new_store_path

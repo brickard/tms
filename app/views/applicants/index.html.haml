@@ -1,5 +1,8 @@
-%h1 Applicants
-%table
+.section_heading
+  Applicants
+  .section_heading_menu
+    = link_to 'New Applicant', new_applicant_path
+%table{ :class => 'section_content data_table' }
   %tr
     %th User
     %th Last name
@@ -20,4 +23,3 @@
       %td= link_to 'Edit', edit_applicant_path(applicant)
       %td= link_to 'Destroy', applicant, :confirm => 'Are you sure?', :method => :delete
 %br/
-= link_to 'New Applicant', new_applicant_path

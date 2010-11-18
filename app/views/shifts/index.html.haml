@@ -1,5 +1,8 @@
-%h1 Shifts
-%table
+.section_heading
+  Shifts
+  .section_heading_menu
+    = link_to 'New Shift', new_shift_path
+%table{ :class => 'section_content data_table' }
   %tr
     %th Project
     %th Name
@@ -14,4 +17,3 @@
       %td= link_to 'Edit', edit_shift_path(shift)
       %td= link_to 'Destroy', shift, :confirm => 'Are you sure?', :method => :delete
 %br/
-= link_to 'New Shift', new_shift_path

@@ -1,6 +1,8 @@
-%h1 Employees
-
-%table
+.section_heading
+  Employees
+  .section_heading_menu
+    = link_to 'New Employee', new_employee_path
+%table{ :class => 'section_content data_table' }
   %tr
     %th Name
     %th Location
@@ -18,4 +20,3 @@
 
 %br
 
-= link_to 'New Employee', new_employee_path
