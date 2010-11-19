@@ -2,7 +2,7 @@
 = form_for(@user, :html => { :class => 'bp'}) do |f|
   %p{ :class => 'field short required email' }
     = f.text_field :email
-    = f.label :email
+    = f.label :email, 'UserID (email)'
     *
   %p{ :class => 'field short required' }
     = f.password_field :password
@@ -24,10 +24,9 @@
       = person_form.text_field :address1
       = person_form.label :address1, 'Address'
       *
-    %p{ :class => 'field short required' }
+    %p{ :class => 'field short' }
       = person_form.text_field :address2
       = person_form.label :address2, 'Address Line 2'
-      *
     %p{ :class => 'field short required' }
       = person_form.text_field :city
       = person_form.label :city
