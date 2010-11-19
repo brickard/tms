@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   validates :email, :presence => true, :confirmation => true, :uniqueness => true
 
-  before_validation :set_random_password!
+  before_validation :set_random_password!, :set_random_email!
 
   scope :store_managers, lambda{
     joins(:roles).
@@ -61,6 +61,14 @@ class User < ActiveRecord::Base
 
   def set_random_password!
     self.password = ActiveSupport::SecureRandom.hex(10) if self.password.blank?
+  end
+
+  def set_random_email!
+    if self.email.blank?
+      self.email = "#{ActiveSupport::SecureRandom.hex(2)}@localhost.localdomain"
+      self.email_confirmation = self.email
+      self.skip_confirmation! rescue nil
+    end
   end
 
 end

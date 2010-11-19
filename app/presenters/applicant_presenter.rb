@@ -38,9 +38,18 @@ class ApplicantPresenter < Presentable::Presenter
   end
 
   def save(*args)
+    run_before_save_callbacks
     results = super
     run_after_save_callbacks if results == true
     return results
+  end
+
+  def run_before_save_callbacks
+    case @person.form_step
+    when 1
+    when 2
+    when 3
+    end
   end
 
   def run_after_save_callbacks

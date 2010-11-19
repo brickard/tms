@@ -37,14 +37,12 @@
       = person_form.label :date_of_birth, 'Date of birth'
       *
   = f.fields_for User.new do |user_form|
-    %p{ :class => 'field short required' }
+    %p{ :class => 'field short' }
       = user_form.text_field :email
       = user_form.label :email
-      *
-    %p{ :class => 'field short required' }
+    %p{ :class => 'field short' }
       = user_form.text_field :email_confirmation
       = user_form.label :email_confirmation
-      *
   = f.fields_for @applicant.person do |person_form|
     %p{ :class => 'field short required' }
       = person_form.text_field :home_phone
