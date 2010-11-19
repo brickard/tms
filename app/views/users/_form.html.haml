@@ -8,10 +8,9 @@
     = f.password_field :password
     = f.label :password
     *
-  %p{ :class => 'field short required' }
-    = f.collection_select :role_ids, Role.all, :id, :name, {}, { :multiple => true }
-    = f.label :role_ids, 'Roles'
-    * ( Hold Ctrl to select multiple )
+  %p{ :class => 'field short checkbox' }
+    = f.check_box :admin
+    = f.label :admin, 'Admin User?'
   = f.fields_for :person do |person_form|
     %p{ :class => 'field short required' }
       = person_form.text_field :first_name

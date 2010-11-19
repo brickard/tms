@@ -33,12 +33,10 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :email_confirmation, :password, 
     :password_confirmation, :remember_me, :person_id, :person_attributes, 
-    :role_ids
+    :admin
   belongs_to :person, :dependent => :destroy
-  has_many :user_roles
-  has_many :roles, :through => :user_roles
   has_many :stores
-  accepts_nested_attributes_for :person, :roles, :stores
+  accepts_nested_attributes_for :person, :stores
 
   validates :email, :presence => true, :confirmation => true, :uniqueness => true
 

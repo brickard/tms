@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101111034350) do
+ActiveRecord::Schema.define(:version => 20101119040755) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -113,12 +113,6 @@ ActiveRecord::Schema.define(:version => 20101111034350) do
     t.datetime "updated_at"
   end
 
-  create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "shifts", :force => true do |t|
     t.integer  "project_id"
     t.string   "name"
@@ -158,13 +152,6 @@ ActiveRecord::Schema.define(:version => 20101111034350) do
     t.datetime "updated_at"
   end
 
-  create_table "user_roles", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
@@ -186,6 +173,7 @@ ActiveRecord::Schema.define(:version => 20101111034350) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "person_id"
+    t.boolean  "admin"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

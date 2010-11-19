@@ -19,8 +19,6 @@ Storeresetter::Application.routes.draw do
 
   resources :clients
 
-  resources :roles
-
   resources :people
 
   resources :users
