@@ -1,0 +1,76 @@
+@import "colorscheme";
+
+.login_form_container {
+  position:absolute;
+  left:50%;
+  top:50%;
+  margin:-75px 0 0 -135px;
+  form {
+    width: 250px;
+    padding: 20px;
+    border: 1px solid $header_bg_color;
+
+    /*** Adding in CSS3 ***/
+
+    /*** Rounded Corners ***/
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+
+    /*** Background Gradient - 2 declarations one for Firefox and one for Webkit ***/
+    background:  -moz-linear-gradient(19% 75% 90deg,$header_bg_color, $header_shadow_color);
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from($header_shadow_color), to($header_bg_color));
+
+    /*** Shadow behind the box ***/
+    -moz-box-shadow:0px -5px 300px $shadow_color;
+    -webkit-box-shadow:0px -5px 300px $shadow_color;
+
+    input {
+      width: 230px;
+      background: $nav_bg_color;
+      padding: 6px;
+      margin-bottom: 10px;
+      border-top: 1px solid $nav_shadow_color;
+      border-left: 0px;
+      border-right: 0px;
+      border-bottom: 0px;
+    }
+    input:hover {
+      -webkit-box-shadow: 0px 0px 4px #000;
+      background: $link_bg_color;
+    }
+    span.remember_me {
+      margin-top: 4px;
+      input {
+        margin: 0;
+        padding: 0;
+        float:right;
+        margin-top: -16px;
+        margin-left: -8px;
+      } 
+      label {
+        margin: 0;
+        padding: 0;
+      }
+    }
+    button {
+      color: white;
+      font-size: 1.1em;
+      border: solid 1px $link_color;
+      background-color: $link_color;
+      background-image: -moz-linear-gradient(100% 100% 90deg, $link_color,$link_bg_color);
+      background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($link_bg_color), to($link_color));
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      -webkit-box-shadow: 0 1px 3px $shadow_color;
+      -moz-box-shadow: 0 1px 3px $shadow_color;
+    }
+
+    button:hover {
+      -webkit-transform: scale(1.1);
+      -moz-transform: scale(1.1);
+      -webkit-box-shadow: 0 2px 5px $hover_color;
+      -moz-box-shadow: 0 2px 5px $hover_color;
+    }
+  }
+}
+

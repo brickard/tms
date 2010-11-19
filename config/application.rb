@@ -47,5 +47,8 @@ module Storeresetter
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    # tell the sessions controller not to load a layout
+    config.to_prepare { Devise::SessionsController.layout 'login_layout' } 
   end
 end

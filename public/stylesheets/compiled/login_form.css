@@ -1,0 +1,76 @@
+/* line 3, ../../../app/views/sass/login_form.scss */
+.login_form_container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -75px 0 0 -135px;
+}
+/* line 8, ../../../app/views/sass/login_form.scss */
+.login_form_container form {
+  width: 250px;
+  padding: 20px;
+  border: 1px solid #333333;
+  /*** Adding in CSS3 ***/
+  /*** Rounded Corners ***/
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  /*** Background Gradient - 2 declarations one for Firefox and one for Webkit ***/
+  background: -moz-linear-gradient(19% 75% 90deg, #333333, #444444);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#444444), to(#333333));
+  /*** Shadow behind the box ***/
+  -moz-box-shadow: 0px -5px 300px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0px -5px 300px rgba(0, 0, 0, 0.4);
+}
+/* line 27, ../../../app/views/sass/login_form.scss */
+.login_form_container form input {
+  width: 230px;
+  background: #666666;
+  padding: 6px;
+  margin-bottom: 10px;
+  border-top: 1px solid #555555;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 0px;
+}
+/* line 37, ../../../app/views/sass/login_form.scss */
+.login_form_container form input:hover {
+  -webkit-box-shadow: 0px 0px 4px #000;
+  background: #48739c;
+}
+/* line 41, ../../../app/views/sass/login_form.scss */
+.login_form_container form span.remember_me {
+  margin-top: 4px;
+}
+/* line 43, ../../../app/views/sass/login_form.scss */
+.login_form_container form span.remember_me input {
+  margin: 0;
+  padding: 0;
+  float: right;
+  margin-top: -16px;
+  margin-left: -8px;
+}
+/* line 50, ../../../app/views/sass/login_form.scss */
+.login_form_container form span.remember_me label {
+  margin: 0;
+  padding: 0;
+}
+/* line 55, ../../../app/views/sass/login_form.scss */
+.login_form_container form button {
+  color: white;
+  font-size: 1.1em;
+  border: solid 1px #385b7b;
+  background-color: #385b7b;
+  background-image: -moz-linear-gradient(100% 100% 90deg, #385b7b, #48739c);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#48739c), to(#385b7b));
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+/* line 68, ../../../app/views/sass/login_form.scss */
+.login_form_container form button:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}

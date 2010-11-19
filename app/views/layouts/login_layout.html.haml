@@ -1,0 +1,9 @@
+!!! html
+%html
+  %head
+    %title Storeresetter
+    = csrf_meta_tag
+    = stylesheet_link_tag 'compiled/login_form'
+  %body
+    #container
+      = yield  

@@ -10,6 +10,9 @@
 // Import the non-default scaffolding module.
 @import "blueprint/scaffolding";
 
+// Import the colors
+@import "colorscheme";
+
 // To generate css equivalent to the blueprint css but with your
 // configuration applied, uncomment:
 // @include blueprint
@@ -29,13 +32,6 @@ form.bp {
   @include blueprint-form;
 }
 
-$bg_color: #ffffff;
-$link_color: #385b7b;
-$link_bg_color: #48739c;
-$shadow_color: rgba(0,0,0, .4);
-$hover_color: rgba(0,0,0, .5);
-$header_bg_color: #333333;
-$header_shadow_color: #444444;
 
 body {
   background-color: $bg_color;
@@ -150,9 +146,6 @@ input:focus, textarea:focus {
     color: $bg_color;
   }
 }
-
-$nav_bg_color: #666666;
-$nav_shadow_color: #555555;
 
 #nav {
   background-color: $nav_bg_color;
@@ -343,3 +336,4 @@ $nav_shadow_color: #555555;
     padding-bottom: 4px;
   }
 }
+
