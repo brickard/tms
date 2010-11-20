@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101028024826
+# Schema version: 20101120152124
 #
 # Table name: people
 #
@@ -22,6 +22,7 @@
 #  date_of_birth                   :datetime
 #  application_agreement_agreed    :boolean
 #  application_agreement_agreed_on :date
+#  form_step                       :integer
 #
 
 class Person < ActiveRecord::Base

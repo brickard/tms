@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101028024826
+# Schema version: 20101120152124
 #
 # Table name: shifts
 #
