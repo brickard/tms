@@ -15,7 +15,7 @@ describe Employee do
     %w{ person needs_special_hours available_at has_reliable_vehicle 
         can_travel_long_term been_convicted ever_failed_drug_test legal_us_worker
         applied_before drivers_license_valid drivers_license_ever_suspended
-        agree_to_terms
+        agree_to_terms emergency_contact_name emergency_contact_phone
         }.each do |attr|
       it "#{attr}" do
         @employee.send("#{attr}=", nil)

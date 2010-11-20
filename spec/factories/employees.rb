@@ -19,5 +19,7 @@ Factory.define :employee do |f|
   f.drivers_license_ever_suspended_detail "Unpaid parking tickets"
   f.agree_to_terms true
   f.agree_to_terms_date "2010-10-03 11:15:20"
+  f.emergency_contact_name 'Your Mom!'
+  f.emergency_contact_phone '2055551212'
 end
 

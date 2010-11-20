@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101028024826
+# Schema version: 20101120152124
 #
 # Table name: employees
 #
@@ -26,6 +26,8 @@
 #  agree_to_terms_date                   :datetime
 #  created_at                            :datetime
 #  updated_at                            :datetime
+#  emergeny_contact_name                 :string(255)
+#  emergency_contact_phone               :string(255)
 #
 
 class DetailsValidator < ActiveModel::EachValidator
@@ -46,7 +48,8 @@ class Employee < ActiveRecord::Base
   accepts_nested_attributes_for :employers, :references, :uniform_order, :skills
 
   validates :person_id, :presence => true, :uniqueness => true
-  validates_presence_of :available_at
+  validates_presence_of :available_at, :emergency_contact_name, 
+    :emergency_contact_phone
   validates_inclusion_of :needs_special_hours, :has_reliable_vehicle, 
     :can_travel_long_term, :been_convicted, :ever_failed_drug_test, 
     :legal_us_worker, :applied_before, :drivers_license_valid, 
