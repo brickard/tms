@@ -46,7 +46,7 @@
   = f.fields_for @applicant.person do |person_form|
     %p{ :class => 'field short required' }
       = person_form.text_field :home_phone
-      = person_form.label :home_phone, 'Main Phone'
+      = person_form.label :home_phone, 'Main phone'
       *
     %p{ :class => 'field short' }
       = person_form.text_field :mobile_phone

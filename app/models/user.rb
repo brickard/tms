@@ -43,14 +43,13 @@ class User < ActiveRecord::Base
 
   before_validation :set_random_password!, :set_random_email!
 
-  scope :store_managers, lambda{
-    joins(:roles).
-    where("roles.name = 'StoreManager'")
-  }
-  scope :admins, lambda{
-    joins(:roles).
-    where("roles.name = 'Admin'")
-  }
+  scope :store_managers, 
+    where(
+      arel_table[:admin].eq(false).or(
+      arel_table[:admin].eq(nil))
+    )
+  scope :admins, where(:admin => true)
+
   scope :not_applicants, lambda{
     joins(:person).
     where('people.hired_at IS NOT NULL')

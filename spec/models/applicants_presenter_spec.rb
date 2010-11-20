@@ -42,14 +42,14 @@ describe ApplicantPresenter do
   end
 
   it "should have errors on a false save" do
-    @applicant.user.password = nil
+    @applicant.person.first_name = nil
     @applicant.save.should be_false
     @applicant.errors.should be_kind_of(Array)
     @applicant.errors.should_not be_blank
   end
 
   it "should have raise on a false save!" do
-    @applicant.user.password = nil
+    @applicant.person.first_name = nil
     lambda{ @applicant.save! }.should raise_error(ActiveRecord::RecordInvalid)
   end
 

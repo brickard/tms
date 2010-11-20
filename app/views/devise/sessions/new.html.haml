@@ -9,5 +9,5 @@
         = f.label :remember_me
         = f.check_box :remember_me
     %p{ :class => 'button' }
-      = content_tag :button, 'Sign In', :type => :submit
+      = content_tag :button, 'Sign In', :type => :submit, :id => :sign_in
 /= render :partial => "devise/shared/links"

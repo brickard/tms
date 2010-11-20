@@ -6,21 +6,19 @@ Feature: Manage Clients
 
   Scenario: Manager manages the entire lifecycle of a Client
     Given a person "joe" exists with first_name: "Joe", last_name: "Manager", middle_name: ""
-      And a role "manager" exists with name: "StoreManager"
-      And a user "joe" exists with email: "manager@srst.com", password: "manager_password", person: person "joe"
-      And a user_role exists with user: user "joe", role: role "manager" 
-      And the role: "manager" should be one of user: "joe"'s roles
+      And a user "joe" exists with email: "manager@srst.com", password: "manager_password", person: person "joe", admin: "false"
       And I am on the new user session page
     When I fill in "Email" with "manager@srst.com"
       And I fill in "Password" with "manager_password"
       And I check "Remember me"
-      And I press "Sign in"
+      And I press "sign_in"
 
     Given I am on the new client page
     When I fill in "Name" with "Wally World"
       And I check "Active"
       And I press "Create Client"
     Then I should see "Wally World"
+      And a client "wallyworld" should exist with name: "Wally World"
     
     Given I am on the new region page
     When I fill in "Name" with "Southeast"
@@ -29,6 +27,7 @@ Feature: Manage Clients
       And I press "Create Region"
     Then I should see "Southeast"
       And I should see "Wally World"
+      And a region "southeast" should exist with name: "Southeast", client: client "wallyworld"
 
     Given I am on the new store page
     When I select "Wally World" from "Client"
@@ -49,6 +48,7 @@ Feature: Manage Clients
       And I should see "4538 U.S. 231"
       And I should see "AL"
       And I should see "36092"
+      And a store "wetumpka" should exist with name: "Wetumpka West 1", client: client "wallyworld", region: region "southeast"
 
     Given I am on the new project page
     When I select "Wetumpka West 1" from "Store"
@@ -56,6 +56,7 @@ Feature: Manage Clients
       And I press "Create Project"
     Then I should see "Wetumpka West 1"
       And I should see "Remodel"
+      And a project "remodel" should exist with name: "Remodel", store: store "wetumpka"
       
     Given I am on the new shift page
     When I select "Wally World | Wetumpka West 1 | Remodel" from "Project"
@@ -63,4 +64,5 @@ Feature: Manage Clients
       And I press "Create Shift"
     Then I should see "Remodel"
       And I should see "1st Shift"
+      And a shift "shift1" should exist with name: "1st Shift", project: project "remodel"
 

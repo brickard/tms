@@ -6,12 +6,10 @@ Factory.define :user do |f|
 end
 
 Factory.define :admin, :parent => :user do |f|
-  f.roles { [ Role.find_by_name('Admin') || 
-            Factory.create(:role, :name => 'Admin') ] }
+  f.admin true
 end
 
 Factory.define :store_manager, :parent => :user do |f|
-  f.roles { [ Role.find_by_name('StoreManager') || 
-            Factory.create(:role, :name => 'StoreManager') ] }
+  f.admin false
 end
 

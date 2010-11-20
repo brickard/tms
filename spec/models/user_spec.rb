@@ -10,13 +10,14 @@ describe User do
     lambda { Factory(:user, :email => @user.email) }.should raise_error(ActiveRecord::RecordInvalid)
   end
 
-  context "should not be valid without " do
+  context "should have a " do
     
     %w{ email password
         }.each do |attr|
-      it "#{attr}" do
+      it "#{attr} set after save when input is nil" do
         @user.send("#{attr}=", nil)
-        @user.valid?.should be_false
+        @user.save!.should be_true
+        @user.send("#{attr}").should_not be_blank
       end
     end
 
