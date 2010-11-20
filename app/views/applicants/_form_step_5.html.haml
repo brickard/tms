@@ -11,19 +11,19 @@
   = f.fields_for UniformOrder.new do |uniform_order_form|
     = uniform_order_form.hidden_field :employee_id, :value => @applicant.person.employee.id
     %p{ :class => 'field short required' }
-      = uniform_order_form.select :shirt_count, (1..10).to_a
+      = uniform_order_form.select :shirt_count, [ '' ] + (1..10).to_a
       = uniform_order_form.label :shirt_count, 'How many Shirts?'
       *
     %p{ :class => 'field short required' }
-      = uniform_order_form.select :shirt_size, %w{ S M L XL XXL }
+      = uniform_order_form.select :shirt_size, [ '' ] + %w{ S M L XL XXL XXXL XXXXL }
       = uniform_order_form.label :shirt_size, 'Shirt Size'
       *
     %p{ :class => 'field short required' }
-      = uniform_order_form.select :hat_count, (1..10).to_a
+      = uniform_order_form.select :hat_count, [ '' ] + (1..10).to_a
       = uniform_order_form.label :hat_count, 'How many Hats?'
       *
     %p{ :class => 'field short required' }
-      = uniform_order_form.select :hat_size, (5..9).to_a
+      = uniform_order_form.select :hat_size, [ '' ] + %w{ S M L }
       = uniform_order_form.label :hat_size, 'Hat Size'
       *
   %p{ :class => 'field button' }

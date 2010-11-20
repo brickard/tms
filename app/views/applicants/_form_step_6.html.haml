@@ -7,7 +7,7 @@
   = f.fields_for @applicant.person do |person_form|
     = person_form.hidden_field :id, :value => @applicant.person.id
     %p{ :class => 'field short required' }
-      = person_form.text_field :application_agreement_agreed_on, :class => 'today'
+      = person_form.text_field :application_agreement_agreed_on, :class => 'today', :value => Date.now
       = person_form.label :application_agreement_agreed_on, 'Todays Date'
       *
     %p{ :class => 'field short required' }

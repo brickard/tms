@@ -52,6 +52,7 @@
   %p{ :class => 'field button' }
     = content_tag :button, 'Add', :type => :submit
 
-= form_for :next, :url => increment_step_applicant_path(@applicant.person) do |f|
-  %p{ :class => 'field button' }
-    = content_tag :button, 'Next', :type => :submit
+- if @employers_left_to_add <= 0
+  = form_for :next, :url => increment_step_applicant_path(@applicant.person) do |f|
+    %p{ :class => 'field button' }
+      = content_tag :button, 'Next', :type => :submit
