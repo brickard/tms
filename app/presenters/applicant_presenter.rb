@@ -47,6 +47,7 @@ class ApplicantPresenter < Presentable::Presenter
   def run_before_save_callbacks
     case @person.form_step
     when 1
+      @user.skip_confirmation! unless @user.blank?
     when 2
     when 3
     end
