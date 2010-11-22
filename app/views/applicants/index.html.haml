@@ -4,7 +4,6 @@
     = link_to 'New Applicant', new_applicant_path
 %table{ :class => 'section_content data_table' }
   %tr
-    %th User
     %th Last name
     %th First name
     %th City
@@ -14,7 +13,6 @@
     %th
   - @applicants.each do |applicant|
     %tr
-      %td= applicant.user.email rescue 'No User Found'
       %td= applicant.last_name
       %td= applicant.first_name
       %td= applicant.city
