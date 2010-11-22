@@ -47,7 +47,7 @@
       %p{ :class => 'field short' }
         = person_form.text_field :mobile_phone
         = person_form.label :mobile_phone, 'Secondary Phone'
-      = person_form.hidden_field :hired_at, :value => @employee.person.hired_at rescue DateTime.now
+      = person_form.hidden_field :hired_at, :value => "#{@employee.person.hired_at rescue DateTime.now}"
     %p{ :class => 'field short required' }
       = f.label :emergency_contact_name, 'Emergency Contact'
       = f.text_field :emergency_contact_name

@@ -4,10 +4,6 @@
     = f.text_field :email
     = f.label :password
     = f.password_field :password
-    - if devise_mapping.rememberable?
-      %span.remember_me
-        = f.label :remember_me
-        = f.check_box :remember_me
     %p{ :class => 'button' }
       = content_tag :button, 'Sign In', :type => :submit, :id => :sign_in
 /= render :partial => "devise/shared/links"
