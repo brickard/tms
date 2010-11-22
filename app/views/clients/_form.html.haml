@@ -1,19 +1,10 @@
-= form_for(@client) do |f|
-  - if @client.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@client.errors.count, "error")
-        prohibited this client from being saved:
-      %ul
-        - @client.errors.full_messages.each do |msg|
-          %li= msg
-  .field
-    = f.label :name
-    %br/
+= render :partial => 'shared/form_errors', :locals => { :@model => @client }
+= form_for(@client, :html => { :class => 'bp'}) do |f|
+  %p{ :class => 'field short required' }
     = f.text_field :name
-  .field
+    = f.label :name
+  %p{ :class => 'field short required' }
+    = f.check_box :active, :checked => true
     = f.label :active
-    %br/
-    = f.check_box :active
-  .actions
-    = f.submit
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Save', :type => :submit, :id => :save

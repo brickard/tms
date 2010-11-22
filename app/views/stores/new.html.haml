@@ -1,3 +1,8 @@
-%h1 New store
-= render 'form'
-= link_to 'Back', stores_path
+= content_for(:content_nav_heading) do
+  New Store
+.section_heading
+  New Store
+  .section_heading_menu
+    = link_to 'Back', stores_path
+.sub_content
+  = render 'form'

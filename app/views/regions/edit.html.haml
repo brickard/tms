@@ -1,5 +1,9 @@
-%h1 Editing region
-= render 'form'
-= link_to 'Show', @region
-|
-\#{link_to 'Back', regions_path}
+= content_for(:content_nav_heading) do
+  Edit Region
+.section_heading
+  Edit Region
+  .section_heading_menu
+    = link_to 'Show', @region
+    = link_to 'Back', clients_path
+.sub_content
+  = render 'form'

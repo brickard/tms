@@ -1,5 +1,9 @@
-%h1 Editing project
-= render 'form'
-= link_to 'Show', @project
-|
-\#{link_to 'Back', projects_path}
+= content_for(:content_nav_heading) do
+  Edit Project
+.section_heading
+  Edit Project
+  .section_heading_menu
+    = link_to 'Show', @project
+    = link_to 'Back', projects_path
+.sub_content
+  = render 'form'

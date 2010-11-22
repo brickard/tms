@@ -1,7 +1,9 @@
-%h1 Editing skill
-
-= render 'form'
-
-= link_to 'Show', @skill
-\|
-= link_to 'Back', skills_path
+= content_for(:content_nav_heading) do
+  Edit Skill
+.section_heading
+  Edit Skill
+  .section_heading_menu
+  = link_to 'Show', @skill
+  = link_to 'Back', skills_path
+.sub_content
+  = render 'form'

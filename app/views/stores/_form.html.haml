@@ -1,58 +1,40 @@
-= form_for(@store) do |f|
-  - if @store.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@store.errors.count, "error")
-        prohibited this store from being saved:
-      %ul
-        - @store.errors.full_messages.each do |msg|
-          %li= msg
-  .field
-    = f.label :client_id
-    %br/
+= render :partial => 'shared/form_errors', :locals => { :@model => @store }
+= form_for(@store, :html => { :class => 'bp'}) do |f|
+  %p{ :class => 'field short required' }
     = f.collection_select( :client_id, Client.all, :id, :name, |
       { :prompt => true } )
-  .field
-    = f.label :region_id
-    %br/
+    = f.label :client_id
+  %p{ :class => 'field short required' }
     = f.collection_select( :region_id, Region.all, :id, :name, |
       { :prompt => true } )
-  .field
-    = f.label :manager_id
-    %br/
+    = f.label :region_id
+  %p{ :class => 'field short required' }
     = f.collection_select( :manager_id, User.store_managers, :id, :full_name, |
       { :prompt => true } )
-  .field
+    = f.label :manager_id
+  %p{ :class => 'field short required' }
+    = f.check_box :active, :checked => true
     = f.label :active
-    %br/
-    = f.check_box :active
-  .field
-    = f.label :name
-    %br/
+  %p{ :class => 'field short required' }
     = f.text_field :name
-  .field
-    = f.label :number
-    %br/
+    = f.label :name
+  %p{ :class => 'field short required' }
     = f.text_field :number
-  .field
-    = f.label :address1
-    %br/
+    = f.label :number
+  %p{ :class => 'field short required' }
     = f.text_field :address1
-  .field
-    = f.label :address2
-    %br/
+    = f.label :address1
+  %p{ :class => 'field short required' }
     = f.text_field :address2
-  .field
-    = f.label :city
-    %br/
+    = f.label :address2
+  %p{ :class => 'field short required' }
     = f.text_field :city
-  .field
+    = f.label :city
+  %p{ :class => 'field short required' }
+    = f.select :state, Carmen::US_STATES
     = f.label :state
-    %br/
-    = f.select :state, Carmen::state_codes("US")
-  .field
-    = f.label :zipcode
-    %br/
+  %p{ :class => 'field short required' }
     = f.text_field :zipcode
-  .actions
-    = f.submit
+    = f.label :zipcode
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Save', :type => :submit, :id => :save

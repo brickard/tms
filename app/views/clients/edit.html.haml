@@ -1,5 +1,9 @@
-%h1 Editing client
-= render 'form'
-= link_to 'Show', @client
-|
-\#{link_to 'Back', clients_path}
+= content_for(:content_nav_heading) do
+  Edit Client
+.section_heading
+  Edit Client
+  .section_heading_menu
+    = link_to 'Show', @client
+    = link_to 'Back', clients_path
+.sub_content
+  = render 'form'

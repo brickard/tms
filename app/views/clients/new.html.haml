@@ -1,3 +1,8 @@
-%h1 New client
-= render 'form'
-= link_to 'Back', clients_path
+= content_for(:content_nav_heading) do
+  New Client
+.section_heading
+  New Client
+  .section_heading_menu
+    = link_to 'Back', clients_path
+.sub_content
+  = render 'form'

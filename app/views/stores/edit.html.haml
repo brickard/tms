@@ -1,5 +1,9 @@
-%h1 Editing store
-= render 'form'
-= link_to 'Show', @store
-|
-\#{link_to 'Back', stores_path}
+= content_for(:content_nav_heading) do
+  Edit Store
+.section_heading
+  Edit Store
+  .section_heading_menu
+    = link_to 'Show', @store
+    = link_to 'Back', stores_path
+.sub_content
+  = render 'form'

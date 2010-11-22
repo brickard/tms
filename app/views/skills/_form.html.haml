@@ -1,13 +1,7 @@
-= form_for @skill do |f|
-  -if @skill.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@skill.errors.count, "error")} prohibited this skill from being saved:"
-      %ul
-        - @skill.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :name
+= render :partial => 'shared/form_errors', :locals => { :@model => @skill }
+= form_for(@skill, :html => { :class => 'bp'}) do |f|
+  %p{ :class => 'field short required email' }
     = f.text_field :name
-  .actions
-    = f.submit 'Save'
+    = f.label :name
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Save', :type => :submit, :id => :save
