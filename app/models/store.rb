@@ -29,7 +29,7 @@ class Store < ActiveRecord::Base
   validates :region, :presence => true
   validates :manager, :presence => true # TODO: scope to StoreManager role
 
-  def full_store_name
+  def name_and_number
     return self.name unless self.number
     "#{self.name} #{self.number}"
   end
