@@ -45,6 +45,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
+        shifts = @project.create_shifts(params[:shift_count])
         format.html { redirect_to(@project, :notice => 'Project was successfully created.') }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else

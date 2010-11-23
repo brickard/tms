@@ -1,5 +1,9 @@
-%h1 Editing shift
-= render 'form'
-= link_to 'Show', @shift
-|
-\#{link_to 'Back', shifts_path}
+= content_for(:content_nav_heading) do
+  Edit Shift
+.section_heading
+  Edit Shift
+  .section_heading_menu
+    = link_to 'Show', @shift
+    = link_to 'Back', shifts_path
+.sub_content
+  = render 'form'

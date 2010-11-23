@@ -4,15 +4,15 @@
     = link_to 'New Shift', new_shift_path
 %table{ :class => 'section_content data_table' }
   %tr
-    %th Project
     %th Name
+    %th Project
     %th
     %th
     %th
   - @shifts.each do |shift|
     %tr
-      %td= shift.project.display_name
       %td= shift.name
+      %td= shift.project.display_name
       %td= link_to 'Show', shift
       %td= link_to 'Edit', edit_shift_path(shift)
       %td= link_to 'Delete', shift, :confirm => 'Are you sure?', :method => :delete

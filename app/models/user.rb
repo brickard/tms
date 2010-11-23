@@ -47,7 +47,11 @@ class User < ActiveRecord::Base
     where(
       arel_table[:admin].eq(false).or(
       arel_table[:admin].eq(nil))
-    )
+    ).
+    joins(:person).
+      where(
+          Person.arel_table[:hired_at].not_eq(nil)
+      )
   }
   scope :admins, lambda { where(:admin => true) }
 
