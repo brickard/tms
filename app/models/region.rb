@@ -13,6 +13,7 @@
 
 class Region < ActiveRecord::Base
   belongs_to :client
+  has_many :stores, :dependent => :destroy
   validates :client_id, :presence => true
   validates :name, :presence => true
 end

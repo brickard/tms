@@ -11,6 +11,6 @@
 #
 
 class Client < ActiveRecord::Base
-  has_many :regions
+  has_many :regions, :dependent => :destroy
   validates :name, :presence => true, :uniqueness => true
 end

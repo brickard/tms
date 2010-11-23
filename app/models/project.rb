@@ -12,7 +12,7 @@
 
 class Project < ActiveRecord::Base
   belongs_to :store
-  has_many :shifts
+  has_many :shifts, :dependent => :destroy
 
   validates_presence_of :store_id, :name
   def display_name

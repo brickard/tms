@@ -26,8 +26,8 @@
 #
 
 class Person < ActiveRecord::Base
-  has_one :user
-  has_one :employee
+  has_one :user, :dependent => :destroy
+  has_one :employee, :dependent => :destroy
   accepts_nested_attributes_for :user, :employee
 
   validates_presence_of :last_name, :first_name

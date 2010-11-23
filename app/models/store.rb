@@ -23,7 +23,7 @@ class Store < ActiveRecord::Base
   belongs_to :client
   belongs_to :region
   belongs_to :manager, :class_name => 'User'
-  has_many :projects
+  has_many :projects, :dependent => :destroy
   validates :name, :presence => true
   validates :client, :presence => true
   validates :region, :presence => true
