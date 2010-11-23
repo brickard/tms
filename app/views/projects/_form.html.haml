@@ -1,7 +1,7 @@
 = render :partial => 'shared/form_errors', :locals => { :@model => @project }
 = form_for(@project, :html => { :class => 'bp'}) do |f|
   %p{ :class => 'field short required' }
-    = f.collection_select( :store_id, Store.all, :id, :name, |
+    = f.collection_select( :store_id, Store.all, :id, :full_name, |
       { :prompt => :true } )                                 |
     = f.label :store_id
   %p{ :class => 'field short required' }
