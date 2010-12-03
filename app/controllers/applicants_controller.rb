@@ -9,6 +9,10 @@ class ApplicantsController < ApplicationController
     @applicants = @search.all.uniq
   end
 
+  def show
+    @applicant = Person.find(params[:id])
+  end
+
   def new
     @applicant = ApplicantPresenter.new(:person => { :form_step => 1})
     set_progress_value
@@ -20,6 +24,11 @@ class ApplicantsController < ApplicationController
     @applicant.hired_at = DateTime.now
     @applicant.save!
     redirect_to(applicants_path, :notice => "You have hired #{@applicant.full_name}")
+  end
+
+  def print
+    @applicant = Person.find(params[:applicant_id])
+    render :layout => false
   end
 
   def create

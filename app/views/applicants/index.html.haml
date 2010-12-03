@@ -36,9 +36,9 @@
       %td= applicant.first_name
       %td= applicant.city
       %td= applicant.state
-      %td= link_to 'Show', applicant
-      %td= link_to 'Delete', applicant, :confirm => 'Are you sure?', :method => :delete
-      %td= link_to 'Hire', applicant_hire_path(applicant), :confirm => 'Are you sure?'
+      %td= link_to 'View', applicant_path(applicant)
+      %td= link_to 'Print', applicant_print_path(applicant)
+      %td= link_to 'Hire', applicant_hire_path(applicant), :confirm => "Are you sure you want to hire #{applicant.full_name}?"
 %br/
 
 = content_for(:footer) do

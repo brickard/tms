@@ -1,0 +1,8 @@
+= content_for(:content_nav_heading) do
+  Show Applicant
+.section_heading
+  = @applicant.full_name rescue 'No Applicant Found'
+  .section_heading_menu
+    = link_to 'New Applicant', new_applicant_path
+
+= render :partial => 'person'
