@@ -13,10 +13,10 @@
       = f.select :state_equals, Carmen::US_STATES
     %p.field
       = f.label :employee_has_reliable_vehicle_equals, 'Reliable Transportation'
-      = f.check_box :employee_has_reliable_vehicle_equals, :checked => true
+      = f.check_box :employee_has_reliable_vehicle_equals
     %p.field
       = f.label :employee_can_travel_long_term_equals, 'Can Travel Long Term'
-      = f.check_box :employee_can_travel_long_term_equals, :checked => true
+      = f.check_box :employee_can_travel_long_term_equals
     %p{ :class => 'field button' }
       = content_tag :button, 'Search', :type => :submit
 
@@ -38,7 +38,7 @@
       %td= applicant.state
       %td= link_to 'Show', applicant
       %td= link_to 'Delete', applicant, :confirm => 'Are you sure?', :method => :delete
-      %td= link_to 'Hire', applicant, :confirm => 'Are you sure?'
+      %td= link_to 'Hire', applicant_hire_path(applicant), :confirm => 'Are you sure?'
 %br/
 
 = content_for(:footer) do

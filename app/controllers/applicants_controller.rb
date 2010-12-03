@@ -4,8 +4,8 @@ class ApplicantsController < ApplicationController
   def index
     skills = params.delete(:skills) rescue nil
     @search = skills.blank? ? 
-      Person.search(params[:search]) : 
-      Person.with_skills(skills).search(params[:search])
+      Person.applicants.search(params[:search]) : 
+      Person.applicants.with_skills(skills).search(params[:search])
     @applicants = @search.all.uniq
   end
 
@@ -13,6 +13,13 @@ class ApplicantsController < ApplicationController
     @applicant = ApplicantPresenter.new(:person => { :form_step => 1})
     set_progress_value
     set_step_status
+  end
+
+  def hire
+    @applicant = Person.find(params[:applicant_id])
+    @applicant.hired_at = DateTime.now
+    @applicant.save!
+    redirect_to(applicants_path, :notice => "You have hired #{@applicant.full_name}")
   end
 
   def create

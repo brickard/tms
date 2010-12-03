@@ -24,6 +24,7 @@ Storeresetter::Application.routes.draw do
   resources :users
 
   resources :applicants do
+    get 'hire'
     member do
       post :increment_step
     end
