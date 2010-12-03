@@ -1,5 +1,5 @@
 class ApplicantsController < ApplicationController
-  before_filter :authenticate_user!, :only => [ :index  ]
+  before_filter :authenticate_user!, :only => [ :index, :hire  ]
 
   def index
     skills = params.delete(:skills) rescue nil
