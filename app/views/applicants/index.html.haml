@@ -2,6 +2,25 @@
   Applicants
   .section_heading_menu
     = link_to 'New Applicant', new_applicant_path
+
+%p
+  = form_for :search, :html => { :method => :get, :class => 'bp' } do |f|
+    %p.skills 
+      = label_tag :skills, 'Skills'
+      = select_tag :skills, options_from_collection_for_select(Skill.all, :id, :name), :multiple => true, :id => :skills
+    %p.field
+      = f.label :state_equals, 'State'
+      = f.select :state_equals, Carmen::US_STATES
+    %p.field
+      = f.label :employee_has_reliable_vehicle_equals, 'Reliable Transportation'
+      = f.check_box :employee_has_reliable_vehicle_equals, :checked => true
+    %p.field
+      = f.label :employee_can_travel_long_term_equals, 'Can Travel Long Term'
+      = f.check_box :employee_can_travel_long_term_equals, :checked => true
+    %p{ :class => 'field button' }
+      = content_tag :button, 'Search', :type => :submit
+
+  
 %table{ :class => 'section_content data_table' }
   %tr
     %th Last name
@@ -18,6 +37,15 @@
       %td= applicant.city
       %td= applicant.state
       %td= link_to 'Show', applicant
-      %td= link_to 'Edit', edit_applicant_path(applicant)
       %td= link_to 'Delete', applicant, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Hire', applicant, :confirm => 'Are you sure?'
 %br/
+
+= content_for(:footer) do
+  = javascript_include_tag 'jquery.multiselect.min.js'
+  :javascript
+    $(document).ready(function(){
+      $("#skills").multiselect({
+        header: "Select Skills"
+      });
+    });

@@ -7,10 +7,7 @@
     = employee_form.hidden_field :person_id, :value => @applicant.person.id
     .checkbox_group
       = employee_form.label :skills, 'Skills'
-      - Skill.all.each do |skill|
-        %p{ :class => 'field checkbox' }
-          = check_box_tag skill.id
-          #{skill.name}
+      = employee_form.collection_select :skills, Skill.all, :id, :name, {}, { :multiple => true, :id => :skills }
     %p{ :class => 'field short required' }
       = employee_form.text_field :emergency_contact_name
       = employee_form.label :emergency_contact_name, 'Emergency Contact'
@@ -34,7 +31,7 @@
       *
     %p{ :class => 'field short' }
       = employee_form.select :has_reliable_vehicle, [ [ '', nil ], [ 'Yes', true ], [ 'No', false ] ]
-      = employee_form.label :has_reliable_vehicle, 'Do you have reliable tranportation?'
+      = employee_form.label :has_reliable_vehicle, 'Do you have reliable transportation?'
       *
     %p{ :class => 'field short' }
       = employee_form.select :can_travel_long_term, [ [ '', nil ], [ 'Yes', true ], [ 'No', false ] ]
@@ -87,3 +84,13 @@
     = employee_form.hidden_field :agree_to_terms, :value => false
   %p{ :class => 'field button' }
     = content_tag :button, 'Next', :type => :submit
+
+= content_for(:footer) do
+  = javascript_include_tag 'jquery.multiselect.min.js'
+  :javascript
+    $(document).ready(function(){
+      $("#skills").multiselect({
+        header: "Select Skills"
+      });
+    });
+

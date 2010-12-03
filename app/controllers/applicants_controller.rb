@@ -2,7 +2,11 @@ class ApplicantsController < ApplicationController
   before_filter :authenticate_user!, :only => [ :index  ]
 
   def index
-    @applicants = Person.applicants
+    skills = params.delete(:skills) rescue nil
+    @search = skills.blank? ? 
+      Person.search(params[:search]) : 
+      Person.with_skills(skills).search(params[:search])
+    @applicants = @search.all.uniq
   end
 
   def new

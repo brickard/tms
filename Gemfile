@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0'
+gem 'rails', '3.0.3'
 
 gem 'pg'
 
@@ -26,6 +26,10 @@ gem 'carmen'
 
 # Use simple-navigation for Navigation Menus
 gem 'simple-navigation', '3.0.0.beta2'
+
+# go meta
+gem 'meta_where'
+gem 'meta_search'
 
 group :development, :test do
   gem 'mongrel'

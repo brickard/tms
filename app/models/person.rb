@@ -49,6 +49,10 @@ class Person < ActiveRecord::Base
     where( "people.middle_name = ?", middle_name )
   }
 
+  scope :with_skills, lambda { |skill_ids|
+    joins(:employee) & Employee.with_skills(skill_ids)
+  }
+
   def full_name
     "#{first_name} #{middle_name+' ' rescue ''}#{last_name}"
   end

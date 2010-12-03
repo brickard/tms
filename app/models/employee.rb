@@ -57,4 +57,9 @@ class Employee < ActiveRecord::Base
     :in => [ true, false ], :message => 'must be Yes or No'
   validates :needs_special_hours, :been_convicted, :applied_before, 
     :drivers_license_ever_suspended, :details => true
+
+  scope :with_skills, lambda { |skill_ids|
+    joins(:skills).
+    where('skills.id' => skill_ids)
+  }
 end
