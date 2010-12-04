@@ -28,13 +28,14 @@
 #
 
 class User < ActiveRecord::Base
+  include ModelBehaviors::RolesBehavior
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable
 
   attr_accessible :email, :email_confirmation, :password, 
     :password_confirmation, :remember_me, :person_id, :person_attributes, 
-    :admin
+    :role
   belongs_to :person, :dependent => :destroy
   has_many :stores
   accepts_nested_attributes_for :person, :stores
@@ -53,6 +54,7 @@ class User < ActiveRecord::Base
           Person.arel_table[:hired_at].not_eq(nil)
       )
   }
+  scope :role_is, lambda { |role_name| where(:role => role_name)  }
   scope :admins, lambda { where(:admin => true) }
 
   scope :not_applicants, lambda{
@@ -69,11 +71,10 @@ class User < ActiveRecord::Base
   end
 
   def set_random_email!
-    if self.email.blank?
-      self.email = "#{ActiveSupport::SecureRandom.hex(2)}@localhost.localdomain"
-      self.email_confirmation = self.email
-      self.skip_confirmation! rescue nil
-    end
+    return nil unless self.email.blank?
+    self.email = "#{ActiveSupport::SecureRandom.hex(2)}@localhost.localdomain"
+    self.email_confirmation = self.email
+    self.skip_confirmation! rescue nil
   end
 
 end

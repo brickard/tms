@@ -12,11 +12,13 @@
 
   - @employees.each do |employee|
     %tr
-      %td= employee.person.full_name rescue 'Person not found'
-      %td= employee.person.location rescue 'Person not found'
-      %td= link_to 'Show', employee
-      %td= link_to 'Edit', edit_employee_path(employee)
-      %td= link_to 'Delete', employee, :confirm => 'Are you sure?', :method => :delete
+      %td= employee.full_name rescue 'Person not found'
+      %td= employee.location rescue 'Person not found'
+      %td= link_to 'Show', employee.employee
+      - edit_employee_path = employee.employee.blank? ? edit_person_path(employee) : edit_employee_path(employee.employee)
+      - delete_employee_path = employee.employee.blank? ? person_path(employee) : employee_path(employee.employee)
+      %td= link_to 'Edit', edit_employee_path
+      %td= link_to 'Delete', delete_employee_path, :confirm => 'Are you sure?', :method => :delete
 
 %br
 

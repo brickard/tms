@@ -2,8 +2,10 @@
   Applicants
   .section_heading_menu
     = link_to 'New Applicant', new_applicant_path
+    = link_to 'Reset Search', applicants_path
 
 %p
+  - select_options = options_for_select( [ [ '', nil ], [ 'Yes', true ], [ 'No', false ] ] )
   = form_for :search, :html => { :method => :get, :class => 'bp' } do |f|
     %p.skills 
       = label_tag :skills, 'Skills'
@@ -13,10 +15,10 @@
       = f.select :state_equals, Carmen::US_STATES
     %p.field
       = f.label :employee_has_reliable_vehicle_equals, 'Reliable Transportation'
-      = f.check_box :employee_has_reliable_vehicle_equals
+      = f.select :employee_has_reliable_vehicle_equals, select_options
     %p.field
       = f.label :employee_can_travel_long_term_equals, 'Can Travel Long Term'
-      = f.check_box :employee_can_travel_long_term_equals
+      = f.select :employee_can_travel_long_term_equals, select_options
     %p{ :class => 'field button' }
       = content_tag :button, 'Search', :type => :submit
 

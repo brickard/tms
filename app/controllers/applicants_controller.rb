@@ -1,11 +1,25 @@
 class ApplicantsController < ApplicationController
   before_filter :authenticate_user!, :only => [ :index, :hire  ]
 
+
+  def reject_blank_search_params(hash)
+    Rails.logger.debug( "HASH INCOMING = #{hash.inspect}" )
+    return hash if hash.blank?
+    Rails.logger.debug( "HASH IS NOT BLANK" )
+    hash.reject! { |k, v| v.blank? }
+    Rails.logger.debug( "HASH AFTER REJECT!: #{hash.inspect}" )
+    hash = hash.each_pair { |k, v| reject_blank_search_params( v ) if v.kind_of?( Hash ) }
+    Rails.logger.debug( "HASH AFTER NESTING: #{hash.inspect}" )
+    return hash
+  end
+
   def index
     skills = params.delete(:skills) rescue nil
+    search_params = reject_blank_search_params(params[:search])
+    Rails.logger.debug( "SEARCH PARAMS: #{search_params.inspect}" )
     @search = skills.blank? ? 
-      Person.applicants.search(params[:search]) : 
-      Person.applicants.with_skills(skills).search(params[:search])
+      Person.applicants.search(search_params) : 
+      Person.applicants.with_skills(skills).search(search_params)
     @applicants = @search.all.uniq
   end
 

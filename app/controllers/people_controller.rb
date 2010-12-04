@@ -77,7 +77,7 @@ class PeopleController < ApplicationController
     @person.destroy
 
     respond_to do |format|
-      format.html { redirect_to(people_url) }
+      format.html { redirect_to(employees_url) }
       format.xml  { head :ok }
     end
   end

@@ -3,7 +3,7 @@ class EmployeesController < ApplicationController
   # GET /employees
   # GET /employees.xml
   def index
-    @employees = Employee.all
+    @employees = Person.employees.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class EmployeesController < ApplicationController
   # GET /employees/1
   # GET /employees/1.xml
   def show
-    @employee = Employee.find(params[:id])
+    @employee = Person.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   # GET /employees/new.xml
   def new
-    @employee = Employee.new
+    @employee = Person.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,17 +35,17 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1/edit
   def edit
-    @employee = Employee.find(params[:id])
+    @employee = Person.find(params[:id])
   end
 
   # POST /employees
   # POST /employees.xml
   def create
-    @employee = Employee.new(params[:employee])
+    @employee = Person.new(params[:employee])
 
     respond_to do |format|
       if @employee.save
-        format.html { redirect_to(@employee, :notice => 'Employee was successfully created.') }
+        format.html { redirect_to(@employee, :notice => 'Person was successfully created.') }
         format.xml  { render :xml => @employee, :status => :created, :location => @employee }
       else
         format.html { render :action => "new" }
@@ -57,11 +57,11 @@ class EmployeesController < ApplicationController
   # PUT /employees/1
   # PUT /employees/1.xml
   def update
-    @employee = Employee.find(params[:id])
+    @employee = Person.find(params[:id])
 
     respond_to do |format|
       if @employee.update_attributes(params[:employee])
-        format.html { redirect_to(@employee, :notice => 'Employee was successfully updated.') }
+        format.html { redirect_to(@employee, :notice => 'Person was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -73,7 +73,7 @@ class EmployeesController < ApplicationController
   # DELETE /employees/1
   # DELETE /employees/1.xml
   def destroy
-    @employee = Employee.find(params[:id])
+    @employee = Person.find(params[:id])
     @employee.destroy
 
     respond_to do |format|

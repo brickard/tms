@@ -12,7 +12,7 @@ describe User do
 
   context "should have a " do
     
-    %w{ email password
+    %w{ email password role
         }.each do |attr|
       it "#{attr} set after save when input is nil" do
         @user.send("#{attr}=", nil)
@@ -21,7 +21,14 @@ describe User do
       end
     end
 
-  end
+    context "should not be valid when" do
+      
+      it "role is nil" do
+        @user.role = nil
+        @user.should_not be_valid
+      end
 
+    end
+  end
 end
 

@@ -136,7 +136,6 @@ module Presentable
 
   class Presenter
     include PresentableBehavior
-
   end
 
 end

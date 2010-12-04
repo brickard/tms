@@ -38,6 +38,10 @@ class Person < ActiveRecord::Base
     where( "people.hired_at IS NULL" )
   }
 
+  scope :employees, lambda {  
+    where( "people.hired_at IS NOT NULL" )
+  }
+
   scope :find_by_full_name, lambda { |full_name|
     first_name, middle_name, last_name = full_name.split(' ')
     unless last_name
