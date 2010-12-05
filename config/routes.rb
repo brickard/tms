@@ -15,5 +15,5 @@ Storeresetter::Application.routes.draw do
 
   devise_for :users, :path => 'accounts'
 
-  root :to => 'users#index'
+  root :controller => :users, :action => :index, :scope => 'applicants'
 end
