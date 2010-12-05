@@ -1,0 +1,8 @@
+#user_show
+  %h2= @user.full_name
+  #user_attributes
+    %p.user_attribute= "Email: #{@user.email}"
+    %p.stores
+      %h3= pluralize(@user.stores.count, 'Managed Stores')
+      - @user.stores.each do |store|
+        %p.user_attribute= "#{@store.name_and_number}"

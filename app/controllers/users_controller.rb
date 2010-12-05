@@ -1,6 +1,80 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [ :new, :create ]
-  before_filter :setup_scope
+  before_filter :setup_scope, :setup_search
+
+  def index
+    @users = @search.all.uniq
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @users }
+    end
+  end
+
+  def show
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @user }
+    end
+  end
+
+  def new
+    @user = @search.relation.build
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @user }
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def create
+    @user = @search.relation.build(params[:user])
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to(users_path(:scope => @scope),
+          :notice => "#{@scope_title.singularize} was successfully created.") }
+        format.xml  { render :xml => @user, :status => :created, 
+          :location => user_path(@user, :scope => @scope) }
+      else
+        format.html { render :action => "new", :scope => @scope }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to(users_path(:scope => @scope), :notice =>  "#{@user.full_name} was successfully updated.") }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(users_path(:scope => @scope), 
+        :notice => "#{@scope_title.singularize} was destroyed.") }
+      format.xml  { head :ok }
+    end
+  end
+
+  private
 
   def setup_scope
     @scope = params.delete(:scope)
@@ -15,90 +89,10 @@ class UsersController < ApplicationController
     return hash
   end
 
-  def index
+  def setup_search
     search_params = reject_blank_search_params(params.delete(:search))
-    Rails.logger.debug( "SEARCH PARAMS: #{search_params.inspect}" )
     @searching = !search_params.blank?
     @search = @scope.nil? ? User.search(search_params) : User.send(@scope).search(search_params)
-    @users = @search.all.uniq
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @users }
-    end
   end
 
-  # GET /users/1
-  # GET /users/1.xml
-  def show
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @user }
-    end
-  end
-
-  # GET /users/new
-  # GET /users/new.xml
-  def new
-    @user = User.new
-    @user.person = Person.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @user }
-    end
-  end
-
-  # GET /users/1/edit
-  def edit
-    @user = User.find(params[:id])
-    @user.person ||= Person.new
-  end
-
-  # POST /users
-  # POST /users.xml
-  def create
-    @user = User.new(params[:user])
-    @user.skip_confirmation!
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to(users_path, :notice => 'User was successfully created.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /users/1
-  # PUT /users/1.xml
-  def update
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /users/1
-  # DELETE /users/1.xml
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(users_url) }
-      format.xml  { head :ok }
-    end
-  end
 end

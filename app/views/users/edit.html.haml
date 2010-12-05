@@ -1,9 +1,9 @@
 = content_for(:content_nav_heading) do
-  Edit User
+  = "Edit #{@scope_title}"
 .section_heading
-  Editing #{@user.person.full_name rescue 'User'}
+  = "Editing #{@user.full_name}"
   .section_heading_menu
-    = link_to 'Show', @user
-    = link_to 'Back', users_path
+    = link_to 'Show', user_path(@user, :scope => @scope)
+    = link_to 'Back', users_path(:scope => @scope)
 .sub_content
-  = render 'form'
+  = render :partial => "#{@scope_name.singularize}_form"

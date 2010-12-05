@@ -1,0 +1,23 @@
+= render :partial => 'shared/form_errors', :locals => { :@model => @user }
+- path = @user.new_record? ? users_path(:scope => @scope) : user_path(@user, :scope => @scope)
+= form_for(@user, :url => path, :html => { :class => 'bp'}) do |f|
+  %p{ :class => 'field short required email' }
+    = f.text_field :email
+    = f.label :email, 'UserID (email)'
+    *
+  %p{ :class => 'field short required' }
+    = f.password_field :password
+    = f.label :password, 'Password (minimum 6 characters)'
+    *
+  %p{ :class => 'field short required' }
+    = f.text_field :first_name
+    = f.label :first_name
+    *
+  %p{ :class => 'field short required' }
+    = f.text_field :last_name
+    = f.label :last_name
+    *
+  = f.hidden_field :role, :value => @user.role || @scope.singularize
+  = hidden_field_tag :scope, @scope
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Save', :type => :submit, :id => :save

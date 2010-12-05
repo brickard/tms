@@ -1,15 +1,8 @@
 = content_for(:content_nav_heading) do
-  Show User
+  = "Show #{@scope_title.singularize}"
 .section_heading
-  = @user.person.full_name rescue 'No Person Found'
+  = "Showing #{@user.full_name}"
   .section_heading_menu
-    = link_to 'Edit', edit_user_path(@user)
-    = link_to 'Back', users_path
-.sub_content
-  %p#notice= notice
-  %p
-    %b Person:
-    = @user.person.full_name rescue 'No Person Found'
-  %p
-    %b UserID (email):
-    = @user.email
+    = link_to 'Edit', edit_user_path(@user, :scope => @scope)
+    = link_to 'Back', users_path(:scope => @scope)
+= render :partial => "#{@scope_name.singularize}_show"

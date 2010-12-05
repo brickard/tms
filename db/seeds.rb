@@ -18,7 +18,7 @@ Dir[Rails.root.join("spec/factories/**/*.rb"),
 ].each do |user_params|
   user_params.merge!(:password => '!password!', 
                      :password_confirmation => '!password!',
-                     :role => 'admin')
+                     :role => 'admin', :middle_name => '')
   user = User.new(Factory.attributes_for(:admin_user, user_params))
   user.save!
 end
