@@ -96,9 +96,9 @@ ActiveRecord::Schema.define(:version => 20101105184758) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                                :default => "", :null => false
-    t.string   "encrypted_password",                    :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                                        :default => "", :null => false
+    t.string   "email",                                                :default => "",      :null => false
+    t.string   "encrypted_password",                    :limit => 128, :default => "",      :null => false
+    t.string   "password_salt",                                        :default => "",      :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(:version => 20101105184758) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "role"
-    t.integer  "form_step",                                            :default => 0
+    t.string   "form_step",                                            :default => "step0"
     t.string   "last_name"
     t.string   "first_name"
     t.string   "middle_name"

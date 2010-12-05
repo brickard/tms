@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.trackable
       t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
       t.string  :role
-      t.integer :form_step, :default => 0
+      t.string  :form_step, :default => 'step0'
       t.string  :last_name
       t.string  :first_name
       t.string  :middle_name

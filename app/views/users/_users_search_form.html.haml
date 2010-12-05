@@ -1,0 +1,11 @@
+#search_div
+  = form_for(:search, :url => users_path(:scope => @scope), :html => { :class => 'bp', :method => :get }) do |f|
+    %p{ :class => 'field' }
+      = f.text_field :first_name_matches
+      = f.label :first_name_matches, 'First Name'
+      = f.text_field :last_name_matches
+      = f.label :last_name_matches, 'Last Name'
+    = hidden_field_tag :scope, @scope
+    %p{ :class => 'field button' }
+      = content_tag :button, 'Search', :type => :submit
+

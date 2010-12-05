@@ -23,18 +23,19 @@ SimpleNavigation::Configuration.run do |navigation|
 
   # Define the primary navigation
   navigation.items do |primary|
-    primary.item :employment, 'Employment', employees_path, :highlights_on => false do |employment_nav|
-      employment_nav.item :employees,  'Employees',  employees_path
-      employment_nav.item :applicants, 'Applicants', applicants_path
+    primary.item :employment, 'Employment', users_path(:scope => :employees) do |employment_nav|
+      employment_nav.item :employees,  'Employees',  users_path(:scope => :employees)
+      employment_nav.item :applicants, 'Applicants', users_path(:scope => :applicants)
     end
-    primary.item :clients, 'Clients', clients_path, :highlights_on => false do |clients_nav|
+    primary.item :clients, 'Clients', clients_path do |clients_nav|
       clients_nav.item :regions,    'Regions',    regions_path
       clients_nav.item :stores,     'Stores',     stores_path
       clients_nav.item :projects,   'Projects',   projects_path
       clients_nav.item :shifts,     'Shifts',     shifts_path
     end
-    primary.item :admin, 'Administration', users_path, :highlights_on => false do |admin_nav|
-      admin_nav.item :users, 'Users', users_path
+    primary.item :admin, 'Administration', users_path(:scope => :admins) do |admin_nav|
+      admin_nav.item :admins, 'Admins', users_path(:scope => :admins)
+      admin_nav.item :managers, 'Managers', users_path(:scope => :managers)
       admin_nav.item :skills, 'Skills', skills_path
     end
     #primary.item :wwwtab, 'Tab Website', 'http://tabretailremodeling.com'

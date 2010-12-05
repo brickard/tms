@@ -1,9 +1,25 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
-  # GET /users
-  # GET /users.xml
+  before_filter :authenticate_user!, :except => [ :new, :create ]
+  before_filter :setup_scope
+
+  def setup_scope
+    @scope = params.delete(:scope)
+    @scope_name = @scope || 'users'
+    @scope_title = @scope_name.capitalize
+  end
+
+  def reject_blank_search_params(hash)
+    return hash if hash.blank?
+    hash.reject! { |k, v| v.blank? }
+    hash = hash.each_pair { |k, v| reject_blank_search_params( v ) if v.kind_of?( Hash ) }
+    return hash
+  end
+
   def index
-    @users = User.not_applicants
+    search_params = reject_blank_search_params(params.delete(:search))
+    @searching = !search_params.blank?
+    @search = @scope.nil? ? User.search(search_params) : User.send(@scope).search(search_params)
+    @users = @search.all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,19 +1,18 @@
 .section_heading
-  Users
+  = pluralize(@users.count, @scope_title)
   .section_heading_menu
-    = link_to 'New User', new_user_path
-%table{ :class => 'section_content data_table' }
-  %tr
-    %th UserID (email)
-    %th Person
-    %th
-    %th
-    %th
-  - @users.each do |user|
-    %tr
-      %td= user.email
-      %td= user.person.full_name rescue 'No Person Found'
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Delete', user, :confirm => 'Are you sure?', :method => :delete
-%br/
+    = link_to "Reset Search", users_path(:scope => @scope)
+    = link_to "Hide Search", 'JavaScript:void()', :id => 'hide_search_link'
+    = link_to "Search", 'JavaScript:void()', :id => 'show_search_link'
+    = link_to "New #{@scope_title.singularize}", new_user_path(:scope => @scope)
+= render :partial => "#{@scope_name}_search_form"
+= render :partial => "#{@scope_name}_table"
+
+= content_for(:footer) do
+  = javascript_include_tag 'search_hider'
+  - search_link_on = @searching ? "show_search_link();" : "hide_search_link();" 
+  :javascript
+    $().ready(function() {
+      #{search_link_on}
+      return true;
+    });
