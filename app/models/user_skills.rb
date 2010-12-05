@@ -10,8 +10,8 @@
 #  updated_at  :datetime
 #
 
-class EmployeeSkill < ActiveRecord::Base
-  belongs_to :employee
+class UserSkill < ActiveRecord::Base
+  belongs_to :user
   belongs_to :skill
-  validates_presence_of :employee_id, :skill_id
+  validates_presence_of :user_id, :skill_id
 end

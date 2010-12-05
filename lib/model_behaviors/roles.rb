@@ -2,17 +2,9 @@ module ModelBehaviors
 
   module RolesBehavior
     
-    unless defined?(ROLES)
-      ROLES = %w{ admin manager employee applicant }
-    end
-    if self.kind_of?(ActiveRecord::Base)
-      class_eval do
-        validates :role, :in => ROLES
-      end
-    else
-      def valid?
-        ROLES.include?(self.role)
-      end
+    ROLES = %w{ admin manager employee applicant }
+    def self.included( base )
+      base.validates :role, :presence => true, :inclusion => { :in => ROLES }
     end
 
     def role?(role_name)

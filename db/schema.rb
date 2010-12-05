@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101204235031) do
+ActiveRecord::Schema.define(:version => 20101105184758) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -19,15 +19,8 @@ ActiveRecord::Schema.define(:version => 20101204235031) do
     t.datetime "updated_at"
   end
 
-  create_table "employee_skills", :force => true do |t|
-    t.integer  "employee_id"
-    t.integer  "skill_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "employees", :force => true do |t|
-    t.integer  "person_id"
+    t.integer  "user_id"
     t.boolean  "needs_special_hours"
     t.text     "needs_special_hours_detail"
     t.datetime "available_at"
@@ -47,14 +40,14 @@ ActiveRecord::Schema.define(:version => 20101204235031) do
     t.text     "drivers_license_ever_suspended_detail"
     t.boolean  "agree_to_terms"
     t.datetime "agree_to_terms_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "emergency_contact_name"
     t.string   "emergency_contact_phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "employers", :force => true do |t|
-    t.integer  "employee_id"
+    t.integer  "user_id"
     t.string   "company_name"
     t.date     "start_date"
     t.date     "end_date"
@@ -69,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20101204235031) do
   end
 
   create_table "people", :force => true do |t|
+    t.integer  "user_id"
     t.string   "last_name"
     t.string   "first_name"
     t.string   "middle_name"
@@ -77,17 +71,18 @@ ActiveRecord::Schema.define(:version => 20101204235031) do
     t.string   "city"
     t.string   "state"
     t.string   "zipcode"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "ssn"
     t.string   "home_phone"
     t.string   "mobile_phone"
     t.string   "other_phone"
-    t.datetime "hired_at"
-    t.datetime "date_of_birth"
+    t.string   "phone2"
+    t.string   "ssn"
+    t.string   "date_of_birth"
+    t.date     "hired_at"
     t.boolean  "application_agreement_agreed"
-    t.date     "application_agreement_agreed_on"
+    t.boolean  "application_agreement_agreed_on"
     t.integer  "form_step"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects", :force => true do |t|
@@ -98,13 +93,13 @@ ActiveRecord::Schema.define(:version => 20101204235031) do
   end
 
   create_table "references", :force => true do |t|
-    t.integer  "employee_id"
+    t.integer  "user_id"
     t.string   "name"
     t.string   "contact_info"
     t.string   "relationship"
+    t.string   "type_of_reference"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "type_of_reference"
   end
 
   create_table "regions", :force => true do |t|
@@ -132,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20101204235031) do
     t.integer  "client_id"
     t.integer  "region_id"
     t.integer  "manager_id"
+    t.integer  "number"
     t.boolean  "active"
     t.string   "name"
     t.string   "address1"
@@ -141,15 +137,21 @@ ActiveRecord::Schema.define(:version => 20101204235031) do
     t.string   "zipcode"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "number"
   end
 
   create_table "uniform_orders", :force => true do |t|
-    t.integer  "employee_id"
+    t.integer  "user_id"
     t.string   "shirt_size"
     t.integer  "shirt_count"
     t.string   "hat_size"
     t.integer  "hat_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_skills", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "skill_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -166,19 +168,14 @@ ActiveRecord::Schema.define(:version => 20101204235031) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
     t.integer  "failed_attempts",                     :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "person_id"
-    t.string   "role"
   end
 
-  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["role"], :name => "index_users_on_role"

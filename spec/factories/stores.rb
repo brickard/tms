@@ -2,7 +2,7 @@ def get_client
   @client ||= Factory.create(:client)
 end
 def get_manager
-  @manager ||= User.store_managers.last || Factory.create(:store_manager)
+  @manager ||= User.managers.last || Factory.create(:store_manager)
 end
 
 Factory.define :store do |f|

@@ -1,7 +1,7 @@
 class CreateUniformOrders < ActiveRecord::Migration
   def self.up
     create_table :uniform_orders do |t|
-      t.integer :employee_id
+      t.integer :user_id
       t.string :shirt_size
       t.integer :shirt_count
       t.string :hat_size

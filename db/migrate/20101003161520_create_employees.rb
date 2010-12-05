@@ -1,7 +1,7 @@
 class CreateEmployees < ActiveRecord::Migration
   def self.up
     create_table :employees do |t|
-      t.integer :person_id
+      t.integer :user_id
       t.boolean :needs_special_hours
       t.text :needs_special_hours_detail
       t.datetime :available_at
@@ -21,6 +21,8 @@ class CreateEmployees < ActiveRecord::Migration
       t.text :drivers_license_ever_suspended_detail
       t.boolean :agree_to_terms
       t.datetime :agree_to_terms_date
+      t.string  :emergency_contact_name 
+      t.string  :emergency_contact_phone
 
       t.timestamps
     end

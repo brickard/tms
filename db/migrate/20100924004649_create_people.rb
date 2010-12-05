@@ -10,8 +10,17 @@ class CreatePeople < ActiveRecord::Migration
       t.string :city
       t.string :state
       t.string :zipcode
-      t.string :phone1
+      t.string :home_phone
+      t.string :mobile_phone
+      t.string :other_phone
       t.string :phone2
+      t.string :ssn
+      t.string :date_of_birth
+      t.date   :hired_at
+
+      t.boolean :application_agreement_agreed
+      t.boolean :application_agreement_agreed_on
+      t.integer :form_step
 
       t.timestamps
     end

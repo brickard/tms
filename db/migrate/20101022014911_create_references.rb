@@ -1,10 +1,11 @@
 class CreateReferences < ActiveRecord::Migration
   def self.up
     create_table :references do |t|
-      t.integer :employee_id
+      t.integer :user_id
       t.string :name
       t.string :contact_info
       t.string :relationship
+      t.string :type_of_reference
 
       t.timestamps
     end

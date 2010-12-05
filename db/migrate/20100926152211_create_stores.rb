@@ -4,6 +4,7 @@ class CreateStores < ActiveRecord::Migration
       t.integer :client_id
       t.integer :region_id
       t.integer :manager_id
+      t.integer :number
       t.boolean :active
       t.string :name
       t.string :address1

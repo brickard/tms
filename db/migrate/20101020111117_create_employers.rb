@@ -1,7 +1,7 @@
 class CreateEmployers < ActiveRecord::Migration
   def self.up
     create_table :employers do |t|
-      t.integer :employee_id
+      t.integer :user_id
       t.string :company_name
       t.date :start_date
       t.date :end_date

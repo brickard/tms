@@ -19,8 +19,8 @@
 #
 
 class Employer < ActiveRecord::Base
-  belongs_to :employee
-  validates_presence_of :employee_id, :company_name, :start_date, :end_date,
+  belongs_to :user
+  validates_presence_of :user_id, :company_name, :start_date, :end_date,
     :job_title, :supervisor_name, :start_salary, :end_salary, 
     :reason_for_leaving
 end

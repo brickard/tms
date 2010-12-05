@@ -39,15 +39,9 @@ class DetailsValidator < ActiveModel::EachValidator
 end
 
 class Employee < ActiveRecord::Base
-  belongs_to :person
-  has_many :employers
-  has_many :references
-  has_one  :uniform_order
-  has_many :employee_skills
-  has_many :skills, :through => :employee_skills
-  accepts_nested_attributes_for :employers, :references, :uniform_order, :skills
+  belongs_to :user
 
-  validates :person_id, :presence => true, :uniqueness => true
+  validates :user_id, :presence => true, :uniqueness => true
   validates_presence_of :available_at, :emergency_contact_name, 
     :emergency_contact_phone
   validates_inclusion_of :needs_special_hours, :has_reliable_vehicle, 

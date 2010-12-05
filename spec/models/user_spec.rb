@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   before(:each) do
-    @user = Factory(:user)
+    @user = Factory( :user )
   end
 
   it "should not be valid with a email that is in use" do
@@ -21,11 +21,24 @@ describe User do
       end
     end
 
-    context "should not be valid when" do
-      
-      it "role is nil" do
-        @user.role = nil
-        @user.should_not be_valid
+    context "valid should return" do
+
+      context "false when" do
+        
+        it "role is not in ROLES" do
+          @user.role = 'this _is not IN RolEZez'
+          @user.should_not be_valid
+        end
+
+      end
+
+      context "true when" do
+
+        it "role is in ROLES" do
+          @user.role = User::ROLES[0]
+          @user.should be_valid
+        end
+
       end
 
     end

@@ -2,16 +2,12 @@ require 'spec_helper'
 
 describe ModelBehaviors::RolesBehavior do
 
-  class TestRoleBehavior < Struct.new(:role)
-    include ::ModelBehaviors::RolesBehavior
-  end
-
-  before(:all) { @model = TestRoleBehavior.new(:role => 'admin') }
+  before(:all) { @model = Factory(:user) }
 
   context "creates constant named" do
 
     it "ROLES" do
-      defined?(::ModelBehaviors::RolesBehavior::ROLES).should be_true
+      defined?(@model.class::ROLES).should be_true
     end
     
   end

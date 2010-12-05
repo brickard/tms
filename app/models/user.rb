@@ -31,36 +31,32 @@ class User < ActiveRecord::Base
   include ModelBehaviors::RolesBehavior
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :lockable, :timeoutable
+         :lockable, :timeoutable
 
   attr_accessible :email, :email_confirmation, :password, 
-    :password_confirmation, :remember_me, :person_id, :person_attributes, 
+    :password_confirmation, :remember_me, :person_attributes, 
     :role
-  belongs_to :person, :dependent => :destroy
-  has_many :stores
-  accepts_nested_attributes_for :person, :stores
+  has_one :person, :dependent => :destroy
+  has_one :employee, :dependent => :destroy
+  has_one :uniform_order, :dependent => :destroy
+
+  has_many :employers, :dependent => :destroy
+  has_many :references, :dependent => :destroy
+  has_many :user_skills, :dependent => :destroy
+  has_many :skills, :through => :user_skills
+
+  has_many :stores, :foreign_key => :manager_id
+
+  accepts_nested_attributes_for :person, :employee, :employers, :references, 
+    :uniform_order, :skills
 
   validates :email, :presence => true, :confirmation => true, :uniqueness => true
 
-  before_validation :set_random_password!, :set_random_email!
+  before_validation :set_random_password!, :set_random_email!, :set_default_role!
 
-  scope :store_managers, lambda {
-    where(
-      arel_table[:admin].eq(false).or(
-      arel_table[:admin].eq(nil))
-    ).
-    joins(:person).
-      where(
-          Person.arel_table[:hired_at].not_eq(nil)
-      )
-  }
-  scope :role_is, lambda { |role_name| where(:role => role_name)  }
-  scope :admins, lambda { where(:admin => true) }
-
-  scope :not_applicants, lambda{
-    joins(:person).
-    where('people.hired_at IS NOT NULL')
-  }
+  #scope :with_role, lambda { |role_name| where(:role => role_name)  }
+  #scope :admins, User.with_role('admin')
+  #scope :admins, User.with_role('admin')
 
   def full_name
     person.full_name rescue email
@@ -68,13 +64,19 @@ class User < ActiveRecord::Base
 
   def set_random_password!
     self.password = ActiveSupport::SecureRandom.hex(10) if self.password.blank?
+    self.password_confirmation = self.password
   end
 
   def set_random_email!
     return nil unless self.email.blank?
     self.email = "#{ActiveSupport::SecureRandom.hex(2)}@localhost.localdomain"
     self.email_confirmation = self.email
-    self.skip_confirmation! rescue nil
+    self.skip_confirmation!
+  end
+
+  def set_default_role!
+    return nil unless self.role.blank?
+    self.role = 'applicant'
   end
 
 end

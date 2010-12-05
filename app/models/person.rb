@@ -26,54 +26,26 @@
 #
 
 class Person < ActiveRecord::Base
-  has_one :user, :dependent => :destroy
-  has_one :employee, :dependent => :destroy
-  accepts_nested_attributes_for :user, :employee
+  belongs_to :user
 
-  validates_presence_of :last_name, :first_name
+  validates_presence_of :last_name, :first_name, :user_id
   validates_presence_of :address1, :city, :state, :zipcode, :home_phone, 
-    :date_of_birth, :if => lambda{ form_step_is?(1) }
+    :date_of_birth, :if => lambda{ self.applicant? == true }
 
-  scope :applicants, lambda {  
-    where( "people.hired_at IS NULL" )
-  }
-
-  scope :employees, lambda {  
-    where( "people.hired_at IS NOT NULL" )
-  }
-
-  scope :find_by_full_name, lambda { |full_name|
-    first_name, middle_name, last_name = full_name.split(' ')
-    unless last_name
-      last_name = middle_name
-      middle_name = ''
-    end
-    where( "people.last_name = ?", last_name ).
-    where( "people.first_name = ?", first_name ).
-    where( "people.middle_name = ?", middle_name )
-  }
-
-  scope :with_skills, lambda { |skill_ids|
-    joins(:employee) & Employee.with_skills(skill_ids)
-  }
+  User::ROLES.each do |role_name|
+    delegate "#{role_name}?".to_sym, :to => :user
+  end
 
   def full_name
     "#{first_name} #{middle_name+' ' rescue ''}#{last_name}"
   end
 
   def location
-    "#{city.capitalize}, #{state.capitalize}" rescue "Unknown"
+    "#{city.capitalize}, #{state.capitalize} #{zipcode}" rescue "Unknown"
   end
 
   def form_step_is?(step)
     self.form_step == step.to_i
-  end
-
-  def build_user(options)
-    user = User.new(options)
-    user.person = self
-    user.skip_confirmation!
-    user
   end
 
 end
