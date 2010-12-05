@@ -17,9 +17,10 @@ class UsersController < ApplicationController
 
   def index
     search_params = reject_blank_search_params(params.delete(:search))
+    Rails.logger.debug( "SEARCH PARAMS: #{search_params.inspect}" )
     @searching = !search_params.blank?
     @search = @scope.nil? ? User.search(search_params) : User.send(@scope).search(search_params)
-    @users = @search.all
+    @users = @search.all.uniq
 
     respond_to do |format|
       format.html # index.html.erb

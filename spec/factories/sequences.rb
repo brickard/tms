@@ -22,4 +22,6 @@ Factory.sequence(:last_name) { "Neo#{random_chars}" }
 Factory.sequence(:middle_name) { "Neo#{random_chars}" }
 Factory.sequence(:address1) { "#{random_numbers(4)} White Rabbit Lane" }
 Factory.sequence(:address2) { "Suite #{random_numbers(4)}" }
+Factory.sequence(:state) { Carmen::US_STATES[rand(Carmen::US_STATES.size)] }
 Factory.sequence(:phone) { random_numbers(10) }
+Factory.sequence(:boolean) { [ true, false ][rand(2)] }

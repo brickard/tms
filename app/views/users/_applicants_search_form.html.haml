@@ -2,7 +2,7 @@
   = form_for(:search, :url => users_path(:scope => @scope), :html => { :class => 'bp', :method => :get }) do |f|
     %p{ :class => 'field' }
       %br/
-      = f.collection_select :skills_id_equals, Skill.all, :id, :name, {}, { :multiple => true, :id => :skills_select } 
+      = f.collection_select :skills_id_equals_all, Skill.all, :id, :name, {}, { :multiple => true, :id => :skills_select } 
     %p{ :class => 'field' }
       = f.text_field :first_name_matches
       = f.label :first_name_matches, 'First Name'
