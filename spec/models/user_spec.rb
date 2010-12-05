@@ -42,6 +42,37 @@ describe User do
       end
 
     end
+
+    context "scope named" do
+    
+      before(:all) do
+        User.destroy_all
+        10.times do
+          Factory.create(:admin_user)
+          Factory.create(:manager_user)
+          Factory.create(:employee_user)
+          Factory.create(:applicant_user)
+        end
+      end
+      
+      it "admins should have count of 11" do
+        User.admins.count.should == 11
+      end
+
+      it "managers should have count of 10" do
+        User.managers.count.should == 10
+      end
+
+      it "employees should have count of 10" do
+        User.employees.count.should == 10
+      end
+
+      it "applicants should have count of 10" do
+        User.applicants.count.should == 10
+      end
+
+
+    end
   end
 end
 

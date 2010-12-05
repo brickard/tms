@@ -54,16 +54,19 @@ class User < ActiveRecord::Base
 
   before_validation :set_random_password!, :set_random_email!, :set_default_role!
 
-  #scope :with_role, lambda { |role_name| where(:role => role_name)  }
-  #scope :admins, User.with_role('admin')
-  #scope :admins, User.with_role('admin')
+  scope :with_role, lambda { |role_name| where(:role => role_name)  }
+  scope :admins, User.with_role('admin')
+  scope :managers, User.with_role('manager')
+  scope :employees, User.with_role('employee')
+  scope :applicants, User.with_role('applicant')
 
   def full_name
     person.full_name rescue email
   end
 
   def set_random_password!
-    self.password = ActiveSupport::SecureRandom.hex(10) if self.password.blank?
+    return nil unless self.password.blank?
+    self.password = ActiveSupport::SecureRandom.hex(10)
     self.password_confirmation = self.password
   end
 
@@ -71,7 +74,6 @@ class User < ActiveRecord::Base
     return nil unless self.email.blank?
     self.email = "#{ActiveSupport::SecureRandom.hex(2)}@localhost.localdomain"
     self.email_confirmation = self.email
-    self.skip_confirmation!
   end
 
   def set_default_role!

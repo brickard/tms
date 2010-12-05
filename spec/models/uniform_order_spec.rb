@@ -5,14 +5,14 @@ describe UniformOrder do
     @uniform_order = Factory(:uniform_order)
   end
 
-  it "should not be valid with a employee that is in use" do
+  it "should not be valid with a user that is in use" do
     @uniform_order.save!
-    lambda { Factory(:uniform_order, :employee => @uniform_order.employee) }.should raise_error(ActiveRecord::RecordInvalid)
+    lambda { Factory(:uniform_order, :user => @uniform_order.user) }.should raise_error(ActiveRecord::RecordInvalid)
   end
 
   context "should not be valid without " do
     
-    %w{ employee_id shirt_size shirt_count hat_size hat_count
+    %w{ user shirt_size shirt_count hat_size hat_count
         }.each do |attr|
       it "#{attr}" do
         @uniform_order.send("#{attr}=", nil)

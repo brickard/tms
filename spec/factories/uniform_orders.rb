@@ -1,8 +1,8 @@
 Factory.define :uniform_order do |f|
-  f.employee { Factory.create(:employee) }
-  f.shirt_size "XL"
-  f.shirt_count 1
-  f.hat_size "7"
-  f.hat_count 1
+  f.user { Factory.create(:user) }
+  f.shirt_size { random_from(UniformOrder::SHIRT_SIZES) } 
+  f.shirt_count { random_from(UniformOrder::SHIRT_COUNT) }
+  f.hat_size { random_from(UniformOrder::HAT_SIZES) }
+  f.hat_count { random_from(UniformOrder::HAT_COUNT) }
 end
 

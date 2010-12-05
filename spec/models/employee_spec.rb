@@ -5,17 +5,17 @@ describe Employee do
     @employee = Factory(:employee)
   end
 
-  it "should not be valid with a person that is in use" do
+  it "should not be valid with a user that is in use" do
     @employee.save!
-    lambda { Factory(:employee, :person => @person) }.should raise_error(ActiveRecord::RecordInvalid)
+    lambda { Factory(:employee, :user => @user) }.should raise_error(ActiveRecord::RecordInvalid)
   end
 
   context "should not be valid without " do
     
-    %w{ person needs_special_hours available_at has_reliable_vehicle 
+    %w{ user needs_special_hours available_at has_reliable_vehicle 
         can_travel_long_term been_convicted ever_failed_drug_test legal_us_worker
-        applied_before drivers_license_valid drivers_license_ever_suspended
-        agree_to_terms emergency_contact_name emergency_contact_phone
+        applied_before drivers_license_valid agree_to_terms 
+        emergency_contact_name emergency_contact_phone
         }.each do |attr|
       it "#{attr}" do
         @employee.send("#{attr}=", nil)

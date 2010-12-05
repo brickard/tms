@@ -1,5 +1,5 @@
 Factory.define :employee do |f|
-  f.person { Factory.create(:person) }
+  f.user { Factory.create(:user) }
   f.needs_special_hours true
   f.needs_special_hours_detail "No Weekends"
   f.available_at "2010-10-03 11:15:20"

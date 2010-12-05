@@ -3,7 +3,6 @@ Factory.define :user do |f|
   f.email { Factory.next(:email) }
   f.password 'password'
   f.password_confirmation 'password'
-  f.confirmed_at { DateTime.now }
   f.role 'admin'
 end
 
@@ -11,7 +10,7 @@ Factory.define :admin_user, :parent => :user do |f|
   f.role 'admin'
 end
 
-Factory.define :store_manager_user, :parent => :user do |f|
+Factory.define :manager_user, :parent => :user do |f|
   f.role 'manager'
 end
 

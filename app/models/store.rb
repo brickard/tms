@@ -19,6 +19,22 @@
 #  number     :integer
 #
 
+class UserHasRoleValidator < ActiveModel::EachValidator
+  def initialize(*options)
+    @options = options[0]
+    super
+  end
+
+  def validate_each(record, attribute, value)
+    unless value.kind_of?(User)
+      record.errors[attribute] << "is not a user"
+      return
+    end
+    record.errors[attribute] << "is not a #{@options[:role]}" unless 
+      value.role?(@options[:role])
+  end
+end
+
 class Store < ActiveRecord::Base
   belongs_to :client
   belongs_to :region
@@ -27,7 +43,7 @@ class Store < ActiveRecord::Base
   validates :name, :presence => true
   validates :client, :presence => true
   validates :region, :presence => true
-  validates :manager, :presence => true # TODO: scope to StoreManager role
+  validates :manager, :presence => true, :user_has_role => { :role => 'manager' }
 
   def name_and_number
     return self.name unless self.number

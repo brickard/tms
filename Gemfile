@@ -47,6 +47,7 @@ group :development, :test do
   gem 'autotest'
   gem 'annotate-models'
   gem 'rb-inotify'
+  gem 'faker'
 end
 
 group :console do
