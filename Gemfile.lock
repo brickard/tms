@@ -163,6 +163,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.2.0)
+    ruby-graphviz (0.9.20)
     rubyzip (0.9.4)
     selenium-webdriver (0.1.1)
       childprocess (= 0.1.4)
@@ -173,6 +174,7 @@ GEM
       activesupport (>= 2.3.2)
     spork (0.8.4)
     stackdeck (0.2.0)
+    state_machine (0.9.4)
     term-ansicolor (1.0.5)
     thor (0.14.6)
     treetop (1.4.9)
@@ -217,7 +219,9 @@ DEPENDENCIES
   rb-inotify
   rspec (>= 2.0.0)
   rspec-rails (>= 2.0.0)
+  ruby-graphviz
   simple-navigation (= 3.0.0.beta2)
   spork
+  state_machine
   unicorn
   wirble

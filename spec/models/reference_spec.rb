@@ -7,7 +7,7 @@ describe Reference do
 
   context "should not be valid without " do
     
-    %w{ user name contact_info relationship type_of_reference
+    %w{ user_id name contact_info relationship type_of_reference
         }.each do |attr|
       it "#{attr}" do
         @reference.send("#{attr}=", nil)

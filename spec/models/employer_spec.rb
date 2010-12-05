@@ -7,7 +7,7 @@ describe Employer do
 
   context "should not be valid without " do
     
-    %w{ user company_name start_date end_date job_title supervisor_name 
+    %w{ user_id company_name start_date end_date job_title supervisor_name 
         start_salary end_salary reason_for_leaving
         }.each do |attr|
       it "#{attr}" do

@@ -31,6 +31,10 @@ gem 'simple-navigation', '3.0.0.beta2'
 gem 'meta_where'
 gem 'meta_search'
 
+# state_machine for user model
+gem 'state_machine'
+gem 'ruby-graphviz', :require => 'graphviz'
+
 group :development, :test do
   gem 'mongrel'
   gem 'capybara'

@@ -29,39 +29,54 @@
 
 class User < ActiveRecord::Base
   include ModelBehaviors::RolesBehavior
+  HAT_SIZES   = %{ S M L }
+  SHIRT_SIZES = %{ S M L XL XXL XXXL XXXXL }
+  HAT_COUNT   = (1..10).to_a
+  SHIRT_COUNT = (1..10).to_a
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable, :timeoutable
-
-  attr_accessible :email, :email_confirmation, :password, 
-    :password_confirmation, :remember_me, :person_attributes, 
-    :role
-  has_one :person, :dependent => :destroy
-  has_one :employee, :dependent => :destroy
-  has_one :uniform_order, :dependent => :destroy
 
   has_many :employers, :dependent => :destroy
   has_many :references, :dependent => :destroy
   has_many :user_skills, :dependent => :destroy
   has_many :skills, :through => :user_skills
-
   has_many :stores, :foreign_key => :manager_id
 
-  accepts_nested_attributes_for :person, :employee, :employers, :references, 
-    :uniform_order, :skills
+  accepts_nested_attributes_for :employers, :references, :user_skills
 
-  validates :email, :presence => true, :confirmation => true, :uniqueness => true
+  attr_accessible :email, :email_confirmation, :first_name, :last_name,
+    :password, :password_confirmation, :remember_me, :role,
+    :employee_attributes, :uniform_order_attributes,
+    :employers_attributes, :references_attributes, :user_skills_attributes,
+    :skills_attributes
 
   before_validation :set_random_password!, :set_random_email!, :set_default_role!
+  validates :email, :presence => true, :confirmation => true, :uniqueness => true
+  validates :last_name, :first_name, :presence => true
+#  validates_presence_of :available_at, :emergency_contact_name, 
+#    :emergency_contact_phone
+#  validates_inclusion_of :needs_special_hours, :has_reliable_vehicle, 
+#    :can_travel_long_term, :been_convicted, :ever_failed_drug_test, 
+#    :legal_us_worker, :applied_before, :drivers_license_valid, 
+#    :agree_to_terms,
+#    :in => [ true, false ], :message => 'must be Yes or No'
+#  validates :needs_special_hours, :been_convicted, :applied_before, 
+#    :drivers_license_ever_suspended, :details => true
 
-  scope :with_role, lambda { |role_name| where(:role => role_name)  }
-  scope :admins, User.with_role('admin')
-  scope :managers, User.with_role('manager')
-  scope :employees, User.with_role('employee')
-  scope :applicants, User.with_role('applicant')
+
+  scope :with_role,  lambda { |role_name| where(:role => role_name)  }
+  scope :admins,     lambda { User.with_role('admin') }
+  scope :managers,   lambda { User.with_role('manager') }
+  scope :employees,  lambda { User.with_role('employee') }
+  scope :applicants, lambda { User.with_role('applicant') }
 
   def full_name
-    person.full_name rescue email
+    "#{first_name} #{middle_name+' ' rescue ''}#{last_name}"
+  end
+
+  def location
+    "#{city.capitalize}, #{state.capitalize} #{zipcode}" rescue "Unknown"
   end
 
   def set_random_password!

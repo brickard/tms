@@ -5,14 +5,15 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
-%w{ bram@craniumisajar.com bryonr@att.net admin@storeresetter.com }.each do |email|
-  user = User.new(:email => email, :password => '!password!',
-                  :password_confirmation => '!password!',
-                  :admin => true)
-  person = Person.create(:hired_at => DateTime.now, :first_name => 'Firstname', 
-                         :last_name => 'Lastname')
-  user.person = person
-  user.skip_confirmation!
+[ 
+  { :email => 'bram@craniumisajar.com', :first_name => 'Bram', :last_name => 'Swenson' },
+  { :email => 'bryonr@att.net', :first_name => 'Bryon', :last_name => 'Rickard' },
+  { :email => 'admin@storeresetter.com', :first_name => 'Admin', :last_name => 'User' },
+].each do |user_params|
+  user_params.merge!(:password => '!password!', 
+                     :password_confirmation => '!password!',
+                     :role => 'admin')
+  user = User.new(user_params)
   user.save!
 end
 %w{ Management Merchandiser Carpenter FixtureInstaller }.each do |skill_name|

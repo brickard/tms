@@ -19,33 +19,6 @@ ActiveRecord::Schema.define(:version => 20101105184758) do
     t.datetime "updated_at"
   end
 
-  create_table "employees", :force => true do |t|
-    t.integer  "user_id"
-    t.boolean  "needs_special_hours"
-    t.text     "needs_special_hours_detail"
-    t.datetime "available_at"
-    t.boolean  "has_reliable_vehicle"
-    t.boolean  "can_travel_long_term"
-    t.boolean  "been_convicted"
-    t.text     "been_convicted_detail"
-    t.boolean  "ever_failed_drug_test"
-    t.boolean  "legal_us_worker"
-    t.boolean  "applied_before"
-    t.text     "applied_before_detail"
-    t.boolean  "drivers_license_valid"
-    t.string   "drivers_license_state"
-    t.string   "drivers_license_number"
-    t.datetime "drivers_license_expiration"
-    t.boolean  "drivers_license_ever_suspended"
-    t.text     "drivers_license_ever_suspended_detail"
-    t.boolean  "agree_to_terms"
-    t.datetime "agree_to_terms_date"
-    t.string   "emergency_contact_name"
-    t.string   "emergency_contact_phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "employers", :force => true do |t|
     t.integer  "user_id"
     t.string   "company_name"
@@ -57,30 +30,6 @@ ActiveRecord::Schema.define(:version => 20101105184758) do
     t.string   "start_salary"
     t.string   "end_salary"
     t.string   "reason_for_leaving"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "people", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "last_name"
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zipcode"
-    t.string   "home_phone"
-    t.string   "mobile_phone"
-    t.string   "other_phone"
-    t.string   "phone2"
-    t.string   "ssn"
-    t.string   "date_of_birth"
-    t.date     "hired_at"
-    t.boolean  "application_agreement_agreed"
-    t.boolean  "application_agreement_agreed_on"
-    t.integer  "form_step"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -139,16 +88,6 @@ ActiveRecord::Schema.define(:version => 20101105184758) do
     t.datetime "updated_at"
   end
 
-  create_table "uniform_orders", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "shirt_size"
-    t.integer  "shirt_count"
-    t.string   "hat_size"
-    t.integer  "hat_count"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "user_skills", :force => true do |t|
     t.integer  "user_id"
     t.integer  "skill_id"
@@ -157,21 +96,64 @@ ActiveRecord::Schema.define(:version => 20101105184758) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "", :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
-    t.string   "password_salt",                       :default => "", :null => false
+    t.string   "email",                                                :default => "", :null => false
+    t.string   "encrypted_password",                    :limit => 128, :default => "", :null => false
+    t.string   "password_salt",                                        :default => "", :null => false
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",                                        :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "failed_attempts",                     :default => 0
+    t.integer  "failed_attempts",                                      :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "role"
+    t.integer  "form_step",                                            :default => 0
+    t.string   "last_name"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.string   "home_phone"
+    t.string   "mobile_phone"
+    t.string   "other_phone"
+    t.string   "phone2"
+    t.string   "ssn"
+    t.string   "date_of_birth"
+    t.date     "hired_at"
+    t.boolean  "application_agreement_agreed"
+    t.date     "application_agreement_agreed_on"
+    t.boolean  "needs_special_hours"
+    t.text     "needs_special_hours_detail"
+    t.date     "available_at"
+    t.boolean  "has_reliable_vehicle"
+    t.boolean  "can_travel_long_term"
+    t.boolean  "been_convicted"
+    t.text     "been_convicted_detail"
+    t.boolean  "ever_failed_drug_test"
+    t.boolean  "legal_us_worker"
+    t.boolean  "applied_before"
+    t.text     "applied_before_detail"
+    t.boolean  "drivers_license_valid"
+    t.string   "drivers_license_state"
+    t.string   "drivers_license_number"
+    t.date     "drivers_license_expiration"
+    t.boolean  "drivers_license_ever_suspended"
+    t.text     "drivers_license_ever_suspended_detail"
+    t.boolean  "agree_to_terms"
+    t.date     "agree_to_terms_date"
+    t.string   "emergency_contact_name"
+    t.string   "emergency_contact_phone"
+    t.string   "shirt_size"
+    t.integer  "shirt_count"
+    t.string   "hat_size"
+    t.integer  "hat_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

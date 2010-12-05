@@ -30,6 +30,13 @@ describe User do
           @user.should_not be_valid
         end
 
+        %w{ last_name first_name }.each do |attr|
+          it "#{attr} is blank" do
+            @user.send( "#{attr}=", nil )
+            @user.should_not be_valid
+          end
+        end
+
       end
 
       context "true when" do
@@ -73,6 +80,22 @@ describe User do
 
 
     end
+  end
+
+  context "on step 1" do
+    before(:each) do
+      #@person.form_step = 1
+    end
+
+    %w{ address1 city state zipcode home_phone date_of_birth
+        }.each do |attr|
+      it "without #{attr}" do
+        pending "Need to implement state machine for user"
+        @user.send("#{attr}=", nil)
+        @user.valid?.should be_false
+      end
+    end
+
   end
 end
 
