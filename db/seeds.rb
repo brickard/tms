@@ -19,7 +19,7 @@ Dir[Rails.root.join("spec/factories/**/*.rb"),
   user_params.merge!(:password => '!password!', 
                      :password_confirmation => '!password!',
                      :role => 'admin')
-  user = User.new(user_params)
+  user = User.new(Factory.attributes_for(:admin_user, user_params))
   user.save!
 end
 @skills = []
@@ -32,7 +32,8 @@ end
   (1..rand(@skills.size+1)).each do |i|
     u.skills << @skills[rand(@skills.size)]
   end
+  u.skills << @skills[rand(@skills.size)] unless u.skills.count >= 1
   u.save!
-  puts "Created applicant: #{u.email} with skills: #{u.skills.join(',')}"
+  puts "Created applicant: #{u.email} with skills: #{u.skills.map{ |s| s.name }.join(', ')}"
 end
 

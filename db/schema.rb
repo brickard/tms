@@ -123,7 +123,6 @@ ActiveRecord::Schema.define(:version => 20101105184758) do
     t.string   "home_phone"
     t.string   "mobile_phone"
     t.string   "other_phone"
-    t.string   "phone2"
     t.string   "ssn"
     t.string   "date_of_birth"
     t.date     "hired_at"

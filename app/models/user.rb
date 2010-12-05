@@ -55,11 +55,28 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :employers, :references, :user_skills
 
-  attr_accessible :email, :email_confirmation, :first_name, :last_name,
-    :password, :password_confirmation, :remember_me, :role,
-    :employee_attributes, :uniform_order_attributes,
-    :employers_attributes, :references_attributes, :user_skills_attributes,
-    :skills_attributes
+  # column based attributes
+  attr_accessible :email, :role, :form_step, :last_name, :first_name,
+    :middle_name, :address1, :address2, :city, :state, :zipcode,
+    :home_phone, :mobile_phone, :other_phone, :ssn, :date_of_birth,
+    :hired_at, :application_agreement_agreed, :application_agreement_agreed_on,
+    :needs_special_hours, :needs_special_hours_detail, :available_at,
+    :has_reliable_vehicle, :can_travel_long_term, :been_convicted,
+    :been_convicted_detail, :ever_failed_drug_test, :legal_us_worker,
+    :applied_before, :applied_before_detail, :drivers_license_valid,
+    :drivers_license_state, :drivers_license_number, 
+    :drivers_license_expiration, :drivers_license_ever_suspended,
+    :drivers_license_ever_suspended_detail, :agree_to_terms, 
+    :agree_to_terms_date, :emergency_contact_name, :emergency_contact_phone,
+    :shirt_size, :shirt_count, :hat_size, :hat_count
+  
+  # virtual attributes
+  attr_accessible :email_confirmation, :remember_me, :password, 
+    :password_confirmation
+
+  # nested attributes
+  attr_accessible :employers_attributes, :references_attributes, 
+    :user_skills_attributes, :skills_attributes
 
   before_validation :set_random_password!, :set_random_email!, :set_default_role!
   validates :email, :presence => true, :confirmation => true, :uniqueness => true

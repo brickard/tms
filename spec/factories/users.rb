@@ -4,23 +4,23 @@ Factory.define :user do |f|
   f.role 'admin'
   f.last_name { Faker::Name.last_name }
   f.first_name { Faker::Name.first_name }
-  f.middle_name { Factory.next(:middle_name) }
+  f.middle_name { Faker::Name.first_name }
   f.address1 { Faker::Address.street_address }
   f.address2 { Faker::Address.secondary_address }
   f.city { Faker::Address.city }
   f.state { Faker::Address.us_state_abbr }
   f.zipcode { Faker::Address.zip_code }
-  f.ssn '111-11-1111'
+  f.ssn { Factory.next(:ssn) }
   f.home_phone { Faker::PhoneNumber.phone_number }
   f.mobile_phone { Faker::PhoneNumber.phone_number }
   f.other_phone { Faker::PhoneNumber.phone_number }
-  f.hired_at DateTime.now
-  f.date_of_birth DateTime.now - 33.years
+  f.hired_at nil
+  f.date_of_birth { Factory.next(:birth_date) }
   f.application_agreement_agreed true
-  f.application_agreement_agreed_on DateTime.now
+  f.application_agreement_agreed_on { Factory.next(:future_date) }
   f.needs_special_hours { Factory.next(:boolean) }
   f.needs_special_hours_detail { Faker::Lorem.words }
-  f.available_at "2010-10-03 11:15:20"
+  f.available_at { Factory.next(:future_date) }
   f.has_reliable_vehicle { Factory.next(:boolean) }
   f.can_travel_long_term { Factory.next(:boolean) }
   f.been_convicted { Factory.next(:boolean) }
@@ -31,12 +31,12 @@ Factory.define :user do |f|
   f.applied_before_detail { Faker::Lorem.words }
   f.drivers_license_valid { Factory.next(:boolean) }
   f.drivers_license_state { Factory.next(:state) }
-  f.drivers_license_number "1111-211222-11211"
-  f.drivers_license_expiration "2010-10-03 11:15:20"
+  f.drivers_license_number { Factory.next(:drivers_license_number) }
+  f.drivers_license_expiration { Factory.next(:future_date) }
   f.drivers_license_ever_suspended { Factory.next(:boolean) }
   f.drivers_license_ever_suspended_detail { Faker::Lorem.words }
   f.agree_to_terms { Factory.next(:boolean) }
-  f.agree_to_terms_date "2010-10-03 11:15:20"
+  f.agree_to_terms_date { Factory.next(:future_date) }
   f.emergency_contact_name { Faker::Name.name }
   f.emergency_contact_phone { Faker::PhoneNumber.phone_number }
   f.shirt_size { random_from(User::SHIRT_SIZES) } 
@@ -51,10 +51,12 @@ end
 
 Factory.define :manager_user, :parent => :user do |f|
   f.role 'manager'
+  f.hired_at { Factory.next(:future_date) }
 end
 
 Factory.define :employee_user, :parent => :user do |f|
   f.role 'employee'
+  f.hired_at { Factory.next(:future_date) }
 end
 
 Factory.define :applicant_user, :parent => :user do |f|
