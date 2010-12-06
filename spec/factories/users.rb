@@ -16,8 +16,6 @@ Factory.define :user do |f|
   f.other_phone { Faker::PhoneNumber.phone_number }
   f.hired_at nil
   f.date_of_birth { Factory.next(:birth_date) }
-  f.application_agreement_agreed true
-  f.application_agreement_agreed_on { Factory.next(:future_date) }
   f.needs_special_hours { Factory.next(:boolean) }
   f.needs_special_hours_detail { Faker::Lorem.words }
   f.available_at { Factory.next(:future_date) }

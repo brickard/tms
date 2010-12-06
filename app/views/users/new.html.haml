@@ -1,8 +1,9 @@
-= content_for(:content_nav_heading) do
-  = "New #{@scope_title}"
-.section_heading
-  = "New #{@scope_title}"
-  .section_heading_menu
-    = link_to 'Back', users_path(:scope => @scope)
+- unless @scope == 'applicants'
+  = content_for(:content_nav_heading) do
+    = "New #{@scope_title.singularize}"
+  .section_heading
+    = "New #{@scope_title.singularize}"
+    .section_heading_menu
+      = link_to 'Back', users_path(:scope => @scope)
 .sub_content
   = render :partial => "#{@scope_name.singularize}_form"

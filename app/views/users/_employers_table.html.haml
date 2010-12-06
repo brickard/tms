@@ -6,7 +6,7 @@
     %th Start Date
     %th End Date
     %th
-  - @applicant.person.employee.employers.each do |employer|
+  - @user.employers.each do |employer|
     %tr
       %td= employer.company_name
       %td= employer.job_title

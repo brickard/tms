@@ -8,8 +8,8 @@
 
 #progress
   #progressbar
-  - unless @applicant.person.form_step >= @total_steps
-    %p.step_text You are currently on step #{@applicant.person.form_step} of #{@total_steps}.
+  - unless @user.form_step_to_i >= @total_steps
+    %p.step_text You are currently on step #{@user.form_step_to_i} of #{@total_steps}.
   - else
     %p.step_text All steps complete!
 %p{ :class => 'sub_content notice' }

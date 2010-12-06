@@ -4,7 +4,7 @@
     %th Contact Info
     %th Type of Reference
     %th
-  - @applicant.person.employee.references.each do |reference|
+  - @user.references.each do |reference|
     %tr
       %td= reference.name
       %td= reference.contact_info

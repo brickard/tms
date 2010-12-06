@@ -1,30 +1,28 @@
 = content_for(:footer) do
   = javascript_include_tag 'datepicker'
+
 = content_for(:content_nav) do
   %p ALL new employees must purchase shirts! Buy 4 get 1 free for new employees ONLY! Each shirt is $12.95
   %p If you wear a ball cap, it MUST be issued by the company! 1 FREE each year. |
   Additional fitted hats can be purchased for $12.95 each.
 
-= form_for :applicant, :url => applicants_path, :html => { :class => 'bp' } do |f|
-  = f.fields_for @applicant.person do |person_form|
-    = person_form.hidden_field :id, :value => @applicant.person.id
-  = f.fields_for UniformOrder.new do |uniform_order_form|
-    = uniform_order_form.hidden_field :employee_id, :value => @applicant.person.employee.id
-    %p{ :class => 'field short required' }
-      = uniform_order_form.select :shirt_count, [ '' ] + (1..10).to_a
-      = uniform_order_form.label :shirt_count, 'How many Shirts?'
-      *
-    %p{ :class => 'field short required' }
-      = uniform_order_form.select :shirt_size, [ '' ] + %w{ S M L XL XXL XXXL XXXXL }
-      = uniform_order_form.label :shirt_size, 'Shirt Size'
-      *
-    %p{ :class => 'field short required' }
-      = uniform_order_form.select :hat_count, [ '' ] + (1..10).to_a
-      = uniform_order_form.label :hat_count, 'How many Hats?'
-      *
-    %p{ :class => 'field short required' }
-      = uniform_order_form.select :hat_size, [ '' ] + %w{ S M L }
-      = uniform_order_form.label :hat_size, 'Hat Size'
-      *
+= form_for @user, :url => user_path(@user, :scope => @scope), :html => { :class => 'bp', :method => :put } do |f|
+  %p{ :class => 'field short required' }
+    = f.select :shirt_count, [ '' ] + (1..10).to_a
+    = f.label :shirt_count, 'How many Shirts?'
+    *
+  %p{ :class => 'field short required' }
+    = f.select :shirt_size, [ '' ] + %w{ S M L XL XXL XXXL XXXXL }
+    = f.label :shirt_size, 'Shirt Size'
+    *
+  %p{ :class => 'field short required' }
+    = f.select :hat_count, [ '' ] + (1..10).to_a
+    = f.label :hat_count, 'How many Hats?'
+    *
+  %p{ :class => 'field short required' }
+    = f.select :hat_size, [ '' ] + %w{ S M L }
+    = f.label :hat_size, 'Hat Size'
+    *
+  = f.hidden_field :form_step, :value => @user.form_step
   %p{ :class => 'field button' }
     = content_tag :button, 'Next', :type => :submit

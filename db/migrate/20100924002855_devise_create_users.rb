@@ -23,8 +23,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string  :ssn
       t.string  :date_of_birth
       t.date    :hired_at
-      t.boolean :application_agreement_agreed
-      t.date    :application_agreement_agreed_on
       t.boolean :needs_special_hours
       t.text :needs_special_hours_detail
       t.date :available_at

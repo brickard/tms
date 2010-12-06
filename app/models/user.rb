@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   has_many :skills, :through => :user_skills
   has_many :stores, :foreign_key => :manager_id
 
-  accepts_nested_attributes_for :employers, :references, :user_skills
+  accepts_nested_attributes_for :employers, :references, :user_skills, :skills
 
   # column based attributes
   attr_accessible :email, :role, :form_step, :last_name, :first_name,
@@ -66,8 +66,8 @@ class User < ActiveRecord::Base
     :applied_before, :applied_before_detail, :drivers_license_valid,
     :drivers_license_state, :drivers_license_number, 
     :drivers_license_expiration, :drivers_license_ever_suspended,
-    :drivers_license_ever_suspended_detail, :agree_to_terms, 
-    :agree_to_terms_date, :emergency_contact_name, :emergency_contact_phone,
+    :drivers_license_ever_suspended_detail,
+    :emergency_contact_name, :emergency_contact_phone,
     :shirt_size, :shirt_count, :hat_size, :hat_count
   
   # virtual attributes
@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
 
   # nested attributes
   attr_accessible :employers_attributes, :references_attributes, 
-    :user_skills_attributes, :skills_attributes
+    :user_skills_attributes, :skill_ids, :employers, :references
 
   before_validation :set_random_password!, :set_random_email!, :set_default_role!
   validates :email, :presence => true, :confirmation => true, :uniqueness => true
@@ -115,10 +115,18 @@ class User < ActiveRecord::Base
       validates_inclusion_of :needs_special_hours, :has_reliable_vehicle, 
         :can_travel_long_term, :been_convicted, :ever_failed_drug_test, 
         :legal_us_worker, :applied_before, :drivers_license_valid, 
-        :agree_to_terms,
         :in => [ true, false ], :message => 'must be Yes or No'
       validates :needs_special_hours, :been_convicted, :applied_before, 
         :drivers_license_ever_suspended, :details => true
+    end
+
+    state :step5 do
+      validates :hat_count, :hat_size, :shirt_count, :shirt_size, :presence => true
+    end
+
+    state :step6 do
+      validates :agree_to_terms, :agree_to_terms_date, :presence => true
+      validates :agree_to_terms, :inclusion => { :in => [ true ] }
     end
   end
 
@@ -128,6 +136,20 @@ class User < ActiveRecord::Base
 
   def location
     "#{city.capitalize}, #{state.capitalize} #{zipcode}" rescue "Unknown"
+  end
+
+  def form_step_to_i
+    self.form_step.to_s.last.to_i
+  end
+
+  def increment_form_step
+    next_form_step = "step#{(self.form_step.to_s.last.to_i + 1)}"
+    self.form_step = next_form_step
+  end
+
+  def decrement_form_step
+    prev_form_step = "step#{(self.form_step.to_s.last.to_i - 1)}"
+    self.form_step = prev_form_step
   end
 
   def set_random_password!
