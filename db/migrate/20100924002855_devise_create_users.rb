@@ -48,6 +48,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.integer :shirt_count
       t.string :hat_size
       t.integer :hat_count
+      t.integer :shift_id
 
       t.timestamps
     end

@@ -1,0 +1,14 @@
+#employees_table_wrapper
+  .section_heading
+    = "#{pluralize(@employees.count, 'Employee')} on Shift"
+  %table{ :class => 'section_content data_table' }
+    %tr
+      %th Name
+      %th Shift
+      %th
+    - @employees.each do |employee|
+      %tr
+        %td= employee.full_name
+        %td= employee.shift.display_name
+        %td= link_to 'Remove from Shift', employee_remove_path(:employee_id => employee.id, :shift_id => @shifts.first.id), :confirm => "Are you sure you want to remove #{employee.full_name} from shift?"
+  %br/

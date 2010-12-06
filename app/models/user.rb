@@ -52,8 +52,9 @@ class User < ActiveRecord::Base
   has_many :user_skills, :dependent => :destroy
   has_many :skills, :through => :user_skills
   has_many :stores, :foreign_key => :manager_id
+  belongs_to :shift
 
-  accepts_nested_attributes_for :employers, :references, :user_skills, :skills
+  accepts_nested_attributes_for :employers, :references, :user_skills, :skills, :shift
 
   # column based attributes
   attr_accessible :email, :role, :form_step, :last_name, :first_name,
@@ -68,7 +69,7 @@ class User < ActiveRecord::Base
     :drivers_license_expiration, :drivers_license_ever_suspended,
     :drivers_license_ever_suspended_detail,
     :emergency_contact_name, :emergency_contact_phone,
-    :shirt_size, :shirt_count, :hat_size, :hat_count
+    :shirt_size, :shirt_count, :hat_size, :hat_count, :shift_id
   
   # virtual attributes
   attr_accessible :email_confirmation, :remember_me, :password, 
@@ -83,11 +84,13 @@ class User < ActiveRecord::Base
   validates :last_name, :first_name, :presence => true
 
 
-  scope :with_role,  lambda { |role_name| where(:role => role_name)  }
-  scope :admins,     lambda { User.with_role('admin') }
-  scope :managers,   lambda { User.with_role('manager') }
-  scope :employees,  lambda { User.with_role('employee') }
-  scope :applicants, lambda { User.with_role('applicant') }
+  scope :with_role,      lambda { |role_name| where(:role => role_name)  }
+  scope :admins,         lambda { User.with_role('admin') }
+  scope :managers,       lambda { User.with_role('manager') }
+  scope :employees,      lambda { User.with_role('employee') }
+  scope :applicants,     lambda { User.with_role('applicant') }
+  scope :on_shift,       lambda { |shift| where(:shift_id => shift.id) }
+  scope :idle_employees, lambda { User.employees.where(:shift_id => nil) }
 
   state_machine :form_step, :initial => :step0 do
 

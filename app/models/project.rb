@@ -21,7 +21,7 @@ class Project < ActiveRecord::Base
 
   def create_shifts(count=3)
     shifts = (1..count.to_i).map{ |i| i.ordinalize }.inject([]) do |s, i|
-      s << Shift.find_or_create_by_name(:project => self, :name => "#{i} Shift")
+      s << Shift.create!(:project => self, :name => "#{i} Shift")
     end
   end
 end

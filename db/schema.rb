@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20101105184758) do
     t.integer  "shirt_count"
     t.string   "hat_size"
     t.integer  "hat_count"
+    t.integer  "shift_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

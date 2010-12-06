@@ -13,4 +13,9 @@
 class Shift < ActiveRecord::Base
   belongs_to :project
   validates_presence_of :project_id, :name
+  has_many :employees, :class_name => 'User', :foreign_key => :shift_id
+
+  def display_name
+    "#{self.project.display_name} - #{self.name}"
+  end
 end

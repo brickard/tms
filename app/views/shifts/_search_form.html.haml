@@ -1,0 +1,15 @@
+#search_div
+  = form_for(:shifts_search, :url => shifts_path, :html => { :class => 'bp', :method => :get }) do |f|
+    %p{ :class => 'field' }
+      = f.label :id_equals, 'Shift'
+      = f.collection_select :id_equals, Shift.all, :id, :display_name
+    %p{ :class => 'field button' }
+      = content_tag :button, 'Select Shift', :type => :submit
+  - if @shifts.count == 1
+    = form_for(:employee, :url => shift_add_path(@shifts.first), :html => { :class => 'bp', :method => :get }) do |f|
+      %p{ :class => 'field' }
+        = f.label :employee_id, 'Employee'
+        = f.collection_select :employee_id, User.idle_employees, :id, :full_name
+      %p{ :class => 'field button' }
+        = content_tag :button, 'Add To Shift', :type => :submit
+

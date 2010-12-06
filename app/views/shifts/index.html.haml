@@ -1,19 +1,18 @@
 .section_heading
-  Shifts
+  = pluralize(@shifts.count, 'Shift')
   .section_heading_menu
-    = link_to 'New Shift', new_shift_path
-%table{ :class => 'section_content data_table' }
-  %tr
-    %th Name
-    %th Project
-    %th
-    %th
-    %th
-  - @shifts.each do |shift|
-    %tr
-      %td= shift.name
-      %td= shift.project.display_name rescue 'No Project Found'
-      %td= link_to 'Show', shift
-      %td= link_to 'Edit', edit_shift_path(shift)
-      %td= link_to 'Delete', shift, :confirm => 'Are you sure?', :method => :delete
-%br/
+    = link_to "Reset Search", shifts_path
+    = link_to "Hide Search", 'JavaScript:void()', :id => 'hide_search_link'
+    = link_to "Search", 'JavaScript:void()', :id => 'show_search_link'
+    = link_to "New Shift", new_shift_path
+= render :partial => "search_form"
+= render :partial => "shifts_table"
+
+= content_for(:footer) do
+  = javascript_include_tag 'search_hider'
+  - search_link_on = @searching ? "show_search_link();" : "hide_search_link();" 
+  :javascript
+    $().ready(function() {
+      #{search_link_on}
+      return true;
+    });

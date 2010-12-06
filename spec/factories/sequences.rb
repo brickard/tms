@@ -23,18 +23,20 @@ def random_date(future=true, years=1)
   Time.local(year, month, day)
 end
 
-Factory.sequence(:name) { random_chars }
-Factory.sequence(:email) { random_chars + '@matrix.com' }
-Factory.sequence(:first_name) { "Neo#{random_chars}" }
-Factory.sequence(:last_name) { "Neo#{random_chars}" }
-Factory.sequence(:middle_name) { "Neo#{random_chars}" }
-Factory.sequence(:address1) { "#{random_numbers(4)} White Rabbit Lane" }
-Factory.sequence(:address2) { "Suite #{random_numbers(4)}" }
-Factory.sequence(:state) { Carmen::US_STATES[rand(Carmen::US_STATES.size)] }
-Factory.sequence(:phone) { random_numbers(10) }
+Factory.sequence(:name) { Faker::Company.name }
+Factory.sequence(:email) { Faker::Internet.email }
+Factory.sequence(:first_name) { Faker::Name.first_name }
+Factory.sequence(:last_name) { Faker::Name.last_name }
+Factory.sequence(:middle_name) { Faker::Name.first_name }
+Factory.sequence(:address1) { Faker::Address.street_address }
+Factory.sequence(:address2) { Faker::Address.secondary_address }
+Factory.sequence(:state) { Carmen::US_STATES[rand(Carmen::US_STATES.size)][0] }
+Factory.sequence(:phone) { Faker::PhoneNumber.phone_number }
 Factory.sequence(:boolean) { [ true, false ][rand(2)] }
 Factory.sequence(:drivers_license_number) { "#{random_numbers(4)}-#{random_numbers(5)}-#{random_numbers(3)}" }
 Factory.sequence(:ssn) { "#{random_numbers(3)}-#{random_numbers(2)}-#{random_numbers(4)}" }
 Factory.sequence(:future_date) { random_date }
 Factory.sequence(:past_date) { random_date(false) }
 Factory.sequence(:birth_date) { random_date(false, 60) }
+Factory.sequence(:project_name) { "Project #{random_numbers(6)}" }
+Factory.sequence(:store_name) { "Store #{random_numbers(6)}" }

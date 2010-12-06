@@ -1,9 +1,39 @@
 class ShiftsController < ApplicationController
   before_filter :authenticate_user!
+
+  def remove
+    @user = User.find(params[:employee_id])
+    @user.shift = nil
+    if @user.save
+      redirect_to(:back, :notice => "#{@user.full_name} removed from shift!")
+    else
+      Rails.logger.warn("ERROR REMOVING #{@user.full_name} from SHIFT:\n\n#{@user.errors.full_messages.inspect}\n\n")
+      redirect_to(:back, :alert => "An error occured removing #{@user.full_name} from shift!")
+    end
+  end
+
+  def add
+    @user = User.find(params[:employee][:employee_id])
+    @shift = Shift.find(params[:shift_id])
+    @user.shift = @shift
+    if @user.save
+      redirect_to(:back, :notice => "#{@user.full_name} added to shift!")
+    else
+      Rails.logger.warn("ERROR ADDING #{@user.full_name} to SHIFT:\n\n#{@user.errors.full_messages.inspect}\n\n")
+      redirect_to(:back, :alert => "An error occured adding #{@user.full_name} from shift!")
+    end
+  end
+
   # GET /shifts
   # GET /shifts.xml
   def index
-    @shifts = Shift.all
+    @searching = !params[:shifts_search].blank?
+    @shifts_search = Shift.search(params[:shifts_search])
+    @shifts = @shifts_search.all.uniq
+    @employees_search = @shifts.count == 1 ?
+      User.employees.on_shift(@shifts.first).search(params[:employees_search]) :
+      User.employees.search(params[:employees_search])
+    @employees = @employees_search.all.uniq
 
     respond_to do |format|
       format.html # index.html.erb

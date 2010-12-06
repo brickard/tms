@@ -1,7 +1,12 @@
 Storeresetter::Application.routes.draw do
   resources :skills
 
-  resources :shifts
+  resources :shifts do
+    get 'add'
+    resources :employees, :controller => :shifts do
+      get 'remove'
+    end
+  end
 
   resources :projects
 

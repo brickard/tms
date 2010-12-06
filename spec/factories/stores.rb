@@ -10,10 +10,11 @@ Factory.define :store do |f|
   f.region { Factory.create(:region, :client => get_client) }
   f.manager { get_manager }
   f.active true
-  f.name { Factory.next(:name) }
+  f.name { Factory.next(:store_name) }
+  f.number { random_numbers(4) }
   f.address1 { Factory.next(:address1) }
   f.address2 { Factory.next(:address2) }
-  f.city 'Zion'
-  f.zipcode '35216'
+  f.city { Faker::Address.city }
+  f.zipcode { Faker::Address.zip_code }
 end
 

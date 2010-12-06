@@ -1,0 +1,18 @@
+#shifts_wrapper
+  #shifts_table_wrapper
+    %table{ :class => 'section_content data_table' }
+      %tr
+        %th Name
+        %th Project
+        %th
+        %th
+        %th
+      - @shifts.each do |shift|
+        %tr
+          %td= shift.name
+          %td= shift.project.display_name rescue 'No Project Found'
+          %td= link_to 'Show', shift_path(shift)
+          %td= link_to 'Edit', edit_shift_path(shift)
+          %td= link_to 'Delete', shift_path(shift), :confirm => 'Are you sure?', :method => :delete
+    %br/
+  = render :partial => "employees_table" if @shifts.count == 1
