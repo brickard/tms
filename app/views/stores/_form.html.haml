@@ -9,7 +9,7 @@
       { :prompt => true } )
     = f.label :region_id
   %p{ :class => 'field short required' }
-    = f.collection_select( :manager_id, User.store_managers, :id, :full_name, |
+    = f.collection_select( :manager_id, User.managers, :id, :full_name, |
       { :prompt => true } )
     = f.label :manager_id
   %p{ :class => 'field short required' }
@@ -31,7 +31,7 @@
     = f.text_field :city
     = f.label :city
   %p{ :class => 'field short required' }
-    = f.select :state, Carmen::US_STATES
+    = f.select :state, options_for_select(Carmen::US_STATES)
     = f.label :state
   %p{ :class => 'field short required' }
     = f.text_field :zipcode

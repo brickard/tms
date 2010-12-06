@@ -1,33 +1,3 @@
-Given /^the last Employee belongs to the last Applicant$/ do
-  @applicant = Person.applicants.last
-  @applicant.employee = Employee.last
-  @applicant.save!.should be_true
-end
-
-Given /^the last UniformOrder belongs to the last Applicant$/ do
-  @applicant = Person.applicants.last
-  @applicant.employee.uniform_order = UniformOrder.last
-  @applicant.save!.should be_true
-end
-
-Given /^the last (\d+) Employers belongs to the last Applicant$/ do |count|
-  @applicant = Person.applicants.last
-  Employer.find(:all, :order => :created_at, :limit => count).each do |employer|
-    @applicant.employee.employers << employer
-  end
-  @applicant.save!.should be_true
-  @applicant.employee.employers.count.should == count.to_i
-end
-
-Given /^the last (\d+) References belongs to the last Applicant$/ do |count|
-  @applicant = Person.applicants.last
-  Reference.find(:all, :order => :created_at, :limit => count).each do |reference|
-    @applicant.employee.references << reference
-  end
-  @applicant.save!.should be_true
-  @applicant.employee.references.count.should == count.to_i
-end
-
 Given /^I complete step (\d+) of the employment application$/ do |step_number|
   case step_number.to_i
   when 1
@@ -51,8 +21,7 @@ Given /^I complete step (\d+) of the employment application$/ do |step_number|
         And I fill in "Email confirmation" with "joe@employees.com"
         And I press "Next"
       Then I should see "Employment Criteria"
-        And there should be a "Person" whose "full_name" is "Joe The Employee"
-        And there should be a "User" whose "email" is "joe@employees.com"
+        And a applicant_user: "joe_user" should exist with email: "joe@employees.com"
     }
   when 2
     steps %Q{
@@ -60,35 +29,32 @@ Given /^I complete step (\d+) of the employment application$/ do |step_number|
         And I complete step 1 of the employment application
         And I should see "Employment Criteria"
         And I should see "You are currently on step 2 of 7"
-      When I select "Management" from "Skills"
-        And I select "Merchandiser" from "Skills"
-        And I select "Carpenter" from "Skills"
-        And I select "Fixture Installer" from "Skills"
-        And I select "Yes" from "applicant[employee][needs_special_hours]"
-        And I fill in "applicant[employee][needs_special_hours_detail]" with "No Weekends"
-        And I fill in "applicant[employee][available_at]" with "10/21/2010"
-        And I select "Yes" from "applicant[employee][has_reliable_vehicle]"
-        And I select "Yes" from "applicant[employee][can_travel_long_term]"
-        And I select "Yes" from "Have you ever been convicted of a crime"
-        And I fill in "applicant[employee][been_convicted_detail]" with "Grand Theft Auto"
-        And I select "No" from "Have you ever failed a drug test"
-        And I select "Yes" from "Are you legally authorized to work in the United States"
+      When I select "Management" from "skills"
+        And I select "Merchandiser" from "skills"
+        And I select "Carpenter" from "skills"
+        And I select "Fixture Installer" from "skills"
+        And I select "Yes" from "Are there any days, shifts, hours you will not work?"
+        And I fill in "user[needs_special_hours_detail]" with "No Weekends"
+        And I fill in "When are you available to start work?" with "10/21/2010"
+        And I select "Yes" from "Do you have reliable transportation?"
+        And I select "Yes" from "Can you travel long term?"
+        And I select "Yes" from "Have you ever been convicted of a crime?"
+        And I fill in "user[been_convicted_detail]" with "Grand Theft Auto"
+        And I select "No" from "Have you ever failed a drug test?"
+        And I select "Yes" from "Are you legally authorized to work in the United States?"
         And I select "Yes" from "Have you ever applied for work or worked here before"
-        And I fill in "If yes, when and reason not employed currently" with "Laid off"
-        And I select "Yes" from "Do you have a valid Drivers License"
+        And I fill in "If yes, when and reason not employed currently?" with "Laid off"
+        And I select "Yes" from "Do you have a valid Drivers License?"
         And I select "Alabama" from "License State"
         And I fill in "License Number" with "55-5555-55555"
-        And I fill in "applicant[employee][drivers_license_expiration]" with "10/21/2013"
-        And I select "Yes" from "Has your Drivers License ever been suspended"
-        And I fill in "applicant[employee][drivers_license_ever_suspended_detail]" with "Unpaid tickets"
+        And I fill in "License Expiration Date" with "10/21/2013"
+        And I select "Yes" from "Has your Drivers License ever been suspended?"
+        And I fill in "user[drivers_license_ever_suspended_detail]" with "Unpaid tickets"
         And I fill in "Emergency Contact" with "Some Family Member"
         And I fill in "Emergency Contact Phone" with "2055551212"
         And I press "Next"
       Then I should see "Employment History"
-        And a person: "joe_person" should exist with first_name: "Joe", last_name: "Employee"
-        And a user: "joe_user" should exist with email: "joe@employees.com"
-        And user: "joe_user" should be person: "joe_person"'s user
-        And a employee: "joe_employee" should exist with person: person "joe_person"
+        And a applicant_user: "joe_user" should exist with email: "joe@employees.com", drivers_license_state: "AL"
     }
   when 3
     steps %Q{
@@ -109,11 +75,7 @@ Given /^I complete step (\d+) of the employment application$/ do |step_number|
       Then I should see "You are currently on step 3 of 7"
         And I should see "You need to add at least 1 more Employer"
         And I should see "Some Job 1"
-        And a person: "joe_person" should exist with first_name: "Joe", last_name: "Employee"
-        And a employee: "joe_employee" should exist with person: person "joe_person"
-        And a employer should exist with employee: employee "joe_employee"
-      When I press "Next"
-      Then I should see "You need to add at least 1 more Employer"
+        And a employer should exist with user: applicant_user "joe_user"
       When I fill in "Company name" with "Some Job 2"
         And I fill in "Start date" with "10/10/2002"
         And I fill in "End date" with "10/10/2004"
@@ -128,7 +90,7 @@ Given /^I complete step (\d+) of the employment application$/ do |step_number|
         And I should see "Some Job 1"
         And I should see "Some Job 2"
         And I should not see "You need to add at least"
-        And 2 employers should exist with employee: employee "joe_employee"
+        And 2 employers should exist with user: applicant_user "joe_user"
       When I press "Next"
         Then I should see "Employment References"
     }
@@ -146,10 +108,7 @@ Given /^I complete step (\d+) of the employment application$/ do |step_number|
       Then I should see "Employment References"
         And I should see "You need to add at least 2 more References"
         And I should see "Reference 1"
-      When I press "Next"
-      Then I should see "Employment References"
-        And I should see "You need to add at least 2 more References"
-        And I should see "Reference 1"
+        And a reference should exist with user: applicant_user "joe_user"
       When I fill in "Name" with "Reference 2"
         And I fill in "Phone number/Email" with "2059992299"
         And I fill in "Relationship" with "Friend"
@@ -159,6 +118,7 @@ Given /^I complete step (\d+) of the employment application$/ do |step_number|
         And I should see "You need to add at least 1 more Reference"
         And I should see "Reference 1"
         And I should see "Reference 2"
+        And 2 references should exist with user: applicant_user "joe_user"
       When I fill in "Name" with "Reference 3"
         And I fill in "Phone number/Email" with "2059993399"
         And I fill in "Relationship" with "Friend"
@@ -169,12 +129,14 @@ Given /^I complete step (\d+) of the employment application$/ do |step_number|
         And I should see "Reference 1"
         And I should see "Reference 2"
         And I should see "Reference 3"
+        And 3 references should exist with user: applicant_user "joe_user"
       When I press "Next"
       Then I should see "ALL new employees must purchase shirts!"
     }
   when 5
     steps %Q{
       Given I complete step 4 of the employment application
+        And I should see "Employment Uniform Order"
         And I should see "You are currently on step 5 of 7"
         And I should see "ALL new employees must purchase shirts!"
         And I should see "Buy 4 get 1 free for new employees ONLY!"
@@ -184,11 +146,11 @@ Given /^I complete step (\d+) of the employment application$/ do |step_number|
         And I should see "Additional fitted hats can be purchased for $12.95 each"
       When I select "XL" from "Shirt Size"
         And I select "5" from "How many Shirts"
-        And I select "7" from "Hat Size"
+        And I select "L" from "Hat Size"
         And I select "2" from "How many Hats"
         And I press "Next"
-        And a uniform order should exist with employee: employee "joe_employee"
       Then I should see "Employment Application Agreement"
+        And a applicant_user should exist with email: "joe@employees.com", hat_size: "L", hat_count: "2"
     }
   end
 end

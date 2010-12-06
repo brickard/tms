@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :role, :form_step, :last_name, :first_name,
     :middle_name, :address1, :address2, :city, :state, :zipcode,
     :home_phone, :mobile_phone, :other_phone, :ssn, :date_of_birth,
-    :hired_at, :application_agreement_agreed, :application_agreement_agreed_on,
+    :hired_at, :agree_to_terms, :agree_to_terms_date,
     :needs_special_hours, :needs_special_hours_detail, :available_at,
     :has_reliable_vehicle, :can_travel_long_term, :been_convicted,
     :been_convicted_detail, :ever_failed_drug_test, :legal_us_worker,
