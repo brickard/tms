@@ -9,7 +9,7 @@
     %tr
       %td= user.email
       %td= user.full_name
-      %td= link_to 'Show', user_path(user, :scope => @scope)
-      %td= link_to 'Edit', edit_user_path(user, :scope => @scope )
-      %td= link_to 'Delete', user_path(user, :scope => @scope), :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Show', manager_path(user)
+      %td= link_to 'Edit', edit_manager_path(user)
+      %td= link_to 'Delete', manager_path(user), :confirm => 'Are you sure?', :method => :delete
 %br/

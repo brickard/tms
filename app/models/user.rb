@@ -169,4 +169,10 @@ class User < ActiveRecord::Base
     self.role = 'applicant'
   end
 
+  def hire!
+    self.role = 'employee'
+    self.hired_at = Date.today
+    self.save!
+  end
+
 end

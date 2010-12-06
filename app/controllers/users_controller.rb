@@ -3,6 +3,17 @@ class UsersController < ApplicationController
   before_filter :authenticate_user_with_scope!, :only => [ :new, :create, :edit, :update ]
   before_filter :setup_scope, :setup_search
 
+  def hire
+    @user = User.find(params[ :applicant_id ])
+    @user.hire!
+    redirect_to(employees_path, :notice => "#{@user.full_name} has been hired!")
+  end
+
+  def print
+    @user = User.find(params[:applicant_id]) rescue User.find(params[:employee_id])
+    render :partial => "#{@scope_name.singularize}_show", :layout => false
+  end
+
   def index
     @users = @search.all.uniq
 

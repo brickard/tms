@@ -4,7 +4,7 @@
   .section_heading
     = "Editing #{@user.full_name}"
     .section_heading_menu
-      = link_to 'Show', user_path(@user, :scope => @scope)
-      = link_to 'Back', users_path(:scope => @scope)
+      = link_to 'Show', eval("#{@scope_name.singularize}_path(@user)")
+      = link_to 'Back', eval("#{@scope_name}_path")
 .sub_content
   = render :partial => "#{@scope_name.singularize}_form"

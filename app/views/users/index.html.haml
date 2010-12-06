@@ -1,10 +1,10 @@
 .section_heading
   = pluralize(@users.count, @scope_title)
   .section_heading_menu
-    = link_to "Reset Search", users_path(:scope => @scope)
+    = link_to "Reset Search", eval("#{@scope_name}_path")
     = link_to "Hide Search", 'JavaScript:void()', :id => 'hide_search_link'
     = link_to "Search", 'JavaScript:void()', :id => 'show_search_link'
-    = link_to "New #{@scope_title.singularize}", new_user_path(:scope => @scope)
+    = link_to "New #{@scope_title.singularize}", eval("new_#{@scope_name.singularize}_path")
 = render :partial => "#{@scope_name}_search_form"
 = render :partial => "#{@scope_name}_table"
 

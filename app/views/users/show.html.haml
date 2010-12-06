@@ -3,6 +3,6 @@
 .section_heading
   = "Showing #{@user.full_name}"
   .section_heading_menu
-    = link_to 'Edit', edit_user_path(@user, :scope => @scope)
-    = link_to 'Back', users_path(:scope => @scope)
+    = link_to 'Edit', eval("edit_#{@scope_name.singularize}_path(@user)")
+    = link_to 'Back', eval("#{@scope_name}_path")
 = render :partial => "#{@scope_name.singularize}_show"

@@ -4,6 +4,6 @@
   .section_heading
     = "New #{@scope_title.singularize}"
     .section_heading_menu
-      = link_to 'Back', users_path(:scope => @scope)
+      = link_to 'Back', eval("#{@scope_name}_path")
 .sub_content
   = render :partial => "#{@scope_name.singularize}_form"

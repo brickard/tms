@@ -5,11 +5,15 @@
     %th
     %th
     %th
+    %th
+    %th
   - @users.each do |user|
     %tr
       %td= user.email
       %td= user.full_name
-      %td= link_to 'Show', user_path(user, :scope => @scope)
-      %td= link_to 'Edit', edit_user_path(user, :scope => @scope )
-      %td= link_to 'Delete', user_path(user, :scope => @scope), :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Show', applicant_path(user)
+      %td= link_to 'Print', applicant_print_path(user), :target => '_new'
+      %td= link_to 'Hire', applicant_hire_path(user)
+      %td= link_to 'Edit', edit_applicant_path(user)
+      %td= link_to 'Delete', applicant_path(user), :confirm => 'Are you sure?', :method => :delete
 %br/

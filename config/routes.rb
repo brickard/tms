@@ -15,8 +15,13 @@ Storeresetter::Application.routes.draw do
 
   resources :admins,     :controller => :users, :scope => 'admins'
   resources :managers,   :controller => :users, :scope => 'managers'
-  resources :employees,  :controller => :users, :scope => 'employees'
-  resources :applicants, :controller => :users, :scope => 'applicants'
+  resources :employees,  :controller => :users, :scope => 'employees' do
+    get 'print'
+  end
+  resources :applicants, :controller => :users, :scope => 'applicants' do
+    get 'hire'
+    get 'print'
+  end
 
   devise_for :users, :path => 'accounts'
 
