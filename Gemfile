@@ -35,6 +35,9 @@ gem 'meta_search'
 gem 'state_machine'
 gem 'ruby-graphviz', :require => 'graphviz'
 
+# pdf generation
+gem 'prawn_rails'
+
 group :development, :test do
   gem 'mongrel'
   gem 'capybara'
@@ -48,10 +51,10 @@ group :development, :test do
   gem 'launchy'
   gem 'capybara-envjs'
   gem 'factory_girl'
-  gem 'autotest'
+  gem 'autotest-standalone'
   gem 'annotate-models'
   gem 'rb-inotify'
-  gem 'faker'
+  gem 'ffaker'
 end
 
 group :console do
