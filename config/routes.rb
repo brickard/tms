@@ -30,5 +30,6 @@ Storeresetter::Application.routes.draw do
 
   devise_for :users, :path => 'accounts'
 
-  root :controller => :users, :action => :index, :scope => 'applicants'
+  #root :controller => :users, :action => :index, :scope => 'applicants'
+  root :to => redirect( '/users?scope=applicants' )
 end
