@@ -1,13 +1,13 @@
 # == Schema Information
-# Schema version: 20101120152124
+# Schema version: 20101105184758
 #
-# Table name: employee_skills
+# Table name: user_skills
 #
-#  id          :integer         not null, primary key
-#  employee_id :integer
-#  skill_id    :integer
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id         :integer         not null, primary key
+#  user_id    :integer
+#  skill_id   :integer
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 class UserSkill < ActiveRecord::Base

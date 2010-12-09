@@ -1,30 +1,67 @@
 # == Schema Information
-# Schema version: 20101120152124
+# Schema version: 20101105184758
 #
 # Table name: users
 #
-#  id                   :integer         not null, primary key
-#  email                :string(255)     default(""), not null
-#  encrypted_password   :string(128)     default(""), not null
-#  password_salt        :string(255)     default(""), not null
-#  reset_password_token :string(255)
-#  remember_token       :string(255)
-#  remember_created_at  :datetime
-#  sign_in_count        :integer         default(0)
-#  current_sign_in_at   :datetime
-#  last_sign_in_at      :datetime
-#  current_sign_in_ip   :string(255)
-#  last_sign_in_ip      :string(255)
-#  confirmation_token   :string(255)
-#  confirmed_at         :datetime
-#  confirmation_sent_at :datetime
-#  failed_attempts      :integer         default(0)
-#  unlock_token         :string(255)
-#  locked_at            :datetime
-#  created_at           :datetime
-#  updated_at           :datetime
-#  person_id            :integer
-#  admin                :boolean
+#  id                                    :integer         not null, primary key
+#  email                                 :string(255)     default(""), not null
+#  encrypted_password                    :string(128)     default(""), not null
+#  password_salt                         :string(255)     default(""), not null
+#  reset_password_token                  :string(255)
+#  remember_token                        :string(255)
+#  remember_created_at                   :datetime
+#  sign_in_count                         :integer         default(0)
+#  current_sign_in_at                    :datetime
+#  last_sign_in_at                       :datetime
+#  current_sign_in_ip                    :string(255)
+#  last_sign_in_ip                       :string(255)
+#  failed_attempts                       :integer         default(0)
+#  unlock_token                          :string(255)
+#  locked_at                             :datetime
+#  role                                  :string(255)
+#  form_step                             :string(255)     default("step0")
+#  last_name                             :string(255)
+#  first_name                            :string(255)
+#  middle_name                           :string(255)
+#  address1                              :string(255)
+#  address2                              :string(255)
+#  city                                  :string(255)
+#  state                                 :string(255)
+#  zipcode                               :string(255)
+#  home_phone                            :string(255)
+#  mobile_phone                          :string(255)
+#  other_phone                           :string(255)
+#  ssn                                   :string(255)
+#  date_of_birth                         :string(255)
+#  hired_at                              :date
+#  needs_special_hours                   :boolean
+#  needs_special_hours_detail            :text
+#  available_at                          :date
+#  has_reliable_vehicle                  :boolean
+#  can_travel_long_term                  :boolean
+#  been_convicted                        :boolean
+#  been_convicted_detail                 :text
+#  ever_failed_drug_test                 :boolean
+#  legal_us_worker                       :boolean
+#  applied_before                        :boolean
+#  applied_before_detail                 :text
+#  drivers_license_valid                 :boolean
+#  drivers_license_state                 :string(255)
+#  drivers_license_number                :string(255)
+#  drivers_license_expiration            :date
+#  drivers_license_ever_suspended        :boolean
+#  drivers_license_ever_suspended_detail :text
+#  agree_to_terms                        :boolean
+#  agree_to_terms_date                   :date
+#  emergency_contact_name                :string(255)
+#  emergency_contact_phone               :string(255)
+#  shirt_size                            :string(255)
+#  shirt_count                           :integer
+#  hat_size                              :string(255)
+#  hat_count                             :integer
+#  shift_id                              :integer
+#  created_at                            :datetime
+#  updated_at                            :datetime
 #
 
 class DetailsValidator < ActiveModel::EachValidator

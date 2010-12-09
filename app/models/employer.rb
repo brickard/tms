@@ -1,10 +1,10 @@
 # == Schema Information
-# Schema version: 20101120152124
+# Schema version: 20101105184758
 #
 # Table name: employers
 #
 #  id                 :integer         not null, primary key
-#  employee_id        :integer
+#  user_id            :integer
 #  company_name       :string(255)
 #  start_date         :date
 #  end_date           :date

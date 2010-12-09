@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101120152124
+# Schema version: 20101105184758
 #
 # Table name: skills
 #

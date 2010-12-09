@@ -1,16 +1,16 @@
 # == Schema Information
-# Schema version: 20101120152124
+# Schema version: 20101105184758
 #
 # Table name: references
 #
 #  id                :integer         not null, primary key
-#  employee_id       :integer
+#  user_id           :integer
 #  name              :string(255)
 #  contact_info      :string(255)
 #  relationship      :string(255)
+#  type_of_reference :string(255)
 #  created_at        :datetime
 #  updated_at        :datetime
-#  type_of_reference :string(255)
 #
 
 class Reference < ActiveRecord::Base

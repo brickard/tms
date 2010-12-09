@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20101120152124
+# Schema version: 20101105184758
 #
 # Table name: stores
 #
@@ -7,6 +7,7 @@
 #  client_id  :integer
 #  region_id  :integer
 #  manager_id :integer
+#  number     :integer
 #  active     :boolean
 #  name       :string(255)
 #  address1   :string(255)
@@ -16,7 +17,6 @@
 #  zipcode    :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#  number     :integer
 #
 
 class Store < ActiveRecord::Base
