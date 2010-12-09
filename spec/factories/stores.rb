@@ -15,6 +15,7 @@ Factory.define :store do |f|
   f.address1 { Factory.next(:address1) }
   f.address2 { Factory.next(:address2) }
   f.city { Faker::Address.city }
+  f.state { Faker::Address.us_state_abbr }
   f.zipcode { Faker::Address.zip_code }
 end
 

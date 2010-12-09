@@ -11,9 +11,9 @@ Factory.define :user do |f|
   f.state { Faker::Address.us_state_abbr }
   f.zipcode { Faker::Address.zip_code }
   f.ssn { Factory.next(:ssn) }
-  f.home_phone { Faker::PhoneNumber.short_phone_number }
-  f.mobile_phone { Faker::PhoneNumber.short_phone_number }
-  f.other_phone { Faker::PhoneNumber.short_phone_number }
+  f.home_phone { Faker::PhoneNumber.phone_number }
+  f.mobile_phone { Faker::PhoneNumber.phone_number }
+  f.other_phone { Faker::PhoneNumber.phone_number }
   f.hired_at nil
   f.date_of_birth { Factory.next(:birth_date) }
   f.needs_special_hours { Factory.next(:boolean) }
@@ -36,7 +36,7 @@ Factory.define :user do |f|
   f.agree_to_terms { Factory.next(:boolean) }
   f.agree_to_terms_date { Factory.next(:future_date) }
   f.emergency_contact_name { Faker::Name.name }
-  f.emergency_contact_phone { Faker::PhoneNumber.short_phone_number }
+  f.emergency_contact_phone { Faker::PhoneNumber.phone_number }
   f.shirt_size { random_from(User::SHIRT_SIZES) } 
   f.shirt_count { random_from(User::SHIRT_COUNT) }
   f.hat_size { random_from(User::HAT_SIZES) }

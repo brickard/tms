@@ -13,7 +13,7 @@
     %tr
       %td= region.client.name
       %td= region.name
-      /%td= link_to 'Show', region
-      /%td= link_to 'Edit', edit_region_path(region)
+      %td= link_to 'Show', region
+      %td= link_to 'Edit', edit_region_path(region)
       %td= link_to 'Delete', region, :confirm => 'Are you sure?', :method => :delete
 %br/
