@@ -8,7 +8,6 @@
       %p{ :class => 'field' }
         = f.label :employee_id, 'Employee'
         = f.collection_select :employee_id, User.idle_employees, :id, :full_name, :include_blank => true
-      %p{ :class => 'field button' }
         = content_tag :button, 'Add To Shift', :type => :submit
 
 = content_for(:footer) do
