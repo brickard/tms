@@ -29,6 +29,11 @@ class Store < ActiveRecord::Base
   validates :region, :presence => true
   validates :manager_id, :presence => true
 
+  scope :default_order, lambda { 
+    order('clients.name ASC, regions.name ASC, stores.city ASC').
+    joins(:client).joins(:region)
+  }
+
   def name_and_number
     return self.name unless self.number
     "#{self.name} #{self.number}"

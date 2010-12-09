@@ -3,7 +3,7 @@ class StoresController < ApplicationController
   # GET /stores
   # GET /stores.xml
   def index
-    @stores = Store.all
+    @stores = Store.default_order
 
     respond_to do |format|
       format.html # index.html.erb
