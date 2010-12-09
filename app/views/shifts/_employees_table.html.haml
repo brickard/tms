@@ -1,6 +1,6 @@
 #employees_table_wrapper
   .section_heading
-    = "#{pluralize(@employees.count, 'Employee')} on Shift"
+    = pluralize(@employees.count, 'Employee')
   %table{ :class => 'section_content data_table' }
     %tr
       %th Name

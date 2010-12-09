@@ -27,13 +27,13 @@ class ShiftsController < ApplicationController
   # GET /shifts
   # GET /shifts.xml
   def index
-    @searching = !params[:shifts_search].blank?
-    @shifts_search = Shift.search(params[:shifts_search])
-    @shifts = @shifts_search.all.uniq
-    @employees_search = @shifts.count == 1 ?
-      User.employees.on_shift(@shifts.first).search(params[:employees_search]) :
-      User.employees.search(params[:employees_search])
-    @employees = @employees_search.all.uniq
+    @searching = !params[:search].blank?
+    @search = Shift.search(params[:search])
+    message = params[:search] ? "Searching with params: #{params[:search]}" :
+                                "Not Searching, no params given"
+    Rails.logger.info(message)
+    @shifts = @search.all.uniq
+    @employees = User.employees.on_shift(@shifts.first) if @shifts.count == 1
 
     respond_to do |format|
       format.html # index.html.erb

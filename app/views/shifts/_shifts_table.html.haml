@@ -11,8 +11,11 @@
         %tr
           %td= shift.name
           %td= shift.project.display_name rescue 'No Project Found'
-          %td= link_to 'Show', shift_path(shift)
-          %td= link_to 'Edit', edit_shift_path(shift)
-          %td= link_to 'Delete', shift_path(shift), :confirm => 'Are you sure?', :method => :delete
+          / only show the controls when multiple shifts are selected
+          - unless @shifts.count == 1
+            %td= link_to 'Select', shifts_path(:search => { :id_equals => shift.id })
+            %td= link_to 'Show', shift_path(shift)
+            %td= link_to 'Edit', edit_shift_path(shift)
+            %td= link_to 'Delete', shift_path(shift), :confirm => 'Are you sure?', :method => :delete
     %br/
   = render :partial => "employees_table" if @shifts.count == 1
