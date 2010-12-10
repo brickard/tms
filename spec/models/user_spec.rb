@@ -104,7 +104,7 @@ describe User do
       %w{ address1 city state zipcode home_phone date_of_birth
           needs_special_hours available_at has_reliable_vehicle 
           can_travel_long_term been_convicted ever_failed_drug_test
-          applied_before drivers_license_valid agree_to_terms 
+          applied_before drivers_license_valid
           emergency_contact_name emergency_contact_phone
           legal_us_worker
            }.each do |attr|
@@ -127,6 +127,27 @@ describe User do
         end
 
       end
+    end
+
+    context "step6" do
+
+      before(:each) do
+        6.times { @user.increment_step }
+      end
+
+      it "should be on step6" do
+        @user.form_step.should == 'step6'
+      end
+
+      %w{ agree_to_terms agree_to_terms_date }.each do |attr|
+
+        it "should not be valid without #{attr}" do
+          @user.send("#{attr}=", nil)
+          @user.should_not be_valid
+        end
+
+      end
+
     end
   end
 end
