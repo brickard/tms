@@ -6,7 +6,7 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 # load factory_girl
-require 'faker'
+require 'ffaker'
 require 'factory_girl'
 Dir[Rails.root.join("spec/factories/**/*.rb"), 
     Rails.root.join("spec/factories.rb")].each {|f| require f}
@@ -33,6 +33,11 @@ end
     u.skills << @skills[rand(@skills.size)]
   end
   u.skills << @skills[rand(@skills.size)] unless u.skills.count >= 1
+  u.save!
+  (1..3).each do |i|
+    u.references << Reference.create!(Factory.attributes_for(:reference, :user => u))
+    u.employers  << Employer.create!(Factory.attributes_for(:employer, :user => u))
+  end
   u.save!
   puts "Created applicant: #{u.email} with skills: #{u.skills.map{ |s| s.name }.join(', ')}"
 end

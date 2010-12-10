@@ -20,7 +20,7 @@ def random_date(future=true, years=1)
   year = eval("Time.now.year #{operand} rand(years) #{operand} 1")
   month = rand(12) + 1
   day = rand(31) + 1
-  Time.local(year, month, day)
+  Time.local(year, month, day).to_date
 end
 
 Factory.sequence(:name) { Faker::Company.name }
@@ -30,7 +30,7 @@ Factory.sequence(:last_name) { Faker::Name.last_name }
 Factory.sequence(:middle_name) { Faker::Name.first_name }
 Factory.sequence(:address1) { Faker::Address.street_address }
 Factory.sequence(:address2) { Faker::Address.secondary_address }
-Factory.sequence(:state) { Carmen::US_STATES[rand(Carmen::US_STATES.size)][0] }
+Factory.sequence(:state) { Carmen::US_STATES[rand(Carmen::US_STATES.size)][1] }
 Factory.sequence(:phone) { Faker::PhoneNumber.phone_number }
 Factory.sequence(:boolean) { [ true, false ][rand(2)] }
 Factory.sequence(:drivers_license_number) { "#{random_numbers(4)}-#{random_numbers(5)}-#{random_numbers(3)}" }
@@ -40,3 +40,4 @@ Factory.sequence(:past_date) { random_date(false) }
 Factory.sequence(:birth_date) { random_date(false, 60) }
 Factory.sequence(:project_name) { "Project #{random_numbers(6)}" }
 Factory.sequence(:store_name) { "Store #{random_numbers(6)}" }
+

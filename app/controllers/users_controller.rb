@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def print
     @user = User.find(params[:applicant_id]) rescue User.find(params[:employee_id])
-    render :partial => "#{@scope_name.singularize}_show", :layout => false
+    render :partial => "#{@scope_name.singularize}_show"
   end
 
   def index
