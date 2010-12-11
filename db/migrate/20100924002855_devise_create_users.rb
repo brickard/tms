@@ -45,9 +45,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string  :emergency_contact_name 
       t.string  :emergency_contact_phone
       t.string :shirt_size
-      t.integer :shirt_count
-      t.string :hat_size
-      t.integer :hat_count
       t.integer :shift_id
 
       t.timestamps

@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
     :drivers_license_expiration, :drivers_license_ever_suspended,
     :drivers_license_ever_suspended_detail,
     :emergency_contact_name, :emergency_contact_phone,
-    :shirt_size, :shirt_count, :hat_size, :hat_count, :shift_id
+    :shirt_size, :shift_id
   
   # virtual attributes
   attr_accessible :email_confirmation, :remember_me, :password, 
@@ -133,13 +133,11 @@ class User < ActiveRecord::Base
 
     event :increment_step do
       transition :step0 => :step1, :step1 => :step2, :step2 => :step3, 
-        :step3 => :step4, :step4 => :step5, :step5 => :step6,
-        :step6 => :step7
+        :step3 => :step4, :step4 => :step5, :step5 => :step6
     end
     event :decrement_step do
-      transition :step7 => :step6, :step6 => :step5, :step5 => :step4, 
-        :step4 => :step3, :step3 => :step2, :step2 => :step1,
-        :step1 => :step0
+      transition :step6 => :step5, :step5 => :step4, :step4 => :step3, 
+        :step3 => :step2, :step2 => :step1, :step1 => :step0
     end
 
     state :step1 do
@@ -149,7 +147,7 @@ class User < ActiveRecord::Base
 
     state :step2 do
       validates :address1, :city, :zipcode, :home_phone, :date_of_birth, :state,
-        :presence => true
+        :shirt_size, :presence => true
       validates_presence_of :available_at, :emergency_contact_name, 
         :emergency_contact_phone
       validates_inclusion_of :needs_special_hours, :has_reliable_vehicle, 
@@ -161,10 +159,6 @@ class User < ActiveRecord::Base
     end
 
     state :step5 do
-      validates :hat_count, :hat_size, :shirt_count, :shirt_size, :presence => true
-    end
-
-    state :step6 do
       validates :agree_to_terms, :agree_to_terms_date, :presence => true
       validates :agree_to_terms, :inclusion => { :in => [ true ] }
     end
@@ -179,11 +173,13 @@ class User < ActiveRecord::Base
   end
 
   def display_phones
-    %w{ email home_phone mobile_phone other_phone }.inject([]) do |a, p|
-      value = self.send(p.to_sym)
-      next if value.blank?
-      a << "#{p.first.upcase}: #{value}"
-    end.join(" | ")
+    @display_phones ||= %w{ email home_phone mobile_phone other_phone }.inject([]) do  |result, element|
+      value = self.send(element.to_sym)
+      next unless value
+      result << "#{element.first.upcase}: #{value}"
+      result
+    end
+    @display_phones.join(" | ")
   end
 
   def form_step_to_i
@@ -224,3 +220,5 @@ class User < ActiveRecord::Base
   end
 
 end
+
+

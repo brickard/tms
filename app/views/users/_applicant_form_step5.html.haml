@@ -1,28 +1,17 @@
 = content_for(:footer) do
   = javascript_include_tag 'datepicker'
 
-= content_for(:content_nav) do
-  %p ALL new employees must purchase shirts! Buy 4 get 1 free for new employees ONLY! Each shirt is $12.95
-  %p If you wear a ball cap, it MUST be issued by the company! 1 FREE each year. |
-  Additional fitted hats can be purchased for $12.95 each.
+= render :partial => 'shared/agreement_copy'
 
 = form_for @user, :url => user_path(@user, :scope => @scope), :html => { :class => 'bp', :method => :put } do |f|
   %p{ :class => 'field short required' }
-    = f.select :shirt_count, [ '' ] + (1..10).to_a
-    = f.label :shirt_count, 'How many Shirts?'
+    = f.text_field :agree_to_terms_date, :class => 'today', :value => DateTime.now.strftime("%Y-%m-%d")
+    = f.label :agree_to_terms_date, 'Todays Date'
     *
   %p{ :class => 'field short required' }
-    = f.select :shirt_size, [ '' ] + %w{ S M L XL XXL XXXL XXXXL }
-    = f.label :shirt_size, 'Shirt Size'
+    = f.label :agree_to_terms, 'I Agree'
     *
-  %p{ :class => 'field short required' }
-    = f.select :hat_count, [ '' ] + (1..10).to_a
-    = f.label :hat_count, 'How many Hats?'
-    *
-  %p{ :class => 'field short required' }
-    = f.select :hat_size, [ '' ] + %w{ S M L }
-    = f.label :hat_size, 'Hat Size'
-    *
+    = f.check_box :agree_to_terms, :value => false
   = f.hidden_field :form_step, :value => @user.form_step
   %p{ :class => 'field button' }
     = content_tag :button, 'Next', :type => :submit

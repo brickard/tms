@@ -12,6 +12,10 @@
     = f.text_field :emergency_contact_phone
     = f.label :emergency_contact_phone, 'Emergency Contact Phone'
     *
+  %p{ :class => 'field short required' }
+    = f.select :shirt_size, [ '' ] + %w{ S M L XL XXL XXXL XXXXL }
+    = f.label :shirt_size, 'Shirt Size'
+    *
   %p{ :class => 'field short' }
     = f.select :needs_special_hours, [ [ '', nil ], [ 'Yes', 't' ], [ 'No', 'f' ] ]
     = f.label :needs_special_hours, 'Are there any days, shifts, hours you will not work?'

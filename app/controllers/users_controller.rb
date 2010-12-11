@@ -142,8 +142,6 @@ class UsersController < ApplicationController
         :message => 'Please complete the form to tell us about your past jobs.' },
       { :heading => 'Employment References', 
         :message => 'Please complete the form to tell us about your references.' },
-      { :heading => 'Employment Uniform Order', 
-        :message => 'Please complete the form to tell us about your uniform preferences.' },
       { :heading => 'Employment Application Agreement', 
         :message => 'Please complete agree to the terms and enter todays date.' },
       { :heading => 'Employment Application Complete', 
@@ -153,7 +151,7 @@ class UsersController < ApplicationController
   end
 
   def total_steps
-    @total_steps = 7
+    @total_steps = 6
   end
 
   def set_progress_value

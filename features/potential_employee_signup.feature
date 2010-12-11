@@ -7,7 +7,7 @@ Feature: Sign up new potential employees from kiosk form
   Scenario: Potential Employee completes the Employment Application Step 1
     Given I am on the new applicant page
     Then I should see "Employment Application"
-      And I should see "You are currently on step 1 of 7"
+      And I should see "You are currently on step 1 of 6"
       And I should see "Please complete the form to tell us about yourself."
     When I fill in "Last name" with "Employee"
       And I fill in "First name" with "Joe"
@@ -30,7 +30,7 @@ Feature: Sign up new potential employees from kiosk form
     Given the default skills exist
       And I complete step 1 of the employment application
       And I should see "Employment Criteria"
-      And I should see "You are currently on step 2 of 7"
+      And I should see "You are currently on step 2 of 6"
     When I select "Management" from "skills"
       And I select "Merchandiser" from "skills"
       And I select "Carpenter" from "skills"
@@ -54,6 +54,7 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "user[drivers_license_ever_suspended_detail]" with "Unpaid tickets"
       And I fill in "Emergency Contact" with "Some Family Member"
       And I fill in "Emergency Contact Phone" with "2055551212"
+      And I select "XL" from "Shirt Size"
       And I press "Next"
     Then I should see "Employment History"
       And a applicant_user: "joe_user" should exist with email: "joe@employees.com", drivers_license_state: "AL"
@@ -61,7 +62,7 @@ Feature: Sign up new potential employees from kiosk form
   Scenario: Potential employee completes Employment Application Step 3
     Given I complete step 2 of the employment application
       And I should see "Employment History"
-      And I should see "You are currently on step 3 of 7"
+      And I should see "You are currently on step 3 of 6"
       And I should see "You need to add at least 2 more Employers"
     When I fill in "Company name" with "Some Job 1"
       And I fill in "Start date" with "10/10/2000"
@@ -73,7 +74,7 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "End $" with "$100 an hour"
       And I fill in "Reason for leaving" with "Laid off"
       And I press "Add"
-    Then I should see "You are currently on step 3 of 7"
+    Then I should see "You are currently on step 3 of 6"
       And I should see "You need to add at least 1 more Employer"
       And I should see "Some Job 1"
       And a employer should exist with user: applicant_user "joe_user"
@@ -87,7 +88,7 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "End $" with "$100 an hour"
       And I fill in "Reason for leaving" with "Laid off"
       And I press "Add"
-    Then I should see "You are currently on step 3 of 7"
+    Then I should see "You are currently on step 3 of 6"
       And I should see "Some Job 1"
       And I should see "Some Job 2"
       And I should not see "You need to add at least"
@@ -99,7 +100,7 @@ Feature: Sign up new potential employees from kiosk form
     Given I complete step 3 of the employment application
       And I should see "Employment References"
       And I should see "You need to add at least 3 more References"
-      And I should see "You are currently on step 4 of 7"
+      And I should see "You are currently on step 4 of 6"
     When I fill in "Name" with "Reference 1"
       And I fill in "Phone number/Email" with "2059991199"
       And I fill in "Relationship" with "Friend"
@@ -131,30 +132,12 @@ Feature: Sign up new potential employees from kiosk form
       And I should see "Reference 3"
       And 3 references should exist with user: applicant_user "joe_user"
     When I press "Next"
-    Then I should see "ALL new employees must purchase shirts!"
+    Then I should see "Employment Application Agreement"
   
   Scenario: Potential employee completes Employment Application Step 5
     Given I complete step 4 of the employment application
-      And I should see "Employment Uniform Order"
-      And I should see "You are currently on step 5 of 7"
-      And I should see "ALL new employees must purchase shirts!"
-      And I should see "Buy 4 get 1 free for new employees ONLY!"
-      And I should see "Each shirt is $12.95"
-      And I should see "If you wear a ball cap, it MUST be issued by the company!"
-      And I should see "1 FREE each year"
-      And I should see "Additional fitted hats can be purchased for $12.95 each"
-    When I select "XL" from "Shirt Size"
-      And I select "5" from "How many Shirts"
-      And I select "L" from "Hat Size"
-      And I select "2" from "How many Hats"
-      And I press "Next"
-    Then I should see "Employment Application Agreement"
-      And a applicant_user should exist with email: "joe@employees.com", hat_size: "L", hat_count: "2"
-
-  Scenario: Potential employee completes Employment Application Step 6
-    Given I complete step 5 of the employment application
       And I should see "Employment Application Agreement"
-      And I should see "You are currently on step 6 of 7"
+      And I should see "You are currently on step 5 of 6"
       And I should see "I certify that the facts contained are true."
     When I check "I Agree"
       And I fill in "Todays Date" with "10/10/2010"
