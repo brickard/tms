@@ -4,9 +4,11 @@
       %tr
         %th Name
         %th Project
-        %th
-        %th
-        %th
+        - unless @shifts.count == 1
+          %th
+          %th
+          %th
+          %th
       - @shifts.each do |shift|
         %tr
           %td= shift.name

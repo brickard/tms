@@ -18,8 +18,12 @@ Storeresetter::Application.routes.draw do
 
   resources :users
 
-  resources :admins,     :controller => :users, :scope => 'admins'
-  resources :managers,   :controller => :users, :scope => 'managers'
+  resources :admins,     :controller => :users, :scope => 'admins' do
+    get 'print'
+  end
+  resources :managers,   :controller => :users, :scope => 'managers' do
+    get 'print'
+  end
   resources :employees,  :controller => :users, :scope => 'employees' do
     get 'print'
   end

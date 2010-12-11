@@ -5,11 +5,13 @@
     %th
     %th
     %th
+    %th
   - @users.each do |user|
     %tr
       %td= user.email
       %td= user.full_name
       %td= link_to 'Show', manager_path(user)
+      %td= link_to 'Print', manager_print_path(user, :format => :pdf)
       %td= link_to 'Edit', edit_manager_path(user)
       %td= link_to 'Delete', manager_path(user), :confirm => 'Are you sure?', :method => :delete
 %br/
