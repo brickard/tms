@@ -98,6 +98,36 @@ form.bp textarea + label {
   position: relative;
 }
 
+form.bp {
+  p.field {
+    div.ui-multiselect-menu {
+      div {
+        ul {
+          li {
+            width: 80px;
+          }
+        }
+      }
+      ul {
+        overflow-x: hidden;
+        overflow-y: auto;
+        li {
+          margin-left: -16px;
+          width: 148px;
+          list-style: none;
+          label {
+            width: 142px;
+            input {
+              width: 20px;
+              float: right;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 input:hover, textarea:hover,
 input:focus, textarea:focus {
   border-color: #C9C9C9;
