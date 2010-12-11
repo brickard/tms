@@ -94,7 +94,7 @@ describe User do
     context "step2" do
 
       before(:each) do
-        2.times { @user.increment_step }
+        @user.form_step = 'step2'
       end
 
       it "should be on step2" do
@@ -104,7 +104,7 @@ describe User do
       %w{ address1 city state zipcode home_phone date_of_birth
           needs_special_hours available_at has_reliable_vehicle 
           can_travel_long_term been_convicted ever_failed_drug_test
-          applied_before drivers_license_valid
+          applied_before drivers_license_valid shirt_size
           emergency_contact_name emergency_contact_phone
           legal_us_worker
            }.each do |attr|
@@ -129,14 +129,14 @@ describe User do
       end
     end
 
-    context "step6" do
+    context "step5" do
 
       before(:each) do
-        6.times { @user.increment_step }
+        @user.form_step = 'step5'
       end
 
-      it "should be on step6" do
-        @user.form_step.should == 'step6'
+      it "should be on step5" do
+        @user.form_step.should == 'step5'
       end
 
       %w{ agree_to_terms agree_to_terms_date }.each do |attr|

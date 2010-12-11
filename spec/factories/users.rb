@@ -38,9 +38,6 @@ Factory.define :user do |f|
   f.emergency_contact_name { Faker::Name.name }
   f.emergency_contact_phone { Faker::PhoneNumber.phone_number }
   f.shirt_size { random_from(User::SHIRT_SIZES) } 
-  f.shirt_count { random_from(User::SHIRT_COUNT) }
-  f.hat_size { random_from(User::HAT_SIZES) }
-  f.hat_count { random_from(User::HAT_COUNT) }
 end
 
 Factory.define :admin_user, :parent => :user do |f|

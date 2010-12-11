@@ -76,10 +76,7 @@ require 'lib/model_behaviors/roles'
 
 class User < ActiveRecord::Base
   include ::ModelBehaviors::RolesBehavior
-  HAT_SIZES   = %{ S M L }
   SHIRT_SIZES = %{ S M L XL XXL XXXL XXXXL }
-  HAT_COUNT   = (1..10).to_a
-  SHIRT_COUNT = (1..10).to_a
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable, :timeoutable
