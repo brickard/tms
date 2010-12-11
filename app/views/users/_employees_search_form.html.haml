@@ -1,0 +1,26 @@
+#search_div
+  = form_for(:search, :url => users_path(:scope => @scope), :html => { :class => 'bp', :method => :get }) do |f|
+    %p{ :class => 'field' }
+      %br/
+      = f.collection_select :skills_id_equals_all, Skill.all, :id, :name, {}, { :multiple => true, :id => :skills_select } 
+    %p{ :class => 'field' }
+      = f.text_field :first_name_matches
+      = f.label :first_name_matches, 'First Name'
+    %p{ :class => 'field' }
+      = f.text_field :last_name_matches
+      = f.label :last_name_matches, 'Last Name'
+    %p{ :class => 'field' }
+      = f.label :has_reliable_vehicle_equals, 'Has Reliable Vehicle?'
+      = f.select :has_reliable_vehicle_equals, options_for_select( [ [ '', nil ], [ 'Yes', true ] ] )
+    = hidden_field_tag :scope, @scope
+    %p{ :class => 'field button' }
+      = content_tag :button, 'Search', :type => :submit
+
+= content_for(:footer) do
+  = javascript_include_tag 'jquery.multiselect.min.js'
+  :javascript
+    $(document).ready(function(){
+      $("#skills_select").multiselect({
+        header: "Select Skills"
+      });
+    });
