@@ -1,6 +1,8 @@
 #employees_table_wrapper
   .section_heading
     = pluralize(@employees.count, 'Employee')
+    .section_heading_menu
+      = link_to "Print List", shifts_print_path(:search => { :id_in => @search.select(:id).all.uniq }, :format => :pdf)
   %table{ :class => 'section_content data_table' }
     %tr
       %th Name

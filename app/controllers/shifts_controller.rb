@@ -1,6 +1,10 @@
 class ShiftsController < ApplicationController
   before_filter :authenticate_user!
 
+  def print
+    @shifts = Shift.search(params[:search]).all.uniq
+  end
+
   def remove
     @user = User.find(params[:employee_id])
     @user.shift = nil
@@ -29,9 +33,6 @@ class ShiftsController < ApplicationController
   def index
     @searching = !params[:search].blank?
     @search = Shift.search(params[:search])
-    message = params[:search] ? "Searching with params: #{params[:search]}" :
-                                "Not Searching, no params given"
-    Rails.logger.info(message)
     @shifts = @search.all.uniq
     @employees = User.employees.on_shift(@shifts.first) if @shifts.count == 1
 

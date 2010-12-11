@@ -1,6 +1,8 @@
 Storeresetter::Application.routes.draw do
   resources :skills
 
+  match '/shifts/print.pdf', :controller => :shifts, :action => :print, 
+    :format => :pdf, :as => :shifts_print
   resources :shifts do
     get 'add'
     resources :employees, :controller => :shifts do

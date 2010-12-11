@@ -178,6 +178,14 @@ class User < ActiveRecord::Base
     "#{city.capitalize}, #{state.capitalize} #{zipcode}" rescue "Unknown"
   end
 
+  def display_phones
+    %w{ email home_phone mobile_phone other_phone }.inject([]) do |a, p|
+      value = self.send(p.to_sym)
+      next if value.blank?
+      a << "#{p.first.upcase}: #{value}"
+    end.join(" | ")
+  end
+
   def form_step_to_i
     self.form_step.to_s.last.to_i
   end
