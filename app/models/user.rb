@@ -159,6 +159,7 @@ class User < ActiveRecord::Base
       validates :agree_to_terms, :agree_to_terms_date, :presence => true
       validates :agree_to_terms, :inclusion => { :in => [ true ] }
     end
+
   end
 
   def full_name

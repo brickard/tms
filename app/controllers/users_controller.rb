@@ -51,7 +51,13 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     if @user.applicant?
-      @user.increment_form_step unless params[:save]
+      unless params[:save]
+        @user.increment_form_step
+        if @user.form_step == 'step6'
+          @user.save!
+          UserMailer.application_notification(@user).deliver
+        end
+      end
       setup_progress
     end
   end

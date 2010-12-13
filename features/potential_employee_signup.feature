@@ -24,7 +24,7 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "Email confirmation" with "joe@employees.com"
       And I press "Next"
     Then I should see "Employment Criteria"
-      And a applicant_user: "joe_user" should exist with email: "joe@employees.com"
+      And user should exist with email: "joe@employees.com", form_step: "step1"
 
   Scenario: Potential employee completes Employment Application Step 2
     Given the default skills exist
@@ -57,7 +57,7 @@ Feature: Sign up new potential employees from kiosk form
       And I select "XL" from "Shirt Size"
       And I press "Next"
     Then I should see "Employment History"
-      And a applicant_user: "joe_user" should exist with email: "joe@employees.com", drivers_license_state: "AL"
+      And user should exist with email: "joe@employees.com", drivers_license_state: "AL", form_step: "step2"
 
   Scenario: Potential employee completes Employment Application Step 3
     Given I complete step 2 of the employment application
@@ -94,7 +94,8 @@ Feature: Sign up new potential employees from kiosk form
       And I should not see "You need to add at least"
       And 2 employers should exist with user: applicant_user "joe_user"
     When I press "Next"
-      Then I should see "Employment References"
+    Then I should see "Employment References"
+      And user should exist with email: "joe@employees.com", form_step: "step3"
 
   Scenario: Potential employee completes Employment Application Step 4
     Given I complete step 3 of the employment application
@@ -133,7 +134,9 @@ Feature: Sign up new potential employees from kiosk form
       And 3 references should exist with user: applicant_user "joe_user"
     When I press "Next"
     Then I should see "Employment Application Agreement"
+      And user should exist with email: "joe@employees.com", form_step: "step4"
   
+  @wip
   Scenario: Potential employee completes Employment Application Step 5
     Given I complete step 4 of the employment application
       And I should see "Employment Application Agreement"
@@ -146,5 +149,6 @@ Feature: Sign up new potential employees from kiosk form
       And I should see "Thank you for taking the time to apply"
       And I should not see "You are currently on step"
       And I should see "All steps complete!"
-      And a applicant_user: "joe_user" should exist with first_name: "Joe", last_name: "Employee", agree_to_terms: true
+      And user should exist with first_name: "Joe", last_name: "Employee", agree_to_terms: true, form_step: "step6"
+      And 1 email should be delivered
     

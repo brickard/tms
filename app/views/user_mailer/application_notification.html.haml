@@ -1,0 +1,5 @@
+%p
+  = "There is a new completed application ready to be reviewed. You can view it "
+  = link_to 'here', applicants_path(:search => { :id_equals => @user.id })
+  = "."
+
