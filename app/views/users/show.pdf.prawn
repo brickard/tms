@@ -1,14 +1,12 @@
 prawn_document(:filename => "#{@user.full_name.gsub(/\s+/, '')}", :force_download => true) do |pdf|
   pdf.font_size 10
   pdf.text @user.full_name, :size => 16, :style => :bold, :spacing => 4
-  - if %w{ applicant employee }.include?(@user.role)
-    pdf.text @user.skills.map{ |s| s.name }.join(" | "), :size => 12, :style => :bold_italic, :spacing => 4
-  pdf.text %w{ home_phone mobile_phone other_phone }.map { |a| "#{a.first.upcase}: #{@user.send(a.to_sym)||'None'}" }.join(" | ") + " | E: #{@user.email}", :style => :bold_italic, :spacing => 4
-  pdf.text %w{ address1 address2 location }.map { |a| "#{@user.send(a.to_sym)||'None'}" }.join(" "), :style => :bold_italic, :spacing => 4
+  pdf.text @user.display_skills, :size => 12, :style => :bold_italic, :spacing => 4
+  pdf.text @user.display_phones, :style => :bold_italic, :spacing => 4
+  pdf.text @user.display_address, :style => :bold_italic, :spacing => 4
   pdf.move_down 4
 
-
-  - if %w{ applicant employee }.include?(@user.role)
+  if (@user.employee? || @user.applicant?)
     pdf.text 'Details', :size => 12, :style => :bold_italic, :spacing => 4
     pdf.move_down 2
     pdf.text "Date of Birth: #{humanize_date(@user.date_of_birth)}"
@@ -23,7 +21,7 @@ prawn_document(:filename => "#{@user.full_name.gsub(/\s+/, '')}", :force_downloa
     pdf.text "Applied Before Details: #{@user.applied_before_detail}"
     pdf.text "Ever Failed Drug Test: #{yes_or_no(@user.ever_failed_drug_test)}"
     pdf.text "Legal US Worker: #{yes_or_no(@user.legal_us_worker)}"
-    pdf.text "Shirt Order Count: #{@user.shirt_count}"
+    pdf.text "Shirt Size: #{@user.shirt_size}"
     pdf.text "Emergency Contact Name: #{@user.emergency_contact_name} | Emergency Contact Phone: #{@user.emergency_contact_phone}"
     pdf.move_down 4
 
@@ -56,5 +54,5 @@ prawn_document(:filename => "#{@user.full_name.gsub(/\s+/, '')}", :force_downloa
       pdf.move_down 2
     end
     pdf.move_down 4
-
+  end
 end

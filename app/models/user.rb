@@ -169,6 +169,10 @@ class User < ActiveRecord::Base
     "#{city.capitalize}, #{state.capitalize} #{zipcode}" rescue "Unknown"
   end
 
+  def display_address
+    %w{ address1 address2 location }.map { |a| "#{self.send(a.to_sym)}" }.join(' ')
+  end
+
   def display_phones
     @display_phones ||= %w{ email home_phone mobile_phone other_phone }.inject([]) do  |result, element|
       value = self.send(element.to_sym)
@@ -177,6 +181,10 @@ class User < ActiveRecord::Base
       result
     end
     @display_phones.join(" | ")
+  end
+
+  def display_skills
+    self.skills.each.map{ |s| s.name }.join(" | ")
   end
 
   def form_step_to_i

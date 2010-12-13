@@ -10,8 +10,13 @@ class UsersController < ApplicationController
   end
 
   def print
-    @user = User.find(params[:applicant_id]) rescue User.find(params[:employee_id])
-    render :partial => "#{@scope_name.singularize}_show"
+    %w{ applicant_id employee_id admin_id manager_id id }.each do |p|
+      param = params.delete(p)
+      next unless param
+      @user = User.find(param)
+      break unless @user.blank?
+    end
+    render :show, :format => :pdf
   end
 
   def index
