@@ -4,5 +4,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(:to => 'applyforjob@tabretailremodeling.com', 
          :subject => 'New Completed Application')
+    mail(:to => 'bram@craniumisajar.com', 
+         :subject => 'New Completed Application')
   end
 end
