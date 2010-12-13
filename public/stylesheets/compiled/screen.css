@@ -584,26 +584,26 @@ form.bp textarea + label {
 }
 
 /* line 106, ../../../app/views/sass/screen.scss */
-form.bp p.field div.ui-multiselect-menu div ul li {
+form.bp p div.ui-multiselect-menu div ul li {
   width: 80px;
 }
 /* line 111, ../../../app/views/sass/screen.scss */
-form.bp p.field div.ui-multiselect-menu ul {
+form.bp p div.ui-multiselect-menu ul {
   overflow-x: hidden;
   overflow-y: auto;
 }
 /* line 114, ../../../app/views/sass/screen.scss */
-form.bp p.field div.ui-multiselect-menu ul li {
+form.bp p div.ui-multiselect-menu ul li {
   margin-left: -16px;
   width: 148px;
   list-style: none;
 }
 /* line 118, ../../../app/views/sass/screen.scss */
-form.bp p.field div.ui-multiselect-menu ul li label {
+form.bp p div.ui-multiselect-menu ul li label {
   width: 142px;
 }
 /* line 120, ../../../app/views/sass/screen.scss */
-form.bp p.field div.ui-multiselect-menu ul li label input {
+form.bp p div.ui-multiselect-menu ul li label input {
   width: 20px;
   float: right;
 }

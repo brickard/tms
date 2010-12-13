@@ -5,7 +5,7 @@
     = link_to "Hide Search", 'JavaScript:void()', :id => 'hide_search_link'
     = link_to "Search", 'JavaScript:void()', :id => 'show_search_link'
     = link_to "New #{@scope_title.singularize}", eval("new_#{@scope_name.singularize}_path")
-= render :partial => "#{@scope_name}_search_form"
+= render :partial => "search_form"
 = render :partial => "#{@scope_name}_table"
 
 = content_for(:footer) do

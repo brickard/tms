@@ -14,7 +14,8 @@
     #container
       #header_container
         #header
-          TAB Retail Remodeling Administration
+          = "TAB Retail Remodeling"
+          = " Administration" if current_user
           = render :partial => 'shared/user_menu' if current_user
       - if current_user
         #nav_container
