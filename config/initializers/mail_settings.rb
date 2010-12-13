@@ -1,11 +1,11 @@
 ActionMailer::Base.smtp_settings = {  
-  :address              => "mail.tabretailremodeling.com",
   #:port                 => 587,  
+  :enable_starttls_auto => true,
   :port                 => 25,  
+  :address              => "mail.tabretailremodeling.com",
   :domain               => "tabretailremodeling.com",  
   :user_name            => "mailer",  
   :password             => "TroutBum",  
-  :authentication       => "plain",  
-  #:enable_starttls_auto => true  
+  :authentication       => "plain"
 }
 ActionMailer::Base.delivery_method = :smtp
