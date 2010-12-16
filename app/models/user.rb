@@ -118,13 +118,14 @@ class User < ActiveRecord::Base
   validates :last_name, :first_name, :presence => true
 
 
-  scope :with_role,      lambda { |role_name| where(:role => role_name)  }
-  scope :admins,         lambda { User.with_role('admin') }
-  scope :managers,       lambda { User.with_role('manager') }
-  scope :employees,      lambda { User.with_role('employee') }
-  scope :applicants,     lambda { User.with_role('applicant') }
-  scope :on_shift,       lambda { |shift| where(:shift_id => shift.id) }
-  scope :idle_employees, lambda { User.employees.where(:shift_id => nil) }
+  scope :completed_application, lambda { where(:application_complete => true) }
+  scope :with_role,             lambda { |role_name| where(:role => role_name)  }
+  scope :admins,                lambda { User.with_role('admin') }
+  scope :managers,              lambda { User.with_role('manager') }
+  scope :employees,             lambda { User.with_role('employee') }
+  scope :applicants,            lambda { User.with_role('applicant') & User.completed_application }
+  scope :on_shift,              lambda { |shift| where(:shift_id => shift.id) }
+  scope :idle_employees,        lambda { User.employees.where(:shift_id => nil) }
 
   state_machine :form_step, :initial => :step0 do
 

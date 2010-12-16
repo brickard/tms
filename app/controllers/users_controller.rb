@@ -54,6 +54,7 @@ class UsersController < ApplicationController
       unless params[:save]
         @user.increment_form_step
         if @user.form_step == 'step6'
+          @user.application_complete = true
           @user.save!
           UserMailer.application_notification(@user).deliver
         end
