@@ -12,8 +12,8 @@
       %td= user.email
       %td= user.full_name
       %td= link_to 'Show', applicant_path(user)
-      %td= link_to 'Print', applicant_print_path(user, :format => :pdf)
-      %td= link_to 'Hire', applicant_hire_path(user), :confirm => "Are you sure you want to hire #{user.full_name}?"
+      %td= link_to 'Print', user_print_path(user, :scope => @scope, :format => :pdf)
+      %td= link_to 'Hire', user_hire_path(user, :scope => @scope), :confirm => "Are you sure you want to hire #{user.full_name}?"
       %td= link_to 'Edit', edit_applicant_path(user)
       %td= link_to 'Delete', applicant_path(user), :confirm => 'Are you sure?', :method => :delete
 %br/

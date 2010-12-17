@@ -18,24 +18,19 @@ Storeresetter::Application.routes.draw do
 
   resources :clients
 
-  resources :users
-
-  resources :admins,     :controller => :users, :scope => 'admins' do
-    get 'print'
-  end
-  resources :managers,   :controller => :users, :scope => 'managers' do
-    get 'print'
-  end
-  resources :employees,  :controller => :users, :scope => 'employees' do
-    get 'print'
-  end
-  resources :applicants, :controller => :users, :scope => 'applicants' do
+  resources :users do
     get 'hire'
     get 'print'
+    resources :employers
+    resources :references
   end
+
+  resources :admins,     :controller => :users, :scope => 'admins'
+  resources :managers,   :controller => :users, :scope => 'managers'
+  resources :employees,  :controller => :users, :scope => 'employees'
+  resources :applicants, :controller => :users, :scope => 'applicants'
 
   devise_for :users, :path => 'accounts'
 
-  #root :controller => :users, :action => :index, :scope => 'applicants'
   root :to => redirect( '/users?scope=applicants' )
 end

@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
     :drivers_license_expiration, :drivers_license_ever_suspended,
     :drivers_license_ever_suspended_detail,
     :emergency_contact_name, :emergency_contact_phone,
-    :shirt_size, :shift_id
+    :shirt_size, :shift_id, :application_complete
   
   # virtual attributes
   attr_accessible :email_confirmation, :remember_me, :password, 
@@ -117,15 +117,25 @@ class User < ActiveRecord::Base
   validates :email, :presence => true, :confirmation => true, :uniqueness => true
   validates :last_name, :first_name, :presence => true
 
+  scope :completed_application,  lambda { where(:application_complete => true) }
+  scope :incomplete_application, lambda { where(:application_complete => false) }
+  scope :days_old,               lambda { |d| where(:created_at.lteq => d.days.ago) }
+  scope :one_day_old,            lambda { User.days_old(1) }
+  scope :old_incomplete_applicants,
+                                 lambda { User.applicants.incomplete_application.one_day_old }
+  scope :with_role,              lambda { |role_name| where(:role => role_name)  }
+  scope :admins,                 lambda { User.with_role('admin') }
+  scope :managers,               lambda { User.with_role('manager') }
+  scope :employees,              lambda { User.with_role('employee') }
+  scope :applicants,             lambda { User.completed_application.with_role('applicant') }
+  scope :on_shift,               lambda { |shift| where(:shift_id => shift.id) }
+  scope :idle_employees,         lambda { User.employees.where(:shift_id => nil) }
 
-  scope :completed_application, lambda { where(:application_complete => true) }
-  scope :with_role,             lambda { |role_name| where(:role => role_name)  }
-  scope :admins,                lambda { User.with_role('admin') }
-  scope :managers,              lambda { User.with_role('manager') }
-  scope :employees,             lambda { User.with_role('employee') }
-  scope :applicants,            lambda { User.with_role('applicant') & User.completed_application }
-  scope :on_shift,              lambda { |shift| where(:shift_id => shift.id) }
-  scope :idle_employees,        lambda { User.employees.where(:shift_id => nil) }
+  composed_of :pay_rate, 
+    :class_name => "Money", :mapping => %w(pay_rate cents), 
+    :converter => Proc.new { |pay_rate| pay_rate.respond_to?(:to_money) ? 
+                                        pay_rate.to_money : Money.empty },
+    :constructor => Proc.new { |pay_rate| Money.new(pay_rate||0, Money.default_currency) }
 
   state_machine :form_step, :initial => :step0 do
 

@@ -40,6 +40,7 @@ end
   end
   u.save!
   puts "Created applicant: #{u.email} with skills: #{u.skills.map{ |s| s.name }.join(', ')}"
+  puts "Applicant #{u.application_complete ? 'completed application!' : 'did not complete application!'}"
 end
 
 20.times do

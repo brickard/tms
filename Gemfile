@@ -38,6 +38,9 @@ gem 'ruby-graphviz', :require => 'graphviz'
 # pdf generation
 gem 'prawn_rails'
 
+# money for nuttin, and your chics for free
+gem 'money'
+
 group :development, :test do
   gem 'mongrel'
   gem 'capybara'

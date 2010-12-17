@@ -2,20 +2,16 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [ :new, :create, :edit, :update ]
   before_filter :authenticate_user_with_scope!, :only => [ :new, :create, :edit, :update ]
   before_filter :setup_scope, :setup_search
+  before_filter :clean_old_incomplete_applicants, :only => [ :index ]
 
   def hire
-    @user = User.find(params[ :applicant_id ])
+    @user = User.find(params[:user_id])
     @user.hire!
     redirect_to(employees_path, :notice => "#{@user.full_name} has been hired!")
   end
 
   def print
-    %w{ applicant_id employee_id admin_id manager_id id }.each do |p|
-      param = params.delete(p)
-      next unless param
-      @user = User.find(param)
-      break unless @user.blank?
-    end
+    @user = User.find(params[:user_id])
     render :show, :format => :pdf
   end
 
@@ -177,6 +173,10 @@ class UsersController < ApplicationController
 
   def authenticate_user_with_scope!
     return authenticate_user! unless params[:scope] == 'applicants'
+  end
+
+  def clean_old_incomplete_applicants
+    User.old_incomplete_applicants.destroy_all
   end
 
 end

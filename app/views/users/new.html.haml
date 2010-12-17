@@ -6,4 +6,7 @@
     .section_heading_menu
       = link_to 'Back', eval("#{@scope_name}_path")
 .sub_content
-  = render :partial => "#{@scope_name.singularize}_form"
+  - if @scope == 'applicants' and not current_user
+    = render :partial => "applicant_form"
+  - else
+    = render :partial => "form"

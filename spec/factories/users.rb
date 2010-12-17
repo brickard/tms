@@ -57,5 +57,6 @@ end
 Factory.define :applicant_user, :parent => :user do |f|
   f.role 'applicant'
   f.form_step 'step6'
+  f.application_complete { Factory.next(:boolean) }
 end
 

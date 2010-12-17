@@ -9,8 +9,8 @@ prawn_document(:filename => "#{@user.full_name.gsub(/\s+/, '')}", :force_downloa
   if (@user.employee? || @user.applicant?)
     pdf.text 'Details', :size => 12, :style => :bold_italic, :spacing => 4
     pdf.move_down 2
-    pdf.text "Date of Birth: #{humanize_date(@user.date_of_birth)}"
-    pdf.text "Can Start On : #{humanize_date(@user.available_at)}"
+    pdf.text "Date of Birth: #{humanize_date(@user.date_of_birth) rescue ''}"
+    pdf.text "Can Start On : #{humanize_date(@user.available_at) rescue ''}"
     pdf.text "Reliable Vehicle: #{yes_or_no(@user.has_reliable_vehicle)}"
     pdf.text "Can Travel: #{yes_or_no(@user.can_travel_long_term)}"
     pdf.text "Needs Special Hours: #{yes_or_no(@user.needs_special_hours)}"
@@ -28,7 +28,7 @@ prawn_document(:filename => "#{@user.full_name.gsub(/\s+/, '')}", :force_downloa
     pdf.text 'Drivers License Information', :size => 12, :style => :bold_italic, :spacing => 4
     pdf.move_down 2
     pdf.text "Valid: #{yes_or_no(@user.drivers_license_valid)}"
-    pdf.text "Number: #{@user.drivers_license_number} |  State: #{@user.drivers_license_state}  |  Expires #{humanize_date(@user.drivers_license_expiration)}"
+    pdf.text "Number: #{@user.drivers_license_number} |  State: #{@user.drivers_license_state}  |  Expires: #{humanize_date(@user.drivers_license_expiration) rescue ''}"
     pdf.text "Ever Suspended: #{yes_or_no(@user.applied_before)}"
     pdf.text "Ever Suspended Details: #{@user.applied_before_detail}"
     pdf.move_down 4

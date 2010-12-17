@@ -11,7 +11,7 @@
       %td= user.email
       %td= user.full_name
       %td= link_to 'Show', admin_path(user)
-      %td= link_to 'Print', admin_print_path(user, :format => :pdf)
+      %td= link_to 'Print', user_print_path(user, :scope => @scope, :format => :pdf)
       %td= link_to 'Edit', edit_admin_path(user)
       %td= link_to 'Delete', admin_path(user), :confirm => 'Are you sure?', :method => :delete
 %br/
