@@ -35,7 +35,7 @@
     %h4= 'Employment History'
     - @user.employers.each do |employer|
       %p{ :id => "employer_#{employer.id}" }
-        %h5= "#{employer.company_name} | #{employer.phone_number} | #{humanize_date(employer.start_date)} to #{humanize_date(employer.start_date)}"
+        %h5= "#{employer.company_name} | #{employer.phone_number} | #{humanize_date(employer.start_date)} to #{humanize_date(employer.end_date)}"
         %p= "Salary: #{employer.start_salary} to #{employer.end_salary}"
         %p= "Title: #{employer.job_title}"
         %p= "Supervisor: #{employer.supervisor_name}"
