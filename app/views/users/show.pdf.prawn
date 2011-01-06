@@ -37,7 +37,7 @@ prawn_document(:filename => "#{@user.full_name.gsub(/\s+/, '')}", :force_downloa
     pdf.text 'Employment History', :size => 12, :style => :bold_italic, :spacing => 4
     pdf.move_down 2
     @user.employers.each do |employer|
-      pdf.text "#{employer.company_name} | #{employer.phone_number} | #{humanize_date(employer.start_date)} to #{humanize_date(employer.start_date)}", :style => :bold
+      pdf.text "#{employer.company_name} | #{employer.phone_number} | #{humanize_date(employer.start_date)} to #{humanize_date(employer.end_date)}", :style => :bold
       pdf.text "Salary: #{employer.start_salary} to #{employer.end_salary}"
       pdf.text "Title: #{employer.job_title}"
       pdf.text "Supervisor: #{employer.supervisor_name}"
