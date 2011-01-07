@@ -19,7 +19,6 @@ gem 'state_machine'
 gem 'ruby-graphviz', :require => 'graphviz'
 gem 'prawn_rails'
 gem 'money'
-gem 'mail_form'
 
 group :development, :test, :console do
   gem 'mongrel'
