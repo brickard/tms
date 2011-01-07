@@ -128,11 +128,11 @@ class User < ActiveRecord::Base
   validates :last_name, :first_name, :presence => true
 
   scope :completed_application,  lambda { where(:application_complete => true) }
-  scope :incomplete_application, lambda { where(:application_complete => false) }
+  scope :incomplete_application, lambda { where(:application_complete => [false, nil]) }
   scope :days_old,               lambda { |d| where(:created_at.lteq => d.days.ago) }
-  scope :one_day_old,            lambda { User.days_old(1) }
+  scope :one_week_old,            lambda { User.days_old(7) }
   scope :old_incomplete_applicants,
-                                 lambda { User.incomplete_application.one_day_old.where(:role => 'applicant') }
+                                 lambda { User.incomplete_application.one_week_old.where(:role => 'applicant') }
   scope :with_role,              lambda { |role_name| where(:role => role_name)  }
   scope :admins,                 lambda { User.with_role('admin') }
   scope :managers,               lambda { User.with_role('manager') }
