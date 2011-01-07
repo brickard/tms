@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   def new
     @user = @search.relation.build
     @user.increment_form_step if @user.applicant?
-    setup_progress
+    setup_progress if @user.applicant?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -62,6 +62,7 @@ class UsersController < ApplicationController
   def create
     @user = @search.relation.build(params[:user])
     setup_progress if @user.applicant?
+		@user.application_complete = false if @user.applicant?
 
     respond_to do |format|
       if @user.save
@@ -133,7 +134,7 @@ class UsersController < ApplicationController
   def setup_search
     search_params = reject_blank_search_params(params.delete(:search))
     @searching = !search_params.blank?
-    @search = @scope.nil? ? User.search(search_params) : User.send(@scope).search(search_params)
+    @search = @scope.nil? ? User.search(search_params) : User.send(@scope.to_sym).search(search_params)
   end
 
   def set_step_status

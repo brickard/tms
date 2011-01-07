@@ -72,6 +72,16 @@ class DetailsValidator < ActiveModel::EachValidator
   end
 end
 
+class DriversLicenseValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    return nil unless value == true
+    %w{ drivers_license_state drivers_license_number 
+			  drivers_license_expiration }.each do |attr|
+			record.errors[attr.to_sym] << "cannot be blank when #{attribute} is Yes" if record.send(attr.to_sym).blank?
+		end
+  end
+end
+
 require 'lib/model_behaviors/roles'
 
 class User < ActiveRecord::Base
@@ -164,6 +174,7 @@ class User < ActiveRecord::Base
         :in => [ true, false ], :message => 'must be Yes or No'
       validates :needs_special_hours, :been_convicted, :applied_before, 
         :drivers_license_ever_suspended, :details => true
+			validates :drivers_license_valid, :drivers_license => true
     end
 
     state :step5 do
