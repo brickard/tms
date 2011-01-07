@@ -9,6 +9,7 @@ prawn_document(:filename => "#{@user.full_name.gsub(/\s+/, '')}", :force_downloa
   if (@user.employee? || @user.applicant?)
     pdf.text 'Details', :size => 12, :style => :bold_italic, :spacing => 4
     pdf.move_down 2
+    pdf.text "Application Date: #{humanize_date(@user.created_at) rescue ''}"
     pdf.text "Date of Birth: #{humanize_date(@user.date_of_birth) rescue ''}"
     pdf.text "Can Start On : #{humanize_date(@user.available_at) rescue ''}"
     pdf.text "Reliable Vehicle: #{yes_or_no(@user.has_reliable_vehicle)}"
