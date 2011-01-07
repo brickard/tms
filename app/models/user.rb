@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
   scope :days_old,               lambda { |d| where(:created_at.lteq => d.days.ago) }
   scope :one_day_old,            lambda { User.days_old(1) }
   scope :old_incomplete_applicants,
-                                 lambda { User.applicants.incomplete_application.one_day_old }
+                                 lambda { User.incomplete_application.one_day_old.where(:role => 'applicant') }
   scope :with_role,              lambda { |role_name| where(:role => role_name)  }
   scope :admins,                 lambda { User.with_role('admin') }
   scope :managers,               lambda { User.with_role('manager') }
