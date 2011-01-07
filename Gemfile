@@ -19,6 +19,7 @@ gem 'state_machine'
 gem 'ruby-graphviz', :require => 'graphviz'
 gem 'prawn_rails'
 gem 'money'
+gem 'mail_form'
 
 group :development, :test, :console do
   gem 'mongrel'
@@ -32,7 +33,7 @@ group :development, :test, :console do
   gem 'spork'
   gem 'launchy'
   gem 'capybara-envjs'
-  gem 'factory_girl'
+  gem 'factory_girl', '2.0.0.beta1'
   gem 'autotest-standalone'
   gem 'annotate-models'
   gem 'rb-inotify'
