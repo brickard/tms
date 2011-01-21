@@ -112,15 +112,17 @@
     = f.text_field :agree_to_terms_date, :class => 'recent'
     = f.label :agree_to_terms_date, 'Agreed To Terms Date'
   - if @user.employee?
-    %p{ :class => 'field short required' }
-      = f.text_field :hired_at, :class => 'recent'
-      = f.label :hired_at, 'Hire Date'
+    - unless @user.new_record?
+      %p{ :class => 'field short required' }
+        = f.text_field :hired_at, :class => 'recent'
+        = f.label :hired_at, 'Hire Date'
     %p{ :class => 'field short required' }
       = f.text_field :pay_rate, :value => number_to_currency(@user.pay_rate)
       = f.label :pay_rate
     %p{ :class => 'field short required' }
       = f.text_field :per_diem, :value => number_to_currency(@user.pay_rate)
       = f.label :per_diem
+  = hidden_field_tag :scope, :value => @scope
   %p{ :class => 'button' }
     = content_tag :button, 'Save', :type => :submit
 

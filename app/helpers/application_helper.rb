@@ -8,9 +8,13 @@ module ApplicationHelper
   end
 
   def humanize_date(attribute)
-    attribute = Date.parse(attribute) if attribute.kind_of?(String) 
-    attribute = attribute.to_date if attribute.respond_to?(:to_date)
-    attribute.to_s(:long) rescue ''
+    begin
+      attribute = Date.parse(attribute) if attribute.kind_of?(String) 
+      attribute = attribute.to_date if attribute.respond_to?(:to_date)
+      attribute.to_s(:long) rescue ''
+    rescue
+      return ''
+    end
   end
 
 end
