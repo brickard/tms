@@ -63,9 +63,8 @@ class UsersController < ApplicationController
     @user = @search.relation.build(params[:user])
     setup_progress if @user.applicant?
 		@user.application_complete = false if @user.applicant?
-    if params[:scope] == 'employees'
-      @user.hire!
-    end
+    
+    @user.hired_at = DateTime.now if @scope == 'employees'
 
     respond_to do |format|
       if @user.save

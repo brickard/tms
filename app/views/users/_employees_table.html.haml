@@ -1,7 +1,7 @@
 %table{ :class => 'section_content data_table' }
   %tr
-    %th UserID (email)
     %th Name
+    %th UserID (email)
     %th
     %th
     %th
@@ -10,8 +10,7 @@
     %tr
       %td= user.email
       %td= user.full_name
-      %td= link_to 'Show', employee_path(user)
-      %td= link_to 'Print', user_print_path(user, :scope => @scope, :format => :pdf)
+      %td= link_to 'Print', user_print_path(user, :scope => @scope, :format => :pdf), :target => '_blank'
       %td= link_to 'Edit', edit_employee_path(user)
       %td= link_to 'Delete', employee_path(user), :confirm => 'Are you sure?', :method => :delete
 %br/
