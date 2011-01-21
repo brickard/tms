@@ -1,24 +1,133 @@
 = render :partial => 'shared/form_errors', :locals => { :@model => @user }
 - path = @user.new_record? ? users_path(:scope => @scope) : user_path(@user, :scope => @scope)
 = form_for(@user, :url => path, :html => { :class => 'bp'}) do |f|
-  %p{ :class => 'field short required email' }
-    = f.text_field :email
-    = f.label :email, 'UserID (email)'
-    *
-  %p{ :class => 'field short required' }
-    = f.password_field :password
-    = f.label :password, 'Password (minimum 6 characters)'
-    *
   %p{ :class => 'field short required' }
     = f.text_field :first_name
     = f.label :first_name
-    *
+  %p{ :class => 'field short' }
+    = f.text_field :middle_name
+    = f.label :middle_name
   %p{ :class => 'field short required' }
     = f.text_field :last_name
     = f.label :last_name
-    *
-  = f.hidden_field :hired_at, :value => @user.hired_at || DateTime.now
-  = f.hidden_field :role, :value => @user.role || @scope.singularize
-  = hidden_field_tag :scope, @scope
-  %p{ :class => 'field button' }
-    = content_tag :button, 'Save', :type => :submit, :id => :save
+  %p{ :class => 'field short required' }
+    = f.text_field :address1
+    = f.label :address1
+  %p{ :class => 'field short' }
+    = f.text_field :address2
+    = f.label :address2
+  %p{ :class => 'field short required' }
+    = f.text_field :city
+    = f.label :city
+  %p{ :class => 'field short required' }
+    = f.select :state, Carmen::US_STATES
+    = f.label :state
+  %p{ :class => 'field short required' }
+    = f.text_field :zipcode
+    = f.label :zipcode
+  %p{ :class => 'field short required' }
+    = f.text_field :date_of_birth, :class => 'recent'
+    = f.label :date_of_birth, 'Date of birth'
+  %p{ :class => 'field short' }
+    = f.text_field :email
+    = f.label :email
+  %p{ :class => 'field short required' }
+    = f.text_field :home_phone
+    = f.label :home_phone, 'Main phone'
+  %p{ :class => 'field short' }
+    = f.text_field :mobile_phone
+    = f.label :mobile_phone
+  %p{ :class => 'field short' }
+    = f.text_field :other_phone
+    = f.label :other_phone
+  %p{ :class => 'field' }
+    %br/
+    = f.collection_select :skill_ids, Skill.all, :id, :name, {}, { :multiple => true, :id => :skills } 
+  %p{ :class => 'field short required' }
+    = f.text_field :emergency_contact_name
+    = f.label :emergency_contact_name, 'Emergency Contact'
+  %p{ :class => 'field short required' }
+    = f.text_field :emergency_contact_phone
+    = f.label :emergency_contact_phone, 'Emergency Contact Phone'
+  %p{ :class => 'field short required' }
+    = f.select :shirt_size, [ '' ] + %w{ S M L XL XXL XXXL XXXXL }, :selected => @user.shirt_size
+    = f.label :shirt_size, 'Shirt Size'
+  %p{ :class => 'field short' }
+    = f.select :needs_special_hours, { 'Yes' => true, 'No' => false }
+    = f.label :needs_special_hours, 'Are there any days, shifts, hours you will not work?'
+  %p{ :class => 'field short' }
+    = f.label :needs_special_hours_detail, 'If yes, please explain.'
+    %br/
+    = f.text_area :needs_special_hours_detail
+  %p{ :class => 'field short' }
+    = f.label :available_at, 'When are you available to start work?'
+    %br/
+    = f.text_field :available_at, :class => 'recent'
+  %p{ :class => 'field short' }
+    = f.select :has_reliable_vehicle, { 'Yes' => true, 'No' => false }
+    = f.label :has_reliable_vehicle, 'Do you have reliable transportation?'
+  %p{ :class => 'field short' }
+    = f.select :can_travel_long_term, { 'Yes' => true, 'No' => false }
+    = f.label :can_travel_long_term, 'Can you travel long term?'
+  %p{ :class => 'field short' }
+    = f.select :been_convicted, { 'Yes' => true, 'No' => false }
+    = f.label :been_convicted, 'Have you ever been convicted of a crime?'
+  %p{ :class => 'field short' }
+    = f.label :been_convicted_detail, 'If yes, please explain.'
+    %br/
+    = f.text_area :been_convicted_detail
+  %p{ :class => 'field short' }
+    = f.select :ever_failed_drug_test, { 'Yes' => true, 'No' => false }
+    = f.label :ever_failed_drug_test, 'Have you ever failed a drug test?'
+  %p{ :class => 'field short' }
+    = f.select :legal_us_worker, { 'Yes' => true, 'No' => false }
+    = f.label :legal_us_worker, 'Are you legally authorized to work in the United States?'
+  %p{ :class => 'field short' }
+    = f.select :applied_before, { 'Yes' => true, 'No' => false }
+    = f.label :applied_before, 'Have you ever applied for work or worked here before?'
+  %p{ :class => 'field short' }
+    = f.label :applied_before_detail, 'If yes, when and reason not employed currently?'
+    %br/
+    = f.text_area :applied_before_detail
+  %p{ :class => 'field short' }
+    = f.select :drivers_license_valid, { 'Yes' => true, 'No' => false }
+    = f.label :drivers_license_valid, 'Do you have a valid Drivers License?'
+  %p{ :class => 'field short' }
+    = f.select :drivers_license_state, Carmen::US_STATES
+    = f.label :drivers_license_state, 'License State'
+  %p{ :class => 'field short' }
+    = f.text_field :drivers_license_number
+    = f.label :drivers_license_number, 'License Number'
+  %p{ :class => 'field short' }
+    = f.text_field :drivers_license_expiration, :class => 'recent'
+    = f.label :drivers_license_expiration, 'License Expiration Date'
+  %p{ :class => 'field short' }
+    = f.select :drivers_license_ever_suspended, { 'Yes' => true, 'No' => false }
+    = f.label :drivers_license_ever_suspended, 'Has your Drivers License ever been suspended?'
+  %p{ :class => 'field short' }
+    = f.label :drivers_license_ever_suspended_detail, 'If yes, please explain'
+    %br/
+    = f.text_area :drivers_license_ever_suspended_detail
+  %p{ :class => 'field short required' }
+    = f.text_field :agree_to_terms_date, :class => 'recent'
+    = f.label :agree_to_terms_date, 'Agreed To Terms Date'
+  - if @user.employee?
+    %p{ :class => 'field short required' }
+      = f.text_field :hired_at, :class => 'recent'
+      = f.label :hired_at, 'Hire Date'
+  %p{ :class => 'button' }
+    = content_tag :button, 'Save', :type => :submit
+
+= render :partial => 'employers_table'
+= render :partial => 'references_table'
+
+
+= content_for(:footer) do
+  = javascript_include_tag 'datepicker'
+  = javascript_include_tag 'jquery.multiselect.min.js'
+  :javascript
+    $(document).ready(function(){
+      $("#skills").multiselect({
+        header: "Select Skills"
+      });
+    });

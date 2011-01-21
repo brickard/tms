@@ -1,8 +1,15 @@
-= content_for(:content_nav_heading) do
-  Application Status
-= content_for(:content_nav) do
-  = render :partial => 'progress_bar'
-  = render :partial => 'shared/form_errors', :locals => { :@model => @user }
-.section_heading
-  = @step_status[:heading]
-= render :partial => "applicant_form_#{@user.form_step}"
+- if current_user
+  = content_for(:content_nav_heading) do
+    Edit Applicant
+  .section_heading
+    = 'Edit Applicant'
+  = render :partial => "employee_form"
+- else
+  = content_for(:content_nav_heading) do
+    Application Status
+  = content_for(:content_nav) do
+    = render :partial => 'progress_bar'
+    = render :partial => 'shared/form_errors', :locals => { :@model => @user }
+  .section_heading
+    = @step_status[:heading]
+  = render :partial => "applicant_form_#{@user.form_step}"

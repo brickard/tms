@@ -86,7 +86,7 @@ require 'lib/model_behaviors/roles'
 
 class User < ActiveRecord::Base
   include ::ModelBehaviors::RolesBehavior
-  SHIRT_SIZES = %{ S M L XL XXL XXXL XXXXL }
+  SHIRT_SIZES = %w{ S M L XL XXL XXXL XXXXL }
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable, :timeoutable
