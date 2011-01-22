@@ -27,7 +27,6 @@ require 'capybara/envjs'
 # steps to use the XPath syntax.
 Capybara.default_selector = :css
 
-#Capybara.default_driver = :envjs
 Capybara.javascript_driver = :selenium
 Capybara.save_and_open_page_path = '/tmp'
 # If you set this to false, any error raised from within your app will bubble 

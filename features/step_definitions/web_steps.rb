@@ -16,6 +16,13 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+
+When /^I follow "([^"]*)" and click OK$/ do |text|
+  page.evaluate_script("window.alert = function(msg) { return true; }")
+  page.evaluate_script("window.confirm = function(msg) { return true; }")
+  When %{I follow "#{text}"}
+end
+
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
@@ -33,6 +40,12 @@ end
 When /^(?:|I )follow "([^"]*)"(?: within "([^"]*)")?$/ do |link, selector|
   with_scope(selector) do
     click_link(link)
+  end
+end
+
+When /^(?:|I )fill in "([^"]*)" with todays date(?: within "([^"]*)")?$/ do |field, selector|
+  with_scope(selector) do
+    fill_in(field, :with => DateTime.now)
   end
 end
 
