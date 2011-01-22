@@ -20,6 +20,11 @@ module NavigationHelpers
         raise e
       end
 
+    when /^scoped #{capture_model}(?:'s)? (.+?) page$/                     # eg. the forum's posts page
+      user = model!($1)
+      unscoped_path = path_to_pickle $1, :extra => $2                      #  or the forum's edit page
+      unscoped_path + "?scope=#{user.scope}"
+
 
     # the following are examples using path_to_pickle
 
