@@ -241,6 +241,10 @@ class User < ActiveRecord::Base
     self.role = 'applicant'
   end
 
+  def scope
+    self.role + 's' rescue nil
+  end
+
   def hire!
     self.role = 'employee'
     self.hired_at = Date.today
