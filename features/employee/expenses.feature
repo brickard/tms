@@ -12,13 +12,15 @@ Feature: Employee Expenses
 
   @wip
   Scenario: Manager User navigates to expenses
-    Then I should see "Expenses for"
+    Then I should see "Expenses for Morpheus X Fishburn"
 
   @wip
   Scenario: Manager User edits contact info
+      And I follow "New"
     When I fill in "Date" with todays date
       And I fill in "Amount" with "$10.00"
       And I press "Save"
     Then I should see "Expense was successfully added."
       And I should see "$10.00"
+      And I should see "Expenses (1)"
 
