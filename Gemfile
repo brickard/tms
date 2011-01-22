@@ -38,5 +38,6 @@ group :development, :test, :console do
   gem 'rb-inotify'
   gem 'ffaker'
   gem 'wirble'
+  gem 'ruby-debug'
 end
 
