@@ -1,0 +1,9 @@
+= content_for(:content_nav_heading) do
+  = "New Expense"
+= content_for(:content_nav) do
+  = render :partial => 'shared/employee_navigation', :locals => { :@user => @employee }
+
+.section_heading
+  = "New Expense for #{@employee.full_name}"
+= render :partial => "form"
+

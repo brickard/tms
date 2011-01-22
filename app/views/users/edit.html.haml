@@ -1,6 +1,12 @@
 - unless @scope == 'applicants'
   - if @scope == 'employees'
-    = render :partial => 'employee_navigation'
+    = content_for(:content_nav_heading) do
+      = "Employee"
+    .section_heading
+      = "Contact Info for #{@user.full_name}"
+      .section_heading_menu
+        /= link_to 'Show', eval("#{@scope_name.singularize}_path(@user)")
+    = render :partial => 'shared/employee_navigation'
   - else
     = content_for(:content_nav_heading) do
       = "Edit #{@scope_title}"
