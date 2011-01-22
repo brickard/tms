@@ -27,8 +27,10 @@ Storeresetter::Application.routes.draw do
 
   resources :admins,     :controller => :users, :scope => 'admins'
   resources :managers,   :controller => :users, :scope => 'managers'
-  resources :employees,  :controller => :users, :scope => 'employees'
   resources :applicants, :controller => :users, :scope => 'applicants'
+  resources :employees,  :controller => :users, :scope => 'employees' do
+    resources :expenses
+  end
 
   devise_for :users, :path => 'accounts'
 
