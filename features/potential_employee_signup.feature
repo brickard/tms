@@ -136,7 +136,6 @@ Feature: Sign up new potential employees from kiosk form
     Then I should see "Employment Application Agreement"
       And user should exist with email: "joe@employees.com", form_step: "step4"
   
-  @wip
   Scenario: Potential employee completes Employment Application Step 5
     Given I complete step 4 of the employment application
       And I should see "Employment Application Agreement"
