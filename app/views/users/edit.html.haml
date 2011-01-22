@@ -1,10 +1,13 @@
 - unless @scope == 'applicants'
-  = content_for(:content_nav_heading) do
-    = "Edit #{@scope_title}"
-  .section_heading
-    = "Editing #{@user.full_name}"
-    .section_heading_menu
-      = link_to 'Show', eval("#{@scope_name.singularize}_path(@user)")
-      = link_to 'Back', eval("#{@scope_name}_path")
+  - if @scope == 'employees'
+    = render :partial => 'employee_navigation'
+  - else
+    = content_for(:content_nav_heading) do
+      = "Edit #{@scope_title}"
+    .section_heading
+      = "Editing #{@user.full_name}"
+      .section_heading_menu
+        = link_to 'Show', eval("#{@scope_name.singularize}_path(@user)")
+        = link_to 'Back', eval("#{@scope_name}_path")
 .sub_content
   = render :partial => "#{@scope_name.singularize}_form"
