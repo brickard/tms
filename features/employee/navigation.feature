@@ -25,11 +25,11 @@ Feature: Employee Navigation
     When I follow "Evaluations"
     Then I should see "Evaluations for"
 
-  @wip
   Scenario: Manager User navigates to discipline
     When I follow "Discipline"
     Then I should see "Discipline for"
 
+  @wip
   Scenario: Manager User navigates to payroll
     When I follow "Payroll"
     Then I should see "Payroll for"
