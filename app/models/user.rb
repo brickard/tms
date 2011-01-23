@@ -101,6 +101,7 @@ class User < ActiveRecord::Base
   has_many :evaluations_performed, :foreign_key => :manager_id
   has_many :disciplines, :foreign_key => :employee_id
   has_many :disciplines_given, :foreign_key => :supervisor_id
+  has_many :vacations, :foreign_key => :employee_id
   belongs_to :shift
 
   accepts_nested_attributes_for :employers, :references, :user_skills, :skills, :shift

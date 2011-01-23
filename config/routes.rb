@@ -31,7 +31,9 @@ Storeresetter::Application.routes.draw do
   resources :employees,  :controller => :users, :scope => 'employees' do
     resources :evaluations
     resources :disciplines
+    resources :payrolls
     resources :expenses
+    resources :vacations
   end
 
   devise_for :users, :path => 'accounts'

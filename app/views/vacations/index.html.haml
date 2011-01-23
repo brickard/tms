@@ -1,0 +1,11 @@
+= content_for(:content_nav_heading) do
+  = "Vacations"
+= content_for(:content_nav) do
+  = render :partial => 'shared/employee_navigation'
+
+.section_heading
+  = "Vacations for #{@employee.full_name}"
+  .section_heading_menu
+    = link_to "New", new_employee_vacation_path(@employee)
+= render :partial => "table"
+

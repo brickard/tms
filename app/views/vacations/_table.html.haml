@@ -1,0 +1,15 @@
+%table{ :class => 'section_content data_table' }
+  %tr
+    %th Date
+    %th Amount
+    %th Description
+    %th
+    %th
+  - @employee.vacations.each do |vacation|
+    %tr
+      %td= vacation.submitted_at
+      %td= number_to_currency(vacation.amount)
+      %td= vacation.description
+      %td= link_to 'Edit', edit_employee_vacation_path(@employee, vacation)
+      %td= link_to 'Delete', employee_vacation_path(@employee, vacation), :confirm => 'Are you sure?', :method => :delete
+%br/

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110123020544) do
+ActiveRecord::Schema.define(:version => 20110123032358) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -203,5 +203,17 @@ ActiveRecord::Schema.define(:version => 20110123020544) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["role"], :name => "index_users_on_role"
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
+
+  create_table "vacations", :force => true do |t|
+    t.integer  "employee_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "reason"
+    t.text     "explanation"
+    t.integer  "store_id"
+    t.boolean  "approved",    :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -39,8 +39,8 @@ Feature: Employee Navigation
 
   @wip
   Scenario: Manager User navigates to vacation
-    When I follow "Vacation"
-    Then I should see "Vacation for"
+    When I follow "Vacations"
+    Then I should see "Vacations for"
 
   Scenario: Manager User navigates to uniforms
     When I follow "Uniforms"
