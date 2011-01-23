@@ -1,11 +1,11 @@
 = content_for(:content_nav_heading) do
-  = "Expenses"
+  = "Evaluations"
 = content_for(:content_nav) do
   = render :partial => 'shared/employee_navigation'
 
 .section_heading
-  = "Expenses for #{@employee.full_name}"
+  = "Evaluations for #{@employee.full_name}"
   .section_heading_menu
-    = link_to "New", new_employee_expense_path(@employee)
+    = link_to "New", new_employee_evaluation_path(@employee)
 = render :partial => "table"
 

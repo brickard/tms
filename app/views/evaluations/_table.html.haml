@@ -1,0 +1,15 @@
+%table{ :class => 'section_content data_table' }
+  %tr
+    %th Date
+    %th Score
+    %th Evaluator
+    %th
+    %th
+  - @employee.evaluations.each do |evaluation|
+    %tr
+      %td= evaluation.created_at
+      %td= evaluation.score
+      %td= evaluation.manager.full_name
+      %td= link_to 'Edit', edit_employee_evaluation_path(@employee, evaluation)
+      %td= link_to 'Delete', employee_evaluation_path(@employee, evaluation), :confirm => 'Are you sure?', :method => :delete
+%br/

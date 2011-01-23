@@ -1,9 +1,9 @@
 = content_for(:content_nav_heading) do
-  = "Edit Expense"
+  = "New Evaluation"
 = content_for(:content_nav) do
   = render :partial => 'shared/employee_navigation'
 
 .section_heading
-  = "Edit Expense for #{@employee.full_name}"
+  = "New Evaluation for #{@employee.full_name}"
 = render :partial => "form"
 

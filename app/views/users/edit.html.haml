@@ -6,7 +6,7 @@
       = "Contact Info for #{@user.full_name}"
       .section_heading_menu
         /= link_to 'Show', eval("#{@scope_name.singularize}_path(@user)")
-    = render :partial => 'shared/employee_navigation'
+    = render :partial => 'shared/employee_navigation', :locals => { :@employee => @user }
   - else
     = content_for(:content_nav_heading) do
       = "Edit #{@scope_title}"

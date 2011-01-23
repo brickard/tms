@@ -1,10 +1,10 @@
 = content_for(:content_nav) do
   %ul
-    %li= link_to 'Contact Info', edit_employee_path(@user)
-    %li= link_to 'Evaluations', '#'
+    %li= link_to 'Contact Info', edit_employee_path(@employee)
+    %li= link_to "Evaluations (#{@employee.evaluations.count})", employee_evaluations_path(@employee) 
     %li= link_to 'Discipline', '#'
     %li= link_to 'Payroll', '#'
-    %li= link_to "Expenses (#{@user.expenses.count})", employee_expenses_path(@user)
+    %li= link_to "Expenses (#{@employee.expenses.count})", employee_expenses_path(@employee)
     %li= link_to 'Vacation', '#'
     %li= link_to 'Uniforms', '#'
     %li= link_to 'Accidents', '#'

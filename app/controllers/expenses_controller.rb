@@ -27,7 +27,6 @@ class ExpensesController < ApplicationController
     unless @expense.update_attributes(params[:expense])
       render :edit
     else
-      Rails.logger.debug("PATH: #{employee_expenses_path(@employee)}")
       redirect_to(employee_expenses_path(@employee), :notice => 'Expense was successfully updated.')
     end
   end

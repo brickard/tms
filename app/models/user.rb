@@ -97,6 +97,8 @@ class User < ActiveRecord::Base
   has_many :skills, :through => :user_skills
   has_many :stores, :foreign_key => :manager_id
   has_many :expenses, :foreign_key => :employee_id
+  has_many :evaluations, :foreign_key => :employee_id
+  has_many :evaluations_performed, :foreign_key => :manager_id
   belongs_to :shift
 
   accepts_nested_attributes_for :employers, :references, :user_skills, :skills, :shift
