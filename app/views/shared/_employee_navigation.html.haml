@@ -8,4 +8,4 @@
     %li= link_to "Vacations (#{@employee.vacations.count})", employee_vacations_path(@employee)
     %li= link_to "Uniforms (#{@employee.uniforms.count})", employee_uniforms_path(@employee)
     %li= link_to "Accidents (#{@employee.accidents.count})", employee_accidents_path(@employee)
-    %li= link_to 'Incidents', '#'
+    %li= link_to "Incidents (#{@employee.incidents.count})", employee_incidents_path(@employee)

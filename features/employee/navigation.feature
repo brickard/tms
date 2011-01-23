@@ -29,6 +29,7 @@ Feature: Employee Navigation
     When I follow "Discipline"
     Then I should see "Discipline for"
 
+  @wip
   Scenario: Manager User navigates to payroll
     When I follow "Payroll"
     Then I should see "Payroll for"
@@ -49,7 +50,6 @@ Feature: Employee Navigation
     When I follow "Accidents"
     Then I should see "Accidents for"
 
-  @wip
   Scenario: Manager User navigates to incidents
     When I follow "Incidents"
     Then I should see "Incidents for"

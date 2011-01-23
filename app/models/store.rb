@@ -26,6 +26,7 @@ class Store < ActiveRecord::Base
   has_many :projects, :dependent => :destroy
   has_many :disciplines
   has_many :accidents
+  has_many :incidents
   validates :name, :presence => true
   validates :client, :presence => true
   validates :region, :presence => true

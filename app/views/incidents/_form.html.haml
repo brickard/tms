@@ -1,0 +1,23 @@
+= render :partial => 'shared/form_errors', :locals => { :@model => @incident }
+- url = @incident.new_record? ? employee_incidents_path : employee_incident_path(@employee, @incident)
+= form_for(@incident, :url => url, :html => { :class => 'bp'}) do |f|
+  %p{ :class => 'field short required' }
+    = f.text_field :occured_on, :class => 'recent'
+    = f.label :occured_on, 'Date'
+    = f.collection_select :supervisor_id, User.managers, :id, :full_name, :include_blank => true
+    = f.label :supervisor_id, 'Supervisor'
+    = f.text_field :people_involved
+    = f.label :people_involved, 'People Involved'
+  %p{ :class => 'field short required' }
+    = f.collection_select :store_id, Store.all, :id, :name, :include_blank => true
+    = f.label :store_id, 'Store'
+    = f.text_field :witnesses
+    = f.label :witnesses
+  %p{ :class => 'field short required' }
+    = f.text_area :description
+    = f.label :description
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Save', :type => :submit, :id => :save
+
+= content_for(:footer) do
+  = javascript_include_tag 'datepicker'

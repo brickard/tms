@@ -36,6 +36,7 @@ Storeresetter::Application.routes.draw do
     resources :vacations
     resources :uniforms
     resources :accidents
+    resources :incidents
   end
 
   devise_for :users, :path => 'accounts'
