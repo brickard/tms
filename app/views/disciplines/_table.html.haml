@@ -1,15 +1,17 @@
 %table{ :class => 'section_content data_table' }
   %tr
-    %th Date
-    %th Amount
-    %th Description
+    %th Date Occured
+    %th Incident Name
+    %th Location
+    %th Supervisor
     %th
     %th
   - @employee.disciplines.each do |discipline|
     %tr
-      %td= discipline.submitted_at
-      %td= number_to_currency(discipline.amount)
-      %td= discipline.description
+      %td= discipline.occured_on
+      %td= discipline.name
+      %td= discipline.store.name
+      %td= discipline.supervisor.full_name
       %td= link_to 'Edit', edit_employee_discipline_path(@employee, discipline)
       %td= link_to 'Delete', employee_discipline_path(@employee, discipline), :confirm => 'Are you sure?', :method => :delete
 %br/

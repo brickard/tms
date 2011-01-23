@@ -2,14 +2,32 @@
 - url = @discipline.new_record? ? employee_disciplines_path : employee_discipline_path(@employee, @discipline)
 = form_for(@discipline, :url => url, :html => { :class => 'bp'}) do |f|
   %p{ :class => 'field short required' }
-    = f.text_field :submitted_at, :class => 'recent'
-    = f.label :submitted_at, 'Date'
+    = f.text_field :name
+    = f.label :name, 'Incident Name'
   %p{ :class => 'field short required' }
-    = f.text_field :amount, :value => number_to_currency(@discipline.amount)
-    = f.label :amount
+    = f.text_field :occured_on, :class => 'recent'
+    = f.label :occured_on, 'Date of Incident'
   %p{ :class => 'field short required' }
-    = f.text_field :description
-    = f.label :description
+    = f.collection_select :store_id, Store.all, :id, :name, :include_blank => true
+    = f.label :store_id, 'Store'
+  %p{ :class => 'field short required' }
+    = f.text_field :verbal_warning_on, :class => 'recent'
+    = f.label :verbal_warning_on, 'Date of Verbal Warning'
+  %p{ :class => 'field short required' }
+    = f.text_field :verbal_warning_subject
+    = f.label :verbal_warning_subject, 'Subject of Verbal Warning'
+  %p{ :class => 'field short required' }
+    = f.text_area :verbal_warning_reason
+    = f.label :verbal_warning_reason, 'Reason for Verbal Warning'
+  %p{ :class => 'field short required' }
+    = f.text_area :verbal_warning_action
+    = f.label :verbal_warning_action, 'Action to be taken if not addressed'
+  %p{ :class => 'field short required' }
+    = f.text_field :possible_termination_on, :class => 'recent'
+    = f.label :possible_termination_on, 'Date of Possible Termination'
+  %p{ :class => 'field short required' }
+    = f.collection_select :supervisor_id, User.managers, :id, :full_name, :include_blank => true
+    = f.label :supervisor_id, 'Supervisor'
   %p{ :class => 'field button' }
     = content_tag :button, 'Save', :type => :submit, :id => :save
 

@@ -9,5 +9,5 @@ Factory.define :discipline do |f|
   f.verbal_warning_reason "Sleeping on the job again!!"
   f.verbal_warning_action "Fired again"
   f.possible_termination_on "2011-01-22"
-  f.supervisor { Factory.create(:manager_id) }
+  f.supervisor { Factory.create(:manager_user) }
 end
