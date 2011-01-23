@@ -1,0 +1,9 @@
+= content_for(:content_nav_heading) do
+  = "Edit Uniform"
+= content_for(:content_nav) do
+  = render :partial => 'shared/employee_navigation'
+
+.section_heading
+  = "Edit Uniform for #{@employee.full_name}"
+= render :partial => "form"
+

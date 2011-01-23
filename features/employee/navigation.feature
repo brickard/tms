@@ -41,7 +41,6 @@ Feature: Employee Navigation
     When I follow "Vacations"
     Then I should see "Vacations for"
 
-  @wip
   Scenario: Manager User navigates to uniforms
     When I follow "Uniforms"
     Then I should see "Uniforms for"
@@ -51,7 +50,6 @@ Feature: Employee Navigation
     When I follow "Accidents"
     Then I should see "Accidents for"
 
-  @wip
   Scenario: Manager User navigates to incidents
     When I follow "Incidents"
     Then I should see "Incidents for"

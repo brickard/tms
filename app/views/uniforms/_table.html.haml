@@ -1,0 +1,15 @@
+%table{ :class => 'section_content data_table' }
+  %tr
+    %th Date
+    %th # of Shirts
+    %th Shirt Size
+    %th
+    %th
+  - @employee.uniforms.each do |uniform|
+    %tr
+      %td= uniform.created_at
+      %td= uniform.count
+      %td= uniform.size
+      %td= link_to 'Edit', edit_employee_uniform_path(@employee, uniform)
+      %td= link_to 'Delete', employee_uniform_path(@employee, uniform), :confirm => 'Are you sure?', :method => :delete
+%br/

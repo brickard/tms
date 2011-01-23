@@ -1,0 +1,12 @@
+= render :partial => 'shared/form_errors', :locals => { :@model => @uniform }
+- url = @uniform.new_record? ? employee_uniforms_path : employee_uniform_path(@employee, @uniform)
+= form_for(@uniform, :url => url, :html => { :class => 'bp'}) do |f|
+  %p{ :class => 'field short required' }
+    = f.select :count, (1..10).to_a
+    = f.label :count, '# of Shirts'
+  %p{ :class => 'field short required' }
+    = f.select :size, User::SHIRT_SIZES
+    = f.label :size, 'Shirt Size'
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Save', :type => :submit, :id => :save
+
