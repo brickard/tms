@@ -1,0 +1,11 @@
+= content_for(:content_nav_heading) do
+  = "Disciplines"
+= content_for(:content_nav) do
+  = render :partial => 'shared/employee_navigation'
+
+.section_heading
+  = "Discipline for #{@employee.full_name}"
+  .section_heading_menu
+    = link_to "New", new_employee_discipline_path(@employee)
+= render :partial => "table"
+

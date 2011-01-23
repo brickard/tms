@@ -30,6 +30,7 @@ Storeresetter::Application.routes.draw do
   resources :applicants, :controller => :users, :scope => 'applicants'
   resources :employees,  :controller => :users, :scope => 'employees' do
     resources :evaluations
+    resources :disciplines
     resources :expenses
   end
 
