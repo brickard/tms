@@ -10,7 +10,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110123041522) do
+ActiveRecord::Schema.define(:version => 20110123045003) do
+
+  create_table "accidents", :force => true do |t|
+    t.integer  "employee_id"
+    t.datetime "occured_on"
+    t.integer  "supervisor_id"
+    t.integer  "store_id"
+    t.text     "description"
+    t.string   "witnesses"
+    t.string   "people_involved"
+    t.string   "injury_location"
+    t.boolean  "required_medical_care"
+    t.boolean  "sent_to_er"
+    t.boolean  "needs_further_care"
+    t.boolean  "miss_work"
+    t.integer  "miss_work_days"
+    t.boolean  "safety_procedures_followed"
+    t.boolean  "returning_to_work"
+    t.text     "supervisor_comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "clients", :force => true do |t|
     t.string   "name"

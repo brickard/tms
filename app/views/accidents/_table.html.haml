@@ -1,0 +1,13 @@
+%table{ :class => 'section_content data_table' }
+  %tr
+    %th Date
+    %th Description
+    %th
+    %th
+  - @employee.accidents.each do |accident|
+    %tr
+      %td= accident.occured_on
+      %td= accident.description
+      %td= link_to 'Edit', edit_employee_accident_path(@employee, accident)
+      %td= link_to 'Delete', employee_accident_path(@employee, accident), :confirm => 'Are you sure?', :method => :delete
+%br/

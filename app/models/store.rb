@@ -25,6 +25,7 @@ class Store < ActiveRecord::Base
   belongs_to :manager, :class_name => 'User'
   has_many :projects, :dependent => :destroy
   has_many :disciplines
+  has_many :accidents
   validates :name, :presence => true
   validates :client, :presence => true
   validates :region, :presence => true

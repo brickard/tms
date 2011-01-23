@@ -1,0 +1,60 @@
+= render :partial => 'shared/form_errors', :locals => { :@model => @accident }
+- url = @accident.new_record? ? employee_accidents_path : employee_accident_path(@employee, @accident)
+= form_for(@accident, :url => url, :html => { :class => 'bp'}) do |f|
+  %p{ :class => 'field short required' }
+    = f.text_field :occured_on, :class => 'recent'
+    = f.label :occured_on, 'Date'
+    = f.collection_select :supervisor_id, User.managers, :id, :full_name, :include_blank => true
+    = f.label :supervisor_id, 'Supervisor'
+    = f.collection_select :store_id, Store.all, :id, :name, :include_blank => true
+    = f.label :store_id, 'Store'
+  %p{ :class => 'field short required' }
+    = f.text_field :description
+    = f.label :description
+  %p{ :class => 'field short required' }
+    = f.text_field :witnesses
+    = f.label :witnesses
+    = f.text_field :people_involved
+    = f.label :people_involved, 'People Involved'
+    = f.text_field :injury_location
+    = f.label :injury_location, 'Part of Body Injured'
+  %p{ :class => 'field short required' }
+    = f.select :required_medical_care, [['Yes',true],['No',false]], :include_blank => true
+    = f.label :required_medical_care, 'Requires Medical Care'
+  %p{ :class => 'field short required' }
+    = f.select :sent_to_er, [['Yes',true],['No',false]], :include_blank => true
+    = f.label :sent_to_er, 'Went to Emergency Room'
+  %p{ :class => 'field short required' }
+    = f.select :sent_to_er, [['Yes',true],['No',false]], :include_blank => true
+    = f.label :sent_to_er, 'Went to Emergency Room'
+  %p{ :class => 'field short required' }
+    = f.select :needs_further_care, [['Yes',true],['No',false]], :include_blank => true
+    = f.label :needs_further_care, 'Employee Needs Further Care'
+  %p{ :class => 'field short required' }
+    = f.select :miss_work, [['Yes',true],['No',false]], :include_blank => true
+    = f.label :miss_work, 'Employee Needs Time Off'
+    = f.select :miss_work_days, (1..14).to_a, :include_blank => true
+    = f.label :miss_work_days, 'How Many Days'
+  %p{ :class => 'field short required' }
+    = f.select :safety_procedures_followed, [['Yes',true],['No',false]], :include_blank => true
+    = f.label :safety_procedures_followed, 'Proper Safety Procedures Followed'
+  %p{ :class => 'field short required' }
+    = f.select :returning_to_work, [['Yes',true],['No',false]], :include_blank => true
+    = f.label :returning_to_work, 'Employee Can Return to Work'
+  %p{ :class => 'field short required' }
+    = f.text_field :supervisor_comments
+    = f.label :supervisor_comments, 'Supervisor Comments'
+  %p{ :class => 'field button' }
+    = content_tag :button, 'Save', :type => :submit, :id => :save
+= content_for(:footer) do
+  = javascript_include_tag 'datepicker'
+
+/  %p{ :class => 'field short required' }
+/    = f.text_field :submitted_at, :class => 'recent'
+/    = f.label :submitted_at, 'Date'
+/  %p{ :class => 'field short required' }
+/    = f.text_field :amount, :value => number_to_currency(@accident.amount)
+/    = f.label :amount
+/  %p{ :class => 'field short required' }
+/    = f.text_field :description
+/    = f.label :description

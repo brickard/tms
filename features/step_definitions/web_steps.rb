@@ -80,6 +80,12 @@ When /^(?:|I )fill in the following(?: within "([^"]*)")?:$/ do |selector, field
   end
 end
 
+When /^I select the following:$/ do |fields|
+  fields.rows_hash.each do |name, value|
+    When %{I select "#{value}" from "#{name}"}
+  end
+end
+
 When /^(?:|I )select "([^"]*)" from "([^"]*)"(?: within "([^"]*)")?$/ do |value, field, selector|
   with_scope(selector) do
     select(value, :from => field)

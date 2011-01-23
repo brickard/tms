@@ -45,11 +45,11 @@ Feature: Employee Navigation
     When I follow "Uniforms"
     Then I should see "Uniforms for"
 
-  @wip
   Scenario: Manager User navigates to accidents
     When I follow "Accidents"
     Then I should see "Accidents for"
 
+  @wip
   Scenario: Manager User navigates to incidents
     When I follow "Incidents"
     Then I should see "Incidents for"
