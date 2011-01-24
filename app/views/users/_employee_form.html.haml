@@ -2,54 +2,68 @@
 - path = @user.new_record? ? users_path(:scope => @scope) : user_path(@user, :scope => @scope)
 = form_for(@user, :url => path, :html => { :class => 'bp'}) do |f|
   %p{ :class => 'field short required' }
-    = f.text_field :first_name
     = f.label :first_name
-  %p{ :class => 'field short' }
-    = f.text_field :middle_name
-    = f.label :middle_name
-  %p{ :class => 'field short required' }
-    = f.text_field :last_name
-    = f.label :last_name
-  %p{ :class => 'field short required' }
-    = f.text_field :address1
-    = f.label :address1, 'Address'
-  %p{ :class => 'field short' }
-    = f.text_field :address2
-    = f.label :address2, 'Address 2'
-  %p{ :class => 'field short required' }
-    = f.text_field :city
-    = f.label :city
-  %p{ :class => 'field short required' }
-    = f.select :state, Carmen::US_STATES
-    = f.label :state
-  %p{ :class => 'field short required' }
-    = f.text_field :zipcode
-    = f.label :zipcode
-  %p{ :class => 'field short required' }
-    = f.text_field :date_of_birth, :class => 'date_of_birth'
-    = f.label :date_of_birth, 'Date of birth'
-  %p{ :class => 'field short' }
-    = f.text_field :email
-    = f.label :email
-  %p{ :class => 'field short required' }
-    = f.text_field :home_phone
-    = f.label :home_phone, 'Main phone'
-  %p{ :class => 'field short' }
-    = f.text_field :mobile_phone
-    = f.label :mobile_phone
-  %p{ :class => 'field short' }
-    = f.text_field :other_phone
-    = f.label :other_phone
-  %p{ :class => 'field' }
     %br/
+    = f.text_field :first_name
+  %p{ :class => 'field short' }
+    = f.label :middle_name
+    %br/
+    = f.text_field :middle_name
+  %p{ :class => 'field short required' }
+    = f.label :last_name
+    %br/
+    = f.text_field :last_name
+  %p{ :class => 'field short required' }
+    = f.label :address1, 'Address'
+    %br/
+    = f.text_field :address1
+  %p{ :class => 'field short' }
+    = f.label :address2, 'Address 2'
+    %br/
+    = f.text_field :address2
+  %p{ :class => 'field short required' }
+    = f.label :city
+    %br/
+    = f.text_field :city
+  %p{ :class => 'field short required' }
+    = f.label :state
+    %br/
+    = f.select :state, Carmen::US_STATES
+  %p{ :class => 'field short required' }
+    = f.label :zipcode
+    %br/
+    = f.text_field :zipcode
+  %p{ :class => 'field short required' }
+    = f.label :date_of_birth, 'Date of birth'
+    %br/
+    = f.text_field :date_of_birth, :class => 'date_of_birth'
+  %p{ :class => 'field short' }
+    = f.label :email
+    %br/
+    = f.text_field :email
+  %p{ :class => 'field short required' }
+    = f.label :home_phone, 'Main phone'
+    %br/
+    = f.text_field :home_phone
+  %p{ :class => 'field short' }
+    = f.label :mobile_phone
+    %br/
+    = f.text_field :mobile_phone
+  %p{ :class => 'field short' }
+    = f.label :other_phone
+    %br/
+    = f.text_field :other_phone
+  %p{ :class => 'field' }
     = f.collection_select :skill_ids, Skill.all, :id, :name, {}, { :multiple => true, :id => :skills } 
     = f.label :skill_ids, 'Skills'
   %p{ :class => 'field short required' }
-    = f.text_field :emergency_contact_name
     = f.label :emergency_contact_name, 'Emergency Contact'
+    %br/
+    = f.text_field :emergency_contact_name
   %p{ :class => 'field short required' }
-    = f.text_field :emergency_contact_phone
     = f.label :emergency_contact_phone, 'Emergency Contact Phone'
+    %br/
+    = f.text_field :emergency_contact_phone
   %p{ :class => 'field short required' }
     = f.select :shirt_size, [ '' ] + %w{ S M L XL XXL XXXL XXXXL }, :selected => @user.shirt_size
     = f.label :shirt_size, 'Shirt Size'
@@ -67,12 +81,15 @@
   %p{ :class => 'field short' }
     = f.select :has_reliable_vehicle, { 'Yes' => true, 'No' => false }
     = f.label :has_reliable_vehicle, 'Do you have reliable transportation?'
+    %br/
   %p{ :class => 'field short' }
     = f.select :can_travel_long_term, { 'Yes' => true, 'No' => false }
     = f.label :can_travel_long_term, 'Can you travel long term?'
+    %br/
   %p{ :class => 'field short' }
     = f.select :been_convicted, { 'Yes' => true, 'No' => false }
     = f.label :been_convicted, 'Have you ever been convicted of a crime?'
+    %br/
   %p{ :class => 'field short' }
     = f.label :been_convicted_detail, 'If yes, please explain.'
     %br/
@@ -80,12 +97,15 @@
   %p{ :class => 'field short' }
     = f.select :ever_failed_drug_test, { 'Yes' => true, 'No' => false }
     = f.label :ever_failed_drug_test, 'Have you ever failed a drug test?'
+    %br/
   %p{ :class => 'field short' }
     = f.select :legal_us_worker, { 'Yes' => true, 'No' => false }
     = f.label :legal_us_worker, 'Are you legally authorized to work in the United States?'
+    %br/
   %p{ :class => 'field short' }
     = f.select :applied_before, { 'Yes' => true, 'No' => false }
     = f.label :applied_before, 'Have you ever applied for work or worked here before?'
+    %br/
   %p{ :class => 'field short' }
     = f.label :applied_before_detail, 'If yes, when and reason not employed currently?'
     %br/
@@ -93,34 +113,36 @@
   %p{ :class => 'field short' }
     = f.select :drivers_license_valid, { 'Yes' => true, 'No' => false }
     = f.label :drivers_license_valid, 'Do you have a valid Drivers License?'
+    %br/
   %p{ :class => 'field short' }
     = f.select :drivers_license_state, Carmen::US_STATES
     = f.label :drivers_license_state, 'License State'
   %p{ :class => 'field short' }
-    = f.text_field :drivers_license_number
     = f.label :drivers_license_number, 'License Number'
+    %br/
+    = f.text_field :drivers_license_number
   %p{ :class => 'field short' }
-    = f.text_field :drivers_license_expiration, :class => 'recent'
     = f.label :drivers_license_expiration, 'License Expiration Date'
+    %br/
+    = f.text_field :drivers_license_expiration, :class => 'recent'
   %p{ :class => 'field short' }
     = f.select :drivers_license_ever_suspended, { 'Yes' => true, 'No' => false }
     = f.label :drivers_license_ever_suspended, 'Has your Drivers License ever been suspended?'
+    %br/
   %p{ :class => 'field short' }
     = f.label :drivers_license_ever_suspended_detail, 'If yes, please explain'
     %br/
     = f.text_area :drivers_license_ever_suspended_detail
-  %p{ :class => 'field short required' }
+  %p{ :class => 'field shorty required' }
     = f.text_field :agree_to_terms_date, :class => 'recent'
     = f.label :agree_to_terms_date, 'Agreed To Terms Date'
+    - if @user.employee? and not @user.new_record?
+      = f.text_field :hired_at, :class => 'recent'
+      = f.label :hired_at, 'Hire Date'
   - if @user.employee?
-    - unless @user.new_record?
-      %p{ :class => 'field short required' }
-        = f.text_field :hired_at, :class => 'recent'
-        = f.label :hired_at, 'Hire Date'
-    %p{ :class => 'field short required' }
+    %p{ :class => 'field shorty required' }
       = f.text_field :pay_rate, :value => number_to_currency(@user.pay_rate)
       = f.label :pay_rate
-    %p{ :class => 'field short required' }
       = f.text_field :per_diem, :value => number_to_currency(@user.pay_rate)
       = f.label :per_diem
   %p{ :class => 'button' }
