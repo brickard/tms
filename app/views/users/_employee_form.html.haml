@@ -43,6 +43,7 @@
   %p{ :class => 'field' }
     %br/
     = f.collection_select :skill_ids, Skill.all, :id, :name, {}, { :multiple => true, :id => :skills } 
+    = f.label :skill_ids, 'Skills'
   %p{ :class => 'field short required' }
     = f.text_field :emergency_contact_name
     = f.label :emergency_contact_name, 'Emergency Contact'
