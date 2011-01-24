@@ -7,7 +7,7 @@
   %p{ :class => 'field short required' }
     = f.text_field :amount, :value => number_to_currency(@expense.amount)
     = f.label :amount
-  %p{ :class => 'field short required' }
+  %p{ :class => 'field long' }
     = f.text_field :description
     = f.label :description
   %p{ :class => 'field button' }

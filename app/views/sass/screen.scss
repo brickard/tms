@@ -90,6 +90,10 @@ form.bp textarea {
   height: 50px;
 }
 
+form.bp p.long input[type='text'] {
+  width: 500px;
+}
+
 form.bp p.large_text_area textarea {
   width: 500px;
   height: 120px;
