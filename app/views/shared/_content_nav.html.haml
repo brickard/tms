@@ -6,6 +6,7 @@
         = render_navigation(:renderer => :breadcrumbs, :level => 1) if current_user
     #content_nav_items
       = render_navigation(:level => 2) if current_user
+      = yield(:content_nav_items)
     = yield(:content_nav)
     = render :partial => 'shared/flash_messages'
 

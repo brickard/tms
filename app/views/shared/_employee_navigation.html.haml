@@ -1,4 +1,4 @@
-= content_for(:content_nav) do
+= content_for(:content_nav_items) do
   %ul
     %li= link_to 'Contact Info', edit_employee_path(@employee)
     %li= link_to "Evaluations (#{@employee.evaluations.count})", employee_evaluations_path(@employee) 
