@@ -90,6 +90,11 @@ form.bp textarea {
   height: 50px;
 }
 
+form.bp p.large_text_area textarea {
+  width: 500px;
+  height: 120px;
+}
+
 form.bp label {
   padding: 10px;
 }

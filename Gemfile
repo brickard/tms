@@ -8,7 +8,6 @@ gem 'devise', '>=1.1.5'
 
 gem 'haml', '>=3.0.18'
 gem 'haml-rails', '>=0.3'
-#gem 'compass'
 
 gem 'formtastic', '>=1.1.0'
 gem 'carmen'
@@ -21,6 +20,7 @@ gem 'prawn_rails'
 gem 'money'
 
 group :development, :test, :console do
+  gem 'compass'
   gem 'mongrel'
   gem 'capybara'
   gem 'database_cleaner'
