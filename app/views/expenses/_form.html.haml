@@ -1,10 +1,10 @@
 = render :partial => 'shared/form_errors', :locals => { :@model => @expense }
 - url = @expense.new_record? ? employee_expenses_path : employee_expense_path(@employee, @expense)
 = form_for(@expense, :url => url, :html => { :class => 'bp'}) do |f|
-  %p{ :class => 'field short required' }
+  %br/
+  %p{ :class => 'field shorty required' }
     = f.text_field :submitted_at, :class => 'recent'
     = f.label :submitted_at, 'Date'
-  %p{ :class => 'field short required' }
     = f.text_field :amount, :value => number_to_currency(@expense.amount)
     = f.label :amount
   %p{ :class => 'field long' }
