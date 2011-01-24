@@ -1,29 +1,34 @@
 = render :partial => 'shared/form_errors', :locals => { :@model => @accident }
 - url = @accident.new_record? ? employee_accidents_path : employee_accident_path(@employee, @accident)
 = form_for(@accident, :url => url, :html => { :class => 'bp'}) do |f|
-  %p{ :class => 'field short required' }
+  %p{ :class => 'field shorty required' }
     = f.text_field :occured_on, :class => 'recent'
     = f.label :occured_on, 'Date'
+  %p{ :class => 'field required' }
     = f.collection_select :supervisor_id, User.managers, :id, :full_name, :include_blank => true
     = f.label :supervisor_id, 'Supervisor'
-    = f.collection_select :store_id, Store.all, :id, :name, :include_blank => true
+  %p{ :class => 'field required' }
+    = f.collection_select :store_id, Store.all, :id, :display_name, :include_blank => true
     = f.label :store_id, 'Store'
-  %p{ :class => 'field short required' }
-    = f.text_field :description
+  %p{ :class => 'field large_text_area required' }
     = f.label :description
-  %p{ :class => 'field short required' }
-    = f.text_field :witnesses
+    %br/
+    = f.text_area :description
+  %p{ :class => 'field large_text_area required' }
     = f.label :witnesses
-    = f.text_field :people_involved
+    %br/
+    = f.text_area :witnesses
+  %p{ :class => 'field large_text_area required' }
     = f.label :people_involved, 'People Involved'
-    = f.text_field :injury_location
+    %br/
+    = f.text_area :people_involved
+  %p{ :class => 'field large_text_area required' }
     = f.label :injury_location, 'Part of Body Injured'
+    %br/
+    = f.text_area :injury_location
   %p{ :class => 'field short required' }
     = f.select :required_medical_care, [['Yes',true],['No',false]], :include_blank => true
     = f.label :required_medical_care, 'Requires Medical Care'
-  %p{ :class => 'field short required' }
-    = f.select :sent_to_er, [['Yes',true],['No',false]], :include_blank => true
-    = f.label :sent_to_er, 'Went to Emergency Room'
   %p{ :class => 'field short required' }
     = f.select :sent_to_er, [['Yes',true],['No',false]], :include_blank => true
     = f.label :sent_to_er, 'Went to Emergency Room'
@@ -41,9 +46,10 @@
   %p{ :class => 'field short required' }
     = f.select :returning_to_work, [['Yes',true],['No',false]], :include_blank => true
     = f.label :returning_to_work, 'Employee Can Return to Work'
-  %p{ :class => 'field short required' }
-    = f.text_field :supervisor_comments
+  %p{ :class => 'field large_text_area required' }
     = f.label :supervisor_comments, 'Supervisor Comments'
+    %br/
+    = f.text_area :supervisor_comments
   %p{ :class => 'field button' }
     = content_tag :button, 'Save', :type => :submit, :id => :save
 = content_for(:footer) do
