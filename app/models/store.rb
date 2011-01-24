@@ -36,4 +36,8 @@ class Store < ActiveRecord::Base
     return self.name unless self.number
     "#{self.name} #{self.number}"
   end
+
+  def display_name
+    "#{self.client.name} | #{self.name_and_number}"
+  end
 end

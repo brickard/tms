@@ -8,7 +8,7 @@
     = f.text_field :occured_on, :class => 'recent'
     = f.label :occured_on, 'Date of Incident'
   %p{ :class => 'field short required' }
-    = f.collection_select :store_id, Store.all, :id, :name, :include_blank => true
+    = f.collection_select :store_id, Store.all, :id, :display_name, :include_blank => true
     = f.label :store_id, 'Store'
   %p{ :class => 'field short required' }
     = f.text_field :verbal_warning_on, :class => 'recent'
