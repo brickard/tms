@@ -18,9 +18,9 @@ gem 'state_machine'
 gem 'ruby-graphviz', :require => 'graphviz'
 gem 'prawn_rails'
 gem 'money'
+gem 'compass'
 
 group :development, :test, :console do
-  gem 'compass'
   gem 'mongrel'
   gem 'capybara'
   gem 'database_cleaner'

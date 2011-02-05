@@ -124,7 +124,7 @@ class User < ActiveRecord::Base
     :drivers_license_expiration, :drivers_license_ever_suspended,
     :drivers_license_ever_suspended_detail,
     :emergency_contact_name, :emergency_contact_phone,
-    :shirt_size, :shift_id, :application_complete
+    :shirt_size, :shift_id, :application_complete, :pin_code
   
   # virtual attributes
   attr_accessible :email_confirmation, :remember_me, :password, 

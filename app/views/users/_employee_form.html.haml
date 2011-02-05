@@ -145,6 +145,10 @@
       = f.label :pay_rate
       = f.text_field :per_diem, :value => number_to_currency(@user.pay_rate)
       = f.label :per_diem
+    %p{ :class => 'field shorty' }
+      = f.label :pin_code, 'Pin Code'
+      %br/
+      = f.text_field :pin_code
   %p{ :class => 'button' }
     = content_tag :button, 'Save', :type => :submit
 

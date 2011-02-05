@@ -1,4 +1,6 @@
 prawn_document(:filename => "#{@user.full_name.gsub(/\s+/, '')}", :force_download => true) do |pdf|
+  pdf.image Rails.root.join('public', 'images', 'tabrr_logo.png'), :fit => [ 232, 50 ]
+  pdf.move_down 20
   pdf.font_size 10
   pdf.text @user.full_name, :size => 16, :style => :bold, :spacing => 4
   pdf.text @user.display_skills, :size => 12, :style => :bold_italic, :spacing => 4

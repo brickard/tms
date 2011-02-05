@@ -3,6 +3,8 @@ filename = @shifts.count == 1 ?
   "ListOfEmployeesByShift"
 prawn_document(:filename => filename, :force_download => true) do |pdf|
   @shifts.each do |shift|
+    pdf.image Rails.root.join('public', 'images', 'tabrr_logo.png'), :fit => [ 232, 50 ]
+    pdf.move_down 20
     pdf.font_size 10
     pdf.text shift.display_name, :size => 16, :style => :bold, :spacing => 4
     pdf.move_down 4

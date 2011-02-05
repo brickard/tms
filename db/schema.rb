@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110123060633) do
+ActiveRecord::Schema.define(:version => 20110205152244) do
 
   create_table "accidents", :force => true do |t|
     t.integer  "employee_id"
@@ -238,6 +238,7 @@ ActiveRecord::Schema.define(:version => 20110123060633) do
     t.boolean  "application_complete"
     t.integer  "pay_rate",                                             :default => 0
     t.integer  "per_diem",                                             :default => 0
+    t.integer  "pin_code"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
