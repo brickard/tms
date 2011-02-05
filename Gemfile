@@ -19,6 +19,7 @@ gem 'ruby-graphviz', :require => 'graphviz'
 gem 'prawn_rails'
 gem 'money'
 gem 'compass'
+gem 'cancan'
 
 group :development, :test, :console do
   gem 'mongrel'

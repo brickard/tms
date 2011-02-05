@@ -46,6 +46,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    authorize! :update, @user
     if @user.applicant?
       unless params[:save]
         @user.increment_form_step
@@ -87,6 +88,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    #authorize! :update, @user
     @save = params.delete(:save)
     setup_progress if @user.applicant?
 

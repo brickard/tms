@@ -4,13 +4,14 @@
     %th UserID (email)
     %th
     %th
-    %th
-    %th
+    - if can? :update, User
+      %th
   - @users.each do |user|
     %tr
       %td= user.full_name
       %td= user.email
       %td= link_to 'Print', user_print_path(user, :scope => @scope, :format => :pdf), :target => '_blank'
-      %td= link_to 'Edit', edit_employee_path(user)
+      - if can? :update, user
+        %td= link_to 'Edit', edit_employee_path(user)
       %td= link_to 'Delete', employee_path(user), :confirm => 'Are you sure?', :method => :delete
 %br/

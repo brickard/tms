@@ -8,7 +8,7 @@
 .sub_content
   - if @scope == 'applicants' and not current_user
     = render :partial => "applicant_form"
-  - if %w{ applicants employees }.include?(@scope) and current_user
+  - elsif %w{ applicants employees }.include?(@scope) and current_user
     = render :partial => "employee_form"
   - else
     = render :partial => "form"
