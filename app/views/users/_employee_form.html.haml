@@ -1,6 +1,6 @@
 = render :partial => 'shared/form_errors', :locals => { :@model => @user }
 - path = @user.new_record? ? users_path(:scope => @scope) : user_path(@user, :scope => @scope)
-= form_for(@user, :url => path, :html => { :class => 'bp'}) do |f|
+= form_for(@user, :url => path, :html => { :class => 'bp', :multipart => true }) do |f|
   %p{ :class => 'field short required' }
     = f.label :first_name
     %br/
@@ -149,6 +149,18 @@
       = f.label :pin_code, 'Pin Code'
       %br/
       = f.text_field :pin_code
+  %p{ :class => 'field short required' }
+    %p= link_to(image_tag(@user.i9_image.url(:thumb)), @user.i9_image.url, :target => '_blank') if @user.i9_image.file?
+    = f.label :i9_image
+    = f.file_field :i9_image
+  %p{ :class => 'field short required' }
+    %p= link_to(image_tag(@user.w4_image.url(:thumb)), @user.w4_image.url, :target => '_blank') if @user.w4_image.file?
+    = f.label :w4_image
+    = f.file_field :w4_image
+  %p{ :class => 'field short required' }
+    %p= link_to(image_tag(@user.drivers_license_image.url(:thumb)), @user.drivers_license_image.url, :target => '_blank') if @user.drivers_license_image.file?
+    = f.label :drivers_license_image
+    = f.file_field :drivers_license_image
   %p{ :class => 'button' }
     = content_tag :button, 'Save', :type => :submit
 

@@ -1,17 +1,16 @@
-= content_for(:footer) do
-  = javascript_include_tag 'datepicker'
-
-= render :partial => 'shared/agreement_copy'
-
-= form_for @user, :url => user_path(@user, :scope => @scope), :html => { :class => 'bp', :method => :put } do |f|
+= form_for @user, :url => user_path(@user, :scope => @scope), :html => { :class => 'bp', :method => :put, :multipart => true } do |f|
   %p{ :class => 'field short required' }
-    = f.text_field :agree_to_terms_date, :class => 'today', :value => DateTime.now.strftime("%Y-%m-%d")
-    = f.label :agree_to_terms_date, 'Todays Date'
+    = f.file_field :i9_image
+    = f.label :i9_image, 'I9'
     *
   %p{ :class => 'field short required' }
-    = f.label :agree_to_terms, 'I Agree'
+    = f.file_field :w4_image
+    = f.label :w4_image, 'W4'
     *
-    = f.check_box :agree_to_terms, :value => false
+  %p{ :class => 'field short required' }
+    = f.file_field :drivers_license_image
+    = f.label :drivers_license_image, 'Drivers License'
+    *
   = f.hidden_field :form_step, :value => @user.form_step
   %p{ :class => 'field button' }
     = content_tag :button, 'Next', :type => :submit

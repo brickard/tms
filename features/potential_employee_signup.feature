@@ -7,7 +7,7 @@ Feature: Sign up new potential employees from kiosk form
   Scenario: Potential Employee completes the Employment Application Step 1
     Given I am on the new applicant page
     Then I should see "Employment Application"
-      And I should see "You are currently on step 1 of 6"
+      And I should see "You are currently on step 1 of 7"
       And I should see "Please complete the form to tell us about yourself."
     When I fill in "Last name" with "Employee"
       And I fill in "First name" with "Joe"
@@ -30,7 +30,7 @@ Feature: Sign up new potential employees from kiosk form
     Given the default skills exist
       And I complete step 1 of the employment application
       And I should see "Employment Criteria"
-      And I should see "You are currently on step 2 of 6"
+      And I should see "You are currently on step 2 of 7"
     When I select "Management" from "skills"
       And I select "Merchandiser" from "skills"
       And I select "Carpenter" from "skills"
@@ -62,7 +62,7 @@ Feature: Sign up new potential employees from kiosk form
   Scenario: Potential employee completes Employment Application Step 3
     Given I complete step 2 of the employment application
       And I should see "Employment History"
-      And I should see "You are currently on step 3 of 6"
+      And I should see "You are currently on step 3 of 7"
       And I should see "You need to add at least 2 more Employers"
     When I fill in "Company name" with "Some Job 1"
       And I fill in "Start date" with "10/10/2000"
@@ -74,7 +74,7 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "End $" with "$100 an hour"
       And I fill in "Reason for leaving" with "Laid off"
       And I press "Add"
-    Then I should see "You are currently on step 3 of 6"
+    Then I should see "You are currently on step 3 of 7"
       And I should see "You need to add at least 1 more Employer"
       And I should see "Some Job 1"
       And a employer should exist with user: applicant_user "joe_user"
@@ -88,7 +88,7 @@ Feature: Sign up new potential employees from kiosk form
       And I fill in "End $" with "$100 an hour"
       And I fill in "Reason for leaving" with "Laid off"
       And I press "Add"
-    Then I should see "You are currently on step 3 of 6"
+    Then I should see "You are currently on step 3 of 7"
       And I should see "Some Job 1"
       And I should see "Some Job 2"
       And I should not see "You need to add at least"
@@ -101,7 +101,7 @@ Feature: Sign up new potential employees from kiosk form
     Given I complete step 3 of the employment application
       And I should see "Employment References"
       And I should see "You need to add at least 3 more References"
-      And I should see "You are currently on step 4 of 6"
+      And I should see "You are currently on step 4 of 7"
     When I fill in "Name" with "Reference 1"
       And I fill in "Phone number/Email" with "2059991199"
       And I fill in "Relationship" with "Friend"
@@ -133,13 +133,28 @@ Feature: Sign up new potential employees from kiosk form
       And I should see "Reference 3"
       And 3 references should exist with user: applicant_user "joe_user"
     When I press "Next"
-    Then I should see "Employment Application Agreement"
+    Then I should see "Employment Application Documents"
       And user should exist with email: "joe@employees.com", form_step: "step4"
   
   Scenario: Potential employee completes Employment Application Step 5
     Given I complete step 4 of the employment application
+      And I should see "Employment Application Documents"
+      And I should see "You are currently on step 5 of 7"
+      And I should see "Please upload scanned images of the requested documents."
+    When I attach the file "features/files/rails.png" to "I9"
+    And I attach the file "features/files/rails.png" to "W4"
+      And I attach the file "features/files/rails.png" to "Drivers License"
+      And I press "Next"
+    Then I should see "Employment Application Agreement"
+      And user should exist with first_name: "Joe", last_name: "Employee", form_step: "step5"
+      And user's i9_image_file_name should not be nil
+      And user's w4_image_file_name should not be nil
+      And user's drivers_license_image_file_name should not be nil
+    
+  Scenario: Potential employee completes Employment Application Step 6
+    Given I complete step 5 of the employment application
       And I should see "Employment Application Agreement"
-      And I should see "You are currently on step 5 of 6"
+      And I should see "You are currently on step 6 of 7"
       And I should see "I certify that the facts contained are true."
     When I check "I Agree"
       And I fill in "Todays Date" with "10/10/2010"
@@ -148,6 +163,6 @@ Feature: Sign up new potential employees from kiosk form
       And I should see "Thank you for taking the time to apply"
       And I should not see "You are currently on step"
       And I should see "All steps complete!"
-      And user should exist with first_name: "Joe", last_name: "Employee", agree_to_terms: true, form_step: "step6"
+      And user should exist with first_name: "Joe", last_name: "Employee", agree_to_terms: true
       And 1 email should be delivered
     

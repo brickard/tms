@@ -87,9 +87,15 @@ require 'lib/model_behaviors/roles'
 class User < ActiveRecord::Base
   include ::ModelBehaviors::RolesBehavior
   SHIRT_SIZES = %w{ S M L XL XXL XXXL XXXXL }
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable, :timeoutable
+
+  IMAGE_STYLES = { :thumb => "100x100>" }
+  has_attached_file :i9_image, :styles => IMAGE_STYLES
+  has_attached_file :w4_image, :styles => IMAGE_STYLES
+  has_attached_file :drivers_license_image, :styles => IMAGE_STYLES
 
   has_many :employers, :dependent => :destroy
   has_many :references, :dependent => :destroy
@@ -120,18 +126,19 @@ class User < ActiveRecord::Base
     :has_reliable_vehicle, :can_travel_long_term, :been_convicted,
     :been_convicted_detail, :ever_failed_drug_test, :legal_us_worker,
     :applied_before, :applied_before_detail, :drivers_license_valid,
-    :drivers_license_state, :drivers_license_number, 
+    :drivers_license_state, :drivers_license_number,
     :drivers_license_expiration, :drivers_license_ever_suspended,
     :drivers_license_ever_suspended_detail,
     :emergency_contact_name, :emergency_contact_phone,
-    :shirt_size, :shift_id, :application_complete, :pin_code
-  
+    :shirt_size, :shift_id, :application_complete, :pin_code,
+    :i9_image, :w4_image, :drivers_license_image
+
   # virtual attributes
-  attr_accessible :email_confirmation, :remember_me, :password, 
+  attr_accessible :email_confirmation, :remember_me, :password,
     :password_confirmation
 
   # nested attributes
-  attr_accessible :employers_attributes, :references_attributes, 
+  attr_accessible :employers_attributes, :references_attributes,
     :user_skills_attributes, :skill_ids, :employers, :references
 
   before_validation :set_random_password!, :set_random_email!, :set_default_role!
@@ -152,21 +159,21 @@ class User < ActiveRecord::Base
   scope :on_shift,               lambda { |shift| where(:shift_id => shift.id) }
   scope :idle_employees,         lambda { User.employees.where(:shift_id => nil) }
 
-  composed_of :pay_rate, 
-    :class_name => "Money", :mapping => %w(pay_rate cents), 
-    :converter => Proc.new { |pay_rate| pay_rate.respond_to?(:to_money) ? 
+  composed_of :pay_rate,
+    :class_name => "Money", :mapping => %w(pay_rate cents),
+    :converter => Proc.new { |pay_rate| pay_rate.respond_to?(:to_money) ?
                                         pay_rate.to_money : Money.empty },
     :constructor => Proc.new { |pay_rate| Money.new(pay_rate||0, Money.default_currency) }
 
   state_machine :form_step, :initial => :step0 do
 
     event :increment_step do
-      transition :step0 => :step1, :step1 => :step2, :step2 => :step3, 
-        :step3 => :step4, :step4 => :step5, :step5 => :step6
+      transition :step0 => :step1, :step1 => :step2, :step2 => :step3,
+        :step3 => :step4, :step4 => :step5, :step5 => :step6, :step6 => :step7
     end
     event :decrement_step do
-      transition :step6 => :step5, :step5 => :step4, :step4 => :step3, 
-        :step3 => :step2, :step2 => :step1, :step1 => :step0
+      transition :step7 => :step6, :step6 => :step5, :step5 => :step4,
+        :step4 => :step3, :step3 => :step2, :step2 => :step1, :step1 => :step0
     end
 
     state :step1 do
@@ -177,18 +184,33 @@ class User < ActiveRecord::Base
     state :step2 do
       validates :address1, :city, :zipcode, :home_phone, :date_of_birth, :state,
         :shirt_size, :presence => true
-      validates_presence_of :available_at, :emergency_contact_name, 
+      validates_presence_of :available_at, :emergency_contact_name,
         :emergency_contact_phone
-      validates_inclusion_of :needs_special_hours, :has_reliable_vehicle, 
-        :can_travel_long_term, :been_convicted, :ever_failed_drug_test, 
-        :legal_us_worker, :applied_before, :drivers_license_valid, 
+      validates_inclusion_of :needs_special_hours, :has_reliable_vehicle,
+        :can_travel_long_term, :been_convicted, :ever_failed_drug_test,
+        :legal_us_worker, :applied_before, :drivers_license_valid,
         :in => [ true, false ], :message => 'must be Yes or No'
-      validates :needs_special_hours, :been_convicted, :applied_before, 
+      validates :needs_special_hours, :been_convicted, :applied_before,
         :drivers_license_ever_suspended, :details => true
 			validates :drivers_license_valid, :drivers_license => true
     end
 
     state :step5 do
+      validates_attachment_size :i9_image, :less_than => 1.megabyte,
+        :if => Proc.new { |user| !user.i9_image.file? }
+      validates_attachment_size :w4_image, :less_than => 1.megabyte,
+        :if => Proc.new { |user| !user.w4_image.file? }
+      validates_attachment_size :drivers_license_image, :less_than => 1.megabyte,
+        :if => Proc.new { |user| !user.drivers_license_image.file? }
+      validates_attachment_presence :i9_image
+      validates_attachment_presence :w4_image
+      validates_attachment_presence :drivers_license_image
+      validates_attachment_content_type :i9_image, :content_type => /image/
+      validates_attachment_content_type :w4_image, :content_type => /image/
+      validates_attachment_content_type :drivers_license_image, :content_type => /image/
+    end
+
+    state :step6 do
       validates :agree_to_terms, :agree_to_terms_date, :presence => true
       validates :agree_to_terms, :inclusion => { :in => [ true ] }
     end

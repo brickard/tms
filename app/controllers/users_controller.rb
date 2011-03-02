@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     if @user.applicant?
       unless params[:save]
         @user.increment_form_step
-        if @user.form_step == 'step6'
+        if @user.form_step == 'step7'
           @user.application_complete = true
           @user.save!
           UserMailer.application_notification(@user).deliver
@@ -64,20 +64,20 @@ class UsersController < ApplicationController
     @user = @search.relation.build(params[:user])
     setup_progress if @user.applicant?
 		@user.application_complete = false if @user.applicant?
-    
+
     @user.hired_at = DateTime.now if @scope == 'employees'
 
     respond_to do |format|
       if @user.save
         Rails.logger.debug("FORM STEP: #{@user.form_step}")
-        format.html { 
+        format.html {
           unless @scope == 'applicants'
             return redirect_to(users_path(:scope => @scope),
              :notice => "#{@scope_title.singularize} was successfully created.")
           end
           redirect_to(edit_user_path(@user, :scope => @scope))
         }
-        format.xml  { render :xml => @user, :status => :created, 
+        format.xml  { render :xml => @user, :status => :created,
           :location => user_path(@user, :scope => @scope) }
       else
         format.html { render :action => "new", :scope => @scope }
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { 
+        format.html {
           unless @scope == 'applicants'
             return redirect_to(users_path(:scope => @scope),
              :notice => "#{@scope_title.singularize} was successfully updated.")
@@ -147,24 +147,26 @@ class UsersController < ApplicationController
       :message => 'Please complete all required form fields to continue to the next step.'
     }
     step_statuses = [
-      { :heading => 'Employment Application', 
+      { :heading => 'Employment Application',
         :message => 'Please complete the form to tell us about yourself.' },
-      { :heading => 'Employment Criteria', 
+      { :heading => 'Employment Criteria',
         :message => 'Please complete the form to tell us about your qualifications.' },
-      { :heading => 'Employment History', 
+      { :heading => 'Employment History',
         :message => 'Please complete the form to tell us about your past jobs.' },
-      { :heading => 'Employment References', 
+      { :heading => 'Employment References',
         :message => 'Please complete the form to tell us about your references.' },
-      { :heading => 'Employment Application Agreement', 
+      { :heading => 'Employment Application Documents',
+        :message => 'Please upload scanned images of the requested documents.' },
+      { :heading => 'Employment Application Agreement',
         :message => 'Please complete agree to the terms and enter todays date.' },
-      { :heading => 'Employment Application Complete', 
+      { :heading => 'Employment Application Complete',
         :message => 'All steps complete! Your application has been submitted.' },
     ]
     @step_status = step_statuses[@user.form_step_to_i - 1] || default_status
   end
 
   def total_steps
-    @total_steps = 6
+    @total_steps = 7
   end
 
   def set_progress_value
