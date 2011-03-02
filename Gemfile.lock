@@ -124,6 +124,9 @@ GEM
       fastthread (>= 1.0.1)
       gem_plugin (>= 0.2.3)
     nokogiri (1.4.4)
+    paperclip (2.3.8)
+      activerecord
+      activesupport
     pg (0.10.0)
     pickle (0.4.4)
       cucumber (>= 0.8)
@@ -231,6 +234,7 @@ DEPENDENCIES
   meta_where
   money
   mongrel
+  paperclip
   pg
   pickle
   prawn_rails

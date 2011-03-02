@@ -20,6 +20,7 @@ gem 'prawn_rails'
 gem 'money'
 gem 'compass'
 gem 'cancan'
+gem 'paperclip'
 
 group :development, :test, :console do
   gem 'mongrel'
