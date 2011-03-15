@@ -24,7 +24,7 @@ SimpleNavigation::Configuration.run do |navigation|
   # Define the primary navigation
   navigation.items do |primary|
     primary.item :employment, 'Employment', employees_path do |employment_nav|
-      #employment_nav.item :employees,  'Employees',  employees_path
+      employment_nav.item :employees,  'Employees',  employees_path
       employment_nav.item :applicants, 'Applicants', applicants_path
     end
     #primary.item :clients, 'Clients', clients_path do |clients_nav|
